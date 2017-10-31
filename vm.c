@@ -55,7 +55,9 @@ int		vm_error(int error)
 	else if (error == 3)
 		ft_putstr("Wrong MAGIC.\n\0");	
 	else if (error == 4)
-		ft_putstr("Champion size > CHAMP_MAX_SIZE\n\0");
+		ft_putstr("Champion size too big. > CHAMP_MAX_SIZE\n\0");
+	else if (error == 4)
+		ft_putstr("We need \0 at the end of champion name or comment\n\0");
 	else
 		ft_putstr("Some unknow error.\n\0");
 	return (0);
@@ -76,7 +78,7 @@ int		vm_usage(char *re)
 ** error = 2 - invalid of empty file;
 ** error = 3 - wrong MAGIC;
 ** error = 4 - champion size > CHAMP_MAX_SIZE
-** error = 5 - 
+** error = 5 - no \0 at the end of champion name or comment
 */
 
 /*
