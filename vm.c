@@ -44,6 +44,9 @@ t_vm	*vm_init(void)
 	return (mem);
 }
 
+/*
+** vm_init - создаем основную структуру виртуальной машины - t_vm и выделяем под нее память.
+*/
 
 
 int		vm_error(int error)
@@ -63,14 +66,6 @@ int		vm_error(int error)
 	return (0);
 }
 
-int		vm_usage(char *re)
-{
-	if (re != NULL)
-		ft_putstr(re);
-	ft_putstr("Usage:\n./corewar [-flags] <champion1.cor> <...>\n\0");
-	return (0);
-}
-
 /*
 ** error management.
 **
@@ -81,35 +76,11 @@ int		vm_usage(char *re)
 ** error = 5 - no \0 at the end of champion name or comment
 */
 
-/*
-** int f - флаг какой ти данных проверяю.
-**
-** f = 1 - 4 байта - меджик число
-** f = 2 - 132 байта - имя
-** f = 3 - 4 байта - значение размера программы
-** f = 4 - 2052 байта - коммент
-** f = 5 - (значение из f3) байт - размер программы
-*/
-
-char	*vm_strjoin(char *t, char *y)
+int		vm_usage(char *re)
 {
-	char	*r;
-	int		i;
-	int		x;
-
-	if (!t || !y)
-		return (0);
-	if (!(r = (char *)malloc(sizeof(char) * (ft_strlen(t) + ft_strlen(y) + 1))))
-		return (0);
-	i = 0;
-	x = 0;
-	while (t[i])
-		r[x++] = t[i++];
-	i = 0;
-	while (y[i])
-		r[x++] = y[i++];
-	r[x] = '\0';
-	ft_strdel(&t);
-	ft_strdel(&y);
-	return (r);
+	if (re != NULL)
+		ft_putstr(re);
+	ft_putstr("Usage:\n./corewar [-flags] <champion1.cor> <...>\n\0");
+	return (0);
 }
+

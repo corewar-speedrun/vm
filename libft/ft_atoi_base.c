@@ -24,7 +24,7 @@ int	test_base(char nb)
 		return (-1);
 }
 
-int	ft_atoi_base(const unsigned char *str, int str_base)
+int	ft_atoi_base(unsigned char *str, int str_base)
 {
 	int temp;
 	int value;

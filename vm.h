@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include <unistd.h>
-#include <stdio.h>////////////////////////////////////////////////////////////////////////////////////////////////////////
+#include <stdio.h>/////////////////////////////////////////////////////////
 #include "libft/libft.h"
 #include "op.h"
 
@@ -20,9 +20,19 @@ typedef struct		s_champ
 	char			*name;
 	char			*comment;
 	unsigned char	*src;
-	int				nmbr;
 	int				size;
+	int				nmbr;
 }					t_champ;
+
+/*
+** t_champ - структура с одним чемпионом и всей инфой по нему.
+**
+** name - имя
+** comment - комент
+** src - код чемпиона, который помещаем на игровое поле
+** size - длина src байт
+** nmbr - номер чемпиона по порядку
+*/
 
 typedef struct		s_vm
 {
@@ -32,24 +42,50 @@ typedef struct		s_vm
 	unsigned char	*game;
 }					t_vm;
 
-union	u_read
+/*
+** t_vm - главная структура виртуальной машины.
+**
+** error - изначально равен -1. если у переменной другое значение, это
+** говорит о необходимости остановить работы программы и вывести
+** соответствующее сообщение об ошибке.
+** champs_nmbr - количество чемпионов, которое нам зашло
+** champs - масив с указателями на структуры t_champ
+** game - игровое поле unsigned char длиной MEM_SIZE, на котором изначально
+** размещаем чемпионов и играем.
+*/
+
+union				u_read
 {
-	unsigned char bit[4];
-	unsigned int  mg;
+	unsigned char	bit[4];
+	unsigned int	mg;
 };
+
+/*
+** u_read - вспомогательная структура для парсинга
+*/
 
 /*
 ** VM_parsing
 */
-int		main(int argv, char **argc);
-t_vm	*vm_init(void);
-void	vm_read(t_vm *vm, int argv, char **argc);
-int		vm_magic(t_vm *vm, int fd);
-t_champ	*vm_parsing(t_vm *vm, int fd);
-int		vm_error(int error);
-void	vm_read_flag(t_vm *vm, char *str);
-int		vm_usage(char *re);
-char	*vm_strjoin(char *t, char *y);
+
+int					main(int argv, char **argc);
+t_vm				*vm_init(void);
+t_champ				*vm_parsing(t_vm *vm, int fd);
+void				vm_read(t_vm *vm, int argv, char **argc);
+unsigned char		*vm_read_script(t_vm *vm, int i, int fd, int flag);
+int					vm_read_magic(t_vm *vm, int fd);
+void				vm_read_flag(t_vm *vm, char *str);
+int					vm_read_int(t_vm *vm, int i, int fd, int flag);
+
 /*
-**
+** VM_error_management
 */
+
+int					vm_error(int error);
+int					vm_usage(char *re);
+
+/*
+** VM_help_scripts
+*/
+
+//char				*vm_strjoin(char *t, char *y);

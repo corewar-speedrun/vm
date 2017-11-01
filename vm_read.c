@@ -12,6 +12,15 @@
 
 #include "vm.h"
 
+/*
+** vm_read_flag - работа с флагами. Закодить.
+*/
+
+void	vm_read_flag(t_vm *vm, char *str)
+{
+	return ;
+}
+
 void	vm_read(t_vm *vm, int i, char **arg)
 {
 	int fd;
@@ -24,7 +33,7 @@ void	vm_read(t_vm *vm, int i, char **arg)
 			vm->error = 2;
 		if (arg[x][0] == '-' && vm->error == -1)
 			vm_read_flag(vm, arg[x]);
-		else if (vm_magic(vm, fd) == 1 && vm->error == -1)
+		else if (vm_read_magic(vm, fd) == 1 && vm->error == -1)
 			vm->champs[++vm->champs_nmbr] = vm_parsing(vm, fd);
 		else
 			vm->error = 1;
@@ -32,6 +41,21 @@ void	vm_read(t_vm *vm, int i, char **arg)
 			break ;
 	}
 }
+
+/*
+** vm_read - главная ф-ция чтения
+**
+** int i - количество аргументов, которые нам дали. 
+** char **arg - массив аргументовю.
+** 
+** Открываю файл, получая его fd. 
+** Если arg[i][0] == '-', значит это флаг и 
+** парсим его как флаг.
+** В ином случае это либо чемпион, либо мусор. Проверить можно сверим MAGIC.
+** vm_read_magic - проверяет первые 4 байта на соответствие COREWAR_EXEC_MAGIC.
+** Если vm_read_magic вернуло 1, это чемпион, начинаем его парсить. Если вернуло 0,
+** нам засунули дичь, посылаем нафиг, выводим usage.
+*/
 
 t_champ	*vm_parsing(t_vm *vm, int fd)
 {
@@ -41,45 +65,90 @@ t_champ	*vm_parsing(t_vm *vm, int fd)
 		return (NULL);
 	ft_bzero(tmp, sizeof(t_champ));
 	if (vm->error == -1)
-		tmp->name = (char *)vm_read_script(PROG_NAME_LENGTH + 4, fd, 1);
+		tmp->name = (char *)vm_read_script(vm, PROG_NAME_LENGTH + 4, fd, 1);
 	if (vm->error == -1)
-		tmp->size = ft_atoi_base(vm_read_script(4, fd, 0), 16);
+		tmp->size = vm_read_int(vm, 4, fd, 0);
 	if (vm->error == -1)
-		tmp->comment = (char *)vm_read_script(COMMENT_LENGTH + 4, fd, 1);
+		tmp->comment = (char *)vm_read_script(vm, COMMENT_LENGTH + 4, fd, 1);
 	if (vm->error == -1 && tmp->size <= (MEM_SIZE / 6))
-		tmp->src = (tmp->size, fd);
+		tmp->src = vm_read_script(vm, tmp->size, fd, 0);
 	else if (vm->error == -1)
 		vm->error = 4;
-
-
 	return (tmp);
 }
 
-unsigned char *vm_read_script(int i, int fd, int flag)
+/*
+** vm_parsing - малочим память под чемпиона и парсим в нее чемпиона
+**
+** tmp->name - имя чемпиона. кащу к char.
+** tmp->size - размер рабочего кода чемпиона. считываю согласно этого размера и
+** на поле размещать исходя из этого значения. перевожу в инт через атои_бейс.
+** tmp->comment - комент. в оригинальной ВМ без визуализатора выводится, с 
+** визуализатором не используется. у нас должно выводится dвезде. кащу в char.
+** tmp->src - исходный код чемпиона. размещается на игровом поле.
+*/
+
+int				vm_read_int(t_vm *vm, int i, int fd, int flag)
 {
+	int				z;
+	int				x;
 	unsigned char	buf[i];
 
+	z = 0;
+	x = -1;
 	if (read(fd, &buf, i) != i)
-	{
 		vm->error = 2;
-		return (0);
-	}
-	if (flag != 0 && (buf[i] != 0 || buf[i - 1] != 0 || buf[i - 2] != 0 || 
-		buf[i - 3] != 0))
+	if (vm->error == -1)
 	{
-		vm->error = 5;
-		return (0);
+		while (++x < i)
+			z = z << 8 | buf[x];
 	}
-
-
+	return (z);
 }
 
-void	vm_read_flag(t_vm *vm, char *str)
+/*
+** vm_read_int - парсим размер программы в int
+**
+** из unsigned char побитовыми манипуляциями кастим нах размер.
+** каст происходит задом наперед.
+*/
+
+unsigned char *vm_read_script(t_vm *vm, int i, int fd, int flag)
 {
-	return ;
+	unsigned char	buf[i];
+	unsigned char	*mem;
+	int				s;
+
+	s = -1;
+	if (read(fd, &buf, i) != i)
+		vm->error = 2;
+	if (flag == 1 && vm->error == -1 && (buf[i - 1] != 0 || buf[i - 2] != 0 ||
+		buf[i - 3] != 0 || buf[i - 4] != 0))
+		vm->error = 5;
+	if (flag == 1 && vm->error == -1)
+		return ((unsigned char *)ft_strdup((char *)buf));
+	else if (vm->error == -1)
+	{
+		if (!(mem = (unsigned char *)malloc(sizeof(unsigned char) * i + 1)))
+			return (NULL);
+		while (++s < i)
+			mem[s] = buf[s];
+		mem[s] = 0;
+		return (mem);
+	}
+	return (NULL);
 }
 
-int		vm_magic(t_vm *vm, int fd)
+/*
+** vm_read_script - считываю чемпиона кусок за куском.
+**
+** flag:
+** 1 - надо последние 4 байта проверить, чтобы были == 0 && эти данные можно 
+** просто закастить в char.
+** 0 - ничего проверять не надо, просто читываем С КОНЦА.
+*/
+
+int		vm_read_magic(t_vm *vm, int fd)
 {
 	union u_read	smpl;
 	unsigned char	r[4];
@@ -97,58 +166,10 @@ int		vm_magic(t_vm *vm, int fd)
 	return (0);
 }
 
-
-
 /*
-** int f - флаг какой ти данных проверяю.
-**
-** f = 1 - 4 байта - меджик число
-** f = 2 - 132 байта - имя
-** f = 3 - 4 байта - значение размера программы
-** f = 4 - 2052 байта - коммент
-** f = 5 - (значение из f3) байт - размер программы
+** 4 байта - меджик число
+** 132 байта - имя
+** 4 байта - значение размера программы
+** 2052 байта - коммент
+** (значение из f3) байт - размер программы
 */
-
-
-///////////////////
-//make atoi_base(unsigned char *src, int base);
-//////////////////
-
-int	test_base(char nb)
-{
-	if (nb >= '0' && nb <= '9')
-		return (nb - '0');
-	else if (nb >= 'a' && nb <= 'z')
-		return (nb - 'a' + 10);
-	else if (nb >= 'A' && nb <= 'Z')
-		return (nb - 'A' + 10);
-	else
-		return (-1);
-}
-
-int ft_atoi_base(const char *str, int str_base)
-{
-	int temp;
-	int value;
-	int sign;
-	
-	value = 0;
-	sign = 1;
-	if(str_base < 2 || str_base > 16 || (!str))
-		return (0);
-	while (*str == ' ' || *str == '\t' || *str == '\f' ||
-		   *str == '\v' || *str == '\n' || *str == '\r')
-		str++;
-	if (*str == '-')
-		sign = -1;
-	if (*str == '-' || *str == '+')
-		str++;
-	temp = test_base(*str);
-	while (temp >= 0 && temp <= str_base)
-	{
-		value = value * str_base + temp;
-		str++;
-		temp = test_base(*str);
-	}
-	return(value * sign);
-}
