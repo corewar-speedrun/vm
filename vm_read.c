@@ -13,18 +13,18 @@
 #include "vm.h"
 
 /*
-** vm_read_flag - работа с флагами. Закодить.
+** vm_read_flag - работа с флагами. Закодить.////////////////////////////////////////////
 */
 
-void	vm_read_flag(t_vm *vm, char *str)
+void			vm_read_flag(t_vm *vm, char *str)
 {
 	return ;
 }
 
-void	vm_read(t_vm *vm, int i, char **arg)
+void			vm_read(t_vm *vm, int i, char **arg)
 {
-	int fd;
-	int x;
+	int			fd;
+	int			x;
 
 	x = 0;
 	while (++x < i)
@@ -49,17 +49,17 @@ void	vm_read(t_vm *vm, int i, char **arg)
 ** char **arg - массив аргументовю.
 ** 
 ** Открываю файл, получая его fd. 
-** Если arg[i][0] == '-', значит это флаг и 
-** парсим его как флаг.
-** В ином случае это либо чемпион, либо мусор. Проверить можно сверим MAGIC.
+** Если arg[i][0] == '-', значит это флаг и парсим его как флаг.
+** В ином случае это либо чемпион, либо мусор. Проверить можно сверив MAGIC.
 ** vm_read_magic - проверяет первые 4 байта на соответствие COREWAR_EXEC_MAGIC.
-** Если vm_read_magic вернуло 1, это чемпион, начинаем его парсить. Если вернуло 0,
-** нам засунули дичь, посылаем нафиг, выводим usage.
+** Если vm_read_magic вернуло 1, это чемпион, начинаем его парсить. Если 
+** вернуло 0, нам засунули дичь, посылаем нафиг, выводим usage.
 */
 
-t_champ	*vm_parsing(t_vm *vm, int fd)
+t_champ				*vm_parsing(t_vm *vm, int fd)
 {
-	t_champ	*tmp;
+	t_champ			*tmp;
+	unsigned char	buf[10];
 
 	if (!(tmp = (t_champ *)malloc(sizeof(t_champ) * 1)))
 		return (NULL);
@@ -67,13 +67,15 @@ t_champ	*vm_parsing(t_vm *vm, int fd)
 	if (vm->error == -1)
 		tmp->name = (char *)vm_read_script(vm, PROG_NAME_LENGTH + 4, fd, 1);
 	if (vm->error == -1)
-		tmp->size = vm_read_int(vm, 4, fd, 0);
+		tmp->size = vm_read_size(vm, 4, fd, 0);
 	if (vm->error == -1)
 		tmp->comment = (char *)vm_read_script(vm, COMMENT_LENGTH + 4, fd, 1);
 	if (vm->error == -1 && tmp->size <= (MEM_SIZE / 6))
 		tmp->src = vm_read_script(vm, tmp->size, fd, 0);
 	else if (vm->error == -1)
 		vm->error = 4;
+	if (read(fd, &buf, 10) != 0)
+		vm->error = 6;
 	return (tmp);
 }
 
@@ -88,7 +90,7 @@ t_champ	*vm_parsing(t_vm *vm, int fd)
 ** tmp->src - исходный код чемпиона. размещается на игровом поле.
 */
 
-int				vm_read_int(t_vm *vm, int i, int fd, int flag)
+int					vm_read_size(t_vm *vm, int i, int fd, int flag)
 {
 	int				z;
 	int				x;
@@ -113,7 +115,7 @@ int				vm_read_int(t_vm *vm, int i, int fd, int flag)
 ** каст происходит задом наперед.
 */
 
-unsigned char *vm_read_script(t_vm *vm, int i, int fd, int flag)
+unsigned char		*vm_read_script(t_vm *vm, int i, int fd, int flag)
 {
 	unsigned char	buf[i];
 	unsigned char	*mem;
@@ -148,7 +150,7 @@ unsigned char *vm_read_script(t_vm *vm, int i, int fd, int flag)
 ** 0 - ничего проверять не надо, просто читываем С КОНЦА.
 */
 
-int		vm_read_magic(t_vm *vm, int fd)
+int					vm_read_magic(t_vm *vm, int fd)
 {
 	union u_read	smpl;
 	unsigned char	r[4];

@@ -39,7 +39,7 @@ typedef struct		s_vm
 	int				error;
 	int				champs_nmbr;
 	t_champ			**champs;
-	unsigned char	*game;
+	unsigned char	*map;
 }					t_vm;
 
 /*
@@ -50,7 +50,7 @@ typedef struct		s_vm
 ** соответствующее сообщение об ошибке.
 ** champs_nmbr - количество чемпионов, которое нам зашло
 ** champs - масив с указателями на структуры t_champ
-** game - игровое поле unsigned char длиной MEM_SIZE, на котором изначально
+** map - игровое поле unsigned char длиной MEM_SIZE, на котором изначально
 ** размещаем чемпионов и играем.
 */
 
@@ -75,7 +75,14 @@ void				vm_read(t_vm *vm, int argv, char **argc);
 unsigned char		*vm_read_script(t_vm *vm, int i, int fd, int flag);
 int					vm_read_magic(t_vm *vm, int fd);
 void				vm_read_flag(t_vm *vm, char *str);
-int					vm_read_int(t_vm *vm, int i, int fd, int flag);
+int					vm_read_size(t_vm *vm, int i, int fd, int flag);
+
+/*
+** VM_init_game_&&_plase_champs
+*/
+
+void				vm_make_game(t_vm *vm);
+unsigned char		*vm_init_game(t_vm *vm);
 
 /*
 ** VM_error_management
