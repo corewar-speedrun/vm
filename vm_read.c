@@ -18,6 +18,10 @@
 
 void			vm_read_flag(t_vm *vm, char *str)
 {
+	if (vm)
+		return ;
+	if (str)
+		return ;
 	return ;
 }
 
@@ -67,7 +71,7 @@ t_champ				*vm_parsing(t_vm *vm, int fd)
 	if (vm->error == -1)
 		tmp->name = (char *)vm_read_script(vm, PROG_NAME_LENGTH + 4, fd, 1);
 	if (vm->error == -1)
-		tmp->size = vm_read_size(vm, 4, fd, 0);
+		tmp->size = vm_read_size(vm, 4, fd);
 	if (vm->error == -1)
 		tmp->comment = (char *)vm_read_script(vm, COMMENT_LENGTH + 4, fd, 1);
 	if (vm->error == -1 && tmp->size <= (MEM_SIZE / 6))
@@ -90,7 +94,7 @@ t_champ				*vm_parsing(t_vm *vm, int fd)
 ** tmp->src - исходный код чемпиона. размещается на игровом поле.
 */
 
-int					vm_read_size(t_vm *vm, int i, int fd, int flag)
+int					vm_read_size(t_vm *vm, int i, int fd)
 {
 	int				z;
 	int				x;

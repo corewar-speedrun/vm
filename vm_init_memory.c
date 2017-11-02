@@ -46,19 +46,16 @@ unsigned char	*vm_init_game(t_vm *vm)
 	q = -1;
 	while (vm->champs[++q] != NULL)
 	{
-		if (q == 0)
-		{
-			i = -1;
-			while (++i < vm->champs[q]->size)
-				map[i] = vm->champs[q]->src[i];
-		}
-		else
-		{
-			w = (MEM_SIZE / vm->champs_nmbr) * (q + 1);
-			i = -1;
-			while (++i < vm->champs[q]->size)
-				map[w++] = vm->champs[q]->src[i];
-		}
+		w = (MEM_SIZE / (vm->champs_nmbr + 1)) * q;
+		i = -1;
+		while (++i < vm->champs[q]->size)
+			map[w++] = vm->champs[q]->src[i];
 	}
 	return (map);
 }
+
+/*
+** vm_init_game - копирует исходный код ботов и размещает на карте.
+**
+** еще пилю это.//////////////////////////////////////////////////////////////////////
+*/

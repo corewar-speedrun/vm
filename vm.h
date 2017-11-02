@@ -75,7 +75,7 @@ void				vm_read(t_vm *vm, int argv, char **argc);
 unsigned char		*vm_read_script(t_vm *vm, int i, int fd, int flag);
 int					vm_read_magic(t_vm *vm, int fd);
 void				vm_read_flag(t_vm *vm, char *str);
-int					vm_read_size(t_vm *vm, int i, int fd, int flag);
+int					vm_read_size(t_vm *vm, int i, int fd);
 
 /*
 ** VM_init_game_&&_plase_champs
