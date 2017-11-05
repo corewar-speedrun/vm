@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include <unistd.h>
-#include <stdio.h>/////////////////////////////////////////////////////////
+#include <stdio.h>////////////////////////////////////////////////////////////////
 #include "libft/libft.h"
 #include "op.h"
 
@@ -34,12 +34,27 @@ typedef struct		s_champ
 ** nmbr - номер чемпиона по порядку
 */
 
+typedef struct		s_car
+{
+	int				car_pos;
+	int				count;
+	unsigned char	**car_reg;
+	struct s_car	*next_car;
+}					t_car;
+
+/*
+** t_car - каретка / процесс
+** 
+** 
+*/
+
 typedef struct		s_vm
 {
 	int				error;
 	int				champs_nmbr;
 	t_champ			**champs;
-	unsigned char	*map;
+	unsigned char	**map;
+	t_car			*cars;
 }					t_vm;
 
 /*
@@ -52,16 +67,6 @@ typedef struct		s_vm
 ** champs - масив с указателями на структуры t_champ
 ** map - игровое поле unsigned char длиной MEM_SIZE, на котором изначально
 ** размещаем чемпионов и играем.
-*/
-
-union				u_read
-{
-	unsigned char	bit[4];
-	unsigned int	mg;
-};
-
-/*
-** u_read - вспомогательная структура для парсинга
 */
 
 /*
@@ -82,7 +87,7 @@ int					vm_read_size(t_vm *vm, int i, int fd);
 */
 
 void				vm_make_game(t_vm *vm);
-unsigned char		*vm_init_game(t_vm *vm);
+void				vm_init_champs(t_vm *vm);
 
 /*
 ** VM_error_management

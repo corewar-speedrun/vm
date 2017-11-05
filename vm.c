@@ -36,9 +36,11 @@ int		vm_error(int error)
 	else if (error == 4)
 		ft_putstr("Champion size too big. > CHAMP_MAX_SIZE\n\0");
 	else if (error == 5)
-		ft_putstr("We need /\0 at the end of champion name or comment\n\0");
+		ft_putstr("We need \\0 at the end of champion name or comment\n\0");
 	else if (error == 6)
 		ft_putstr("Champion size error. Size != encoded size by Assembler\n\0");
+	else if (error == 7)
+		vm_usage("We need a champion!\n\0");
 	else
 		ft_putstr("Some unknow error.\n\0");
 	return (0);
@@ -53,6 +55,7 @@ int		vm_error(int error)
 ** error == 4 - champion size > CHAMP_MAX_SIZE
 ** error == 5 - no \0 at the end of champion name or comment
 ** error == 6 - Champion size != encoded size by Assembler
+** error == 7 - Wee need a champion > 0! 
 */
 
 int		vm_usage(char *re)
@@ -65,15 +68,41 @@ int		vm_usage(char *re)
 
 void	vm_make_game(t_vm *vm)
 {
-	vm->map = vm_init_game(vm);
+	vm_init_champs(vm);
 	int i = -1;
+	int z = 1;
 	while (++i < MEM_SIZE)
 	{
-		printf("|%x|", vm->map[i]);
-		if (i % 4 == 0)
-			printf(" ");
-		if (i % 32 == 0)
+		printf("|%x| ", vm->map[0][i]);
+		if (z % 4 == 0)
+			printf("  ");
+		if (z % 32 == 0)
 			printf("\n");
+		z++;
+	}
+	i = -1;
+	z = 1;
+	printf("champs\n");
+	while (++i < MEM_SIZE)
+	{
+		printf("|%x| ", vm->map[1][i]);
+		if (z % 4 == 0)
+			printf("  ");
+		if (z % 32 == 0)
+			printf("\n");
+		z++;
+	}
+			printf("caretki\n");
+	i = -1;
+	z = 1;
+	while (++i < MEM_SIZE)
+	{
+		printf("|%x| ", vm->map[2][i]);
+		if (z % 4 == 0)
+			printf("  ");
+		if (z % 32 == 0)
+			printf("\n");
+		z++;
 	}
 }
 

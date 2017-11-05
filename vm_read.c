@@ -12,6 +12,16 @@
 
 #include "vm.h"
 
+union				u_read
+{
+	unsigned char	bit[4];
+	unsigned int	mg;
+};
+
+/*
+** u_read - вспомогательная структура для парсинга
+*/
+
 /*
 ** vm_read_flag - работа с флагами. Закодить.////////////////////////////////////////////
 */
@@ -38,12 +48,14 @@ void			vm_read(t_vm *vm, int i, char **arg)
 		if (arg[x][0] == '-' && vm->error == -1)
 			vm_read_flag(vm, arg[x]);
 		else if (vm_read_magic(vm, fd) == 1 && vm->error == -1)
-			vm->champs[++vm->champs_nmbr] = vm_parsing(vm, fd);
+			vm->champs[vm->champs_nmbr++] = vm_parsing(vm, fd);
 		else
 			vm->error = 1;
 		if (vm->error != -1)
 			break ;
 	}
+	if (vm->champs_nmbr < 1 && vm->error != -1)
+		vm->error = 7;
 }
 
 /*

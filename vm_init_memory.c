@@ -25,9 +25,13 @@ t_vm			*vm_init(void)
 	while (++i < MAX_PLAYERS)
 		mem->champs[i] = NULL;
 	mem->error = -1;
-	mem->champs_nmbr = -1;
-	mem->map = (unsigned char *)malloc(sizeof(unsigned char) * MEM_SIZE);
-	ft_bzero(mem->map, (sizeof(unsigned char) * MEM_SIZE));
+	mem->map = (unsigned char **)malloc(sizeof(unsigned char *) * 4);
+	i = -1;
+	while (++i < 4)
+	{
+		mem->map[i] = (unsigned char *)malloc(sizeof(unsigned char) * MEM_SIZE);
+		ft_bzero(mem->map[i], (sizeof(unsigned char) * MEM_SIZE));
+	}
 	return (mem);
 }
 
@@ -35,27 +39,34 @@ t_vm			*vm_init(void)
 ** vm_init - выделяем память под основную структуру виртуальной машины - t_vm.
 */
 
-unsigned char	*vm_init_game(t_vm *vm)
+void		vm_init_champs(t_vm *vm)
 {
-	unsigned char	*map;
 	int				i;
 	int				q;
 	int				w;
 
-	map = vm->map;
 	q = -1;
 	while (vm->champs[++q] != NULL)
 	{
-		w = (MEM_SIZE / (vm->champs_nmbr + 1)) * q;
+		w = (MEM_SIZE / (vm->champs_nmbr)) * q;
+		vm->map[2][w] = 1;
 		i = -1;
 		while (++i < vm->champs[q]->size)
-			map[w++] = vm->champs[q]->src[i];
+		{
+			vm->map[0][w] = vm->champs[q]->src[i];
+			vm->map[1][w++] = q + 1;
+		}
 	}
-	return (map);
+	return ;
 }
 
 /*
-** vm_init_game - копирует исходный код ботов и размещает на карте.
+** vm_init_champs - копирует исходный код ботов и размещает на карте.
 **
 ** еще пилю это.//////////////////////////////////////////////////////////////////////
 */
+
+t_car		*vm_init_car(t_vm *vm)
+{
+
+}
