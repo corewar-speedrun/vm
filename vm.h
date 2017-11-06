@@ -38,14 +38,20 @@ typedef struct		s_car
 {
 	int				car_pos;
 	int				count;
-	unsigned char	**car_reg;
+	int				cost;
+	int				*car_reg;
 	struct s_car	*next_car;
 }					t_car;
 
 /*
 ** t_car - каретка / процесс
 ** 
-** 
+** car_pos - положение на карте
+** count - счетчик циклов до выполнения команды
+** cost - стоимость(количество) циклов для выполнения команды // возможно достаточно будет count
+** car_reg - регистр.
+** ** 0 регистр - номер чемпиона, вызвавшего данный процесс со знаком минус (-1 или -3 и т.д.)  
+** next_car - следуюзая каретка / процесс
 */
 
 typedef struct		s_vm

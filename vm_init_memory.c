@@ -50,6 +50,7 @@ void		vm_init_champs(t_vm *vm)
 	{
 		w = (MEM_SIZE / (vm->champs_nmbr)) * q;
 		vm->map[2][w] = 1;
+		vm_init_car(vm, w, vm->champs[q]->nmbr, NULL);
 		i = -1;
 		while (++i < vm->champs[q]->size)
 		{
@@ -57,7 +58,6 @@ void		vm_init_champs(t_vm *vm)
 			vm->map[1][w++] = q + 1;
 		}
 	}
-	return ;
 }
 
 /*
@@ -66,7 +66,24 @@ void		vm_init_champs(t_vm *vm)
 ** еще пилю это.//////////////////////////////////////////////////////////////////////
 */
 
-t_car		*vm_init_car(t_vm *vm)
+void		vm_init_car(t_vm *vm, int pos, int champ_nmbr, int *reg)
 {
+	t_car buf;
 
+	if (!(buf = (t_car *)malloc(sizeof(t_car))))
+		return ;
+	ft_bzero(buf, sizeof(t_car));
+	if (!(buf->car_reg = (int *)malloc(sizeof(int) * 16)))
+		return (NULL);
+	ft_bzero(buf->car_reg, sizeof(int) * 16);
+	buf->car_reg[0] = (reg == NULL) ? champ_nmbr * -1 : reg[0];
+	buf->car_pos = pos;
+	buf->next_car = NULL;
+	if (vm->cars == NULL)
+		vm->cars = buf;
+	else
+	{
+		buf->next_car = vm->cars;
+		vm->cars = buf;
+	}
 }
