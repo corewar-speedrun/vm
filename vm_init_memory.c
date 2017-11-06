@@ -32,6 +32,9 @@ t_vm			*vm_init(void)
 		mem->map[i] = (unsigned char *)malloc(sizeof(unsigned char) * MEM_SIZE);
 		ft_bzero(mem->map[i], (sizeof(unsigned char) * MEM_SIZE));
 	}
+	mem->damp = -1;
+	mem->game == 1;
+	mem->to_die = CYCLE_TO_DIE;
 	return (mem);
 }
 
@@ -73,17 +76,12 @@ void		vm_init_car(t_vm *vm, int pos, int champ_nmbr, int *reg)
 	if (!(buf = (t_car *)malloc(sizeof(t_car))))
 		return ;
 	ft_bzero(buf, sizeof(t_car));
-	if (!(buf->car_reg = (int *)malloc(sizeof(int) * 16)))
-		return (NULL);
-	ft_bzero(buf->car_reg, sizeof(int) * 16);
+	// if (!(buf->car_reg = (int *)malloc(sizeof(int) * 16)))
+	// 	buf->car_reg = NULL;
+	// ft_bzero(buf->car_reg, sizeof(int) * 16);
 	buf->car_reg[0] = (reg == NULL) ? champ_nmbr * -1 : reg[0];
 	buf->car_pos = pos;
 	buf->next_car = NULL;
-	if (vm->cars == NULL)
-		vm->cars = buf;
-	else
-	{
-		buf->next_car = vm->cars;
-		vm->cars = buf;
-	}
+	buf->next_car = vm->cars;
+	vm->cars = buf;
 }

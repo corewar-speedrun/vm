@@ -22,6 +22,8 @@ typedef struct		s_champ
 	unsigned char	*src;
 	int				size;
 	int				nmbr;
+	int				live;
+	int				last_live;
 }					t_champ;
 
 /*
@@ -37,9 +39,12 @@ typedef struct		s_champ
 typedef struct		s_car
 {
 	int				car_pos;
+	int				car_next_pos;
 	int				count;
-	int				cost;
-	int				*car_reg;
+	int				comand;
+//	int				cost;
+	int				car_reg[16];
+	int				live;
 	struct s_car	*next_car;
 }					t_car;
 
@@ -61,6 +66,10 @@ typedef struct		s_vm
 	t_champ			**champs;
 	unsigned char	**map;
 	t_car			*cars;
+	int				damp;
+	int				cycle;
+	int				game;
+	int				to_die;
 }					t_vm;
 
 /*
@@ -92,8 +101,8 @@ int					vm_read_size(t_vm *vm, int i, int fd);
 ** VM_init_game_&&_plase_champs
 */
 
-void				vm_make_game(t_vm *vm);
 void				vm_init_champs(t_vm *vm);
+void				vm_init_car(t_vm *vm, int pos, int champ_nmbr, int *reg);
 
 /*
 ** VM_error_management
@@ -107,3 +116,4 @@ int					vm_usage(char *re);
 */
 
 //char				*vm_strjoin(char *t, char *y);
+void				print_maps(t_vm *vm);
