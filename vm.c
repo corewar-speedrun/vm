@@ -81,8 +81,15 @@ void	vm_to_die(void)
 {
 	t_car *move;
 	t_car *tmp;
+	t_car *start;
 
-	move = g_vm->cars;
+	start = g_vm->cars;
+	while (start->live < 1 && start != NULL)
+	{
+		tmp = start->next_car;
+		free(start);
+		start = tmp;
+	}
 	while (move != NULL)
 	{
 		if (move->live < 1)
