@@ -12,13 +12,13 @@
 
 #include "vm.h"
 
-void	print_maps(t_vm *vm)
+void	print_maps(void)
 {
 	int i = -1;
 	int z = 1;
 	while (++i < MEM_SIZE)
 	{
-		printf("|%x| ", vm->map[0][i]);
+		printf("|%x| ", g_vm->map[0][i]);
 		if (z % 4 == 0)
 			printf("  ");
 		if (z % 32 == 0)
@@ -30,7 +30,7 @@ void	print_maps(t_vm *vm)
 	printf("champs\n");
 	while (++i < MEM_SIZE)
 	{
-		printf("|%x| ", vm->map[1][i]);
+		printf("|%x| ", g_vm->map[1][i]);
 		if (z % 4 == 0)
 			printf("  ");
 		if (z % 32 == 0)
@@ -42,7 +42,7 @@ void	print_maps(t_vm *vm)
 	z = 1;
 	while (++i < MEM_SIZE)
 	{
-		printf("|%x| ", vm->map[2][i]);
+		printf("|%x| ", g_vm->map[2][i]);
 		if (z % 4 == 0)
 			printf("  ");
 		if (z % 32 == 0)

@@ -72,16 +72,22 @@ typedef struct		s_vm
 	int				to_die;
 }					t_vm;
 
+t_vm				*g_vm;
+
 /*
 ** t_vm - главная структура виртуальной машины.
 **
 ** error - изначально равен -1. если у переменной другое значение, это
-** говорит о необходимости остановить работы программы и вывести
-** соответствующее сообщение об ошибке.
+** ** говорит о необходимости остановить работу программы и вывести
+** ** соответствующее сообщение об ошибке.
 ** champs_nmbr - количество чемпионов, которое нам зашло
 ** champs - масив с указателями на структуры t_champ
-** map - игровое поле unsigned char длиной MEM_SIZE, на котором изначально
-** размещаем чемпионов и играем.
+** map - игровое поле unsigned char длиной MEM_SIZE
+** ** map[0] - карта выводится на экран, код чемпионов и все изменения на ней
+** ** map[1] - клетка != 0 означает, что точка на карте принадлежит боту.
+** ** ** значение клетки == номеру бота.
+** ** map[2] - если клетка == 1, на ней размещена каретка.
+** ** map[3] - если клетка == 1, за последние Х циклов тут изменился код (решить чему рвен Х)
 */
 
 /*
@@ -90,19 +96,19 @@ typedef struct		s_vm
 
 int					main(int argv, char **argc);
 t_vm				*vm_init(void);
-t_champ				*vm_parsing(t_vm *vm, int fd);
-void				vm_read(t_vm *vm, int argv, char **argc);
-unsigned char		*vm_read_script(t_vm *vm, int i, int fd, int flag);
-int					vm_read_magic(t_vm *vm, int fd);
-void				vm_read_flag(t_vm *vm, char *str);
-int					vm_read_size(t_vm *vm, int i, int fd);
+t_champ				*vm_parsing(int fd);
+void				vm_read(int argv, char **argc);
+unsigned char		*vm_read_script(int i, int fd, int flag);
+int					vm_read_magic(int fd);
+void				vm_read_flag(char *str);
+int					vm_read_size(int i, int fd);
 
 /*
 ** VM_init_game_&&_plase_champs
 */
 
-void				vm_init_champs(t_vm *vm);
-void				vm_init_car(t_vm *vm, int pos, int champ_nmbr, int *reg);
+void				vm_init_champs(void);
+void				vm_init_car(int pos, int champ_nmbr, int *reg);
 
 /*
 ** VM_error_management
@@ -116,4 +122,4 @@ int					vm_usage(char *re);
 */
 
 //char				*vm_strjoin(char *t, char *y);
-void				print_maps(t_vm *vm);
+void				print_maps(void);

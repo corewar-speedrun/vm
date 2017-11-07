@@ -26,16 +26,14 @@ union				u_read
 ** vm_read_flag - работа с флагами. Закодить.////////////////////////////////////////////
 */
 
-void			vm_read_flag(t_vm *vm, char *str)
+void			vm_read_flag(char *str)
 {
-	if (vm)
-		return ;
 	if (str)
 		return ;
 	return ;
 }
 
-void			vm_read(t_vm *vm, int i, char **arg)
+void			vm_read(int i, char **arg)
 {
 	int			fd;
 	int			x;
@@ -43,19 +41,19 @@ void			vm_read(t_vm *vm, int i, char **arg)
 	x = 0;
 	while (++x < i)
 	{
-		if((fd = open(arg[x], O_RDONLY)) == -1 && vm->error == -1)
-			vm->error = 2;
-		if (arg[x][0] == '-' && vm->error == -1)
-			vm_read_flag(vm, arg[x]);
-		else if (vm_read_magic(vm, fd) == 1 && vm->error == -1)
-			vm->champs[vm->champs_nmbr++] = vm_parsing(vm, fd);
+		if((fd = open(arg[x], O_RDONLY)) == -1 && g_vm->error == -1)
+			g_vm->error = 2;
+		if (arg[x][0] == '-' && g_vm->error == -1)
+			vm_read_flag(arg[x]);
+		else if (vm_read_magic(fd) == 1 && g_vm->error == -1)
+			g_vm->champs[g_vm->champs_nmbr++] = vm_parsing(fd);
 		else
-			vm->error = 1;
-		if (vm->error != -1)
+			g_vm->error = 1;
+		if (g_vm->error != -1)
 			break ;
 	}
-	if (vm->champs_nmbr < 1 && vm->error != -1)
-		vm->error = 7;
+	if (g_vm->champs_nmbr < 1 && g_vm->error != -1)
+		g_vm->error = 7;
 }
 
 /*
@@ -72,7 +70,7 @@ void			vm_read(t_vm *vm, int i, char **arg)
 ** вернуло 0, нам засунули дичь, посылаем нафиг, выводим usage.
 */
 
-t_champ				*vm_parsing(t_vm *vm, int fd)
+t_champ				*vm_parsing(int fd)
 {
 	t_champ			*tmp;
 	unsigned char	buf[10];
@@ -80,18 +78,18 @@ t_champ				*vm_parsing(t_vm *vm, int fd)
 	if (!(tmp = (t_champ *)malloc(sizeof(t_champ) * 1)))
 		return (NULL);
 	ft_bzero(tmp, sizeof(t_champ));
-	if (vm->error == -1)
-		tmp->name = (char *)vm_read_script(vm, PROG_NAME_LENGTH + 4, fd, 1);
-	if (vm->error == -1)
-		tmp->size = vm_read_size(vm, 4, fd);
-	if (vm->error == -1)
-		tmp->comment = (char *)vm_read_script(vm, COMMENT_LENGTH + 4, fd, 1);
-	if (vm->error == -1 && tmp->size <= (MEM_SIZE / 6))
-		tmp->src = vm_read_script(vm, tmp->size, fd, 0);
-	else if (vm->error == -1)
-		vm->error = 4;
+	if (g_vm->error == -1)
+		tmp->name = (char *)vm_read_script(PROG_NAME_LENGTH + 4, fd, 1);
+	if (g_vm->error == -1)
+		tmp->size = vm_read_size(4, fd);
+	if (g_vm->error == -1)
+		tmp->comment = (char *)vm_read_script(COMMENT_LENGTH + 4, fd, 1);
+	if (g_vm->error == -1 && tmp->size <= (MEM_SIZE / 6))
+		tmp->src = vm_read_script(tmp->size, fd, 0);
+	else if (g_vm->error == -1)
+		g_vm->error = 4;
 	if (read(fd, &buf, 10) != 0)
-		vm->error = 6;
+		g_vm->error = 6;
 	return (tmp);
 }
 

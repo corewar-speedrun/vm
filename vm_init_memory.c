@@ -12,53 +12,50 @@
 
 #include "vm.h"
 
-t_vm			*vm_init(void)
+void			vm_init(void)
 {
-	t_vm			*mem;
 	int 			i;
 
 	i = -1;
-	if (!(mem = (t_vm *)malloc(sizeof(t_vm) * 1)))
-		return (NULL);
-	ft_bzero(mem, sizeof(t_vm));
-	mem->champs = (t_champ **)malloc(sizeof(t_champ *) * MAX_PLAYERS); //////////////////// потестить 3 или 4 должно тут быть
+	ft_bzero(g_vm, sizeof(g_vm));
+	g_vm->champs = (t_champ **)malloc(sizeof(t_champ *) * MAX_PLAYERS);
 	while (++i < MAX_PLAYERS)
-		mem->champs[i] = NULL;
-	mem->error = -1;
-	mem->map = (unsigned char **)malloc(sizeof(unsigned char *) * 4);
+		g_vm->champs[i] = NULL;
+	g_vm->error = -1;
+	g_vm->map = (unsigned char **)malloc(sizeof(unsigned char *) * 4);
 	i = -1;
 	while (++i < 4)
 	{
-		mem->map[i] = (unsigned char *)malloc(sizeof(unsigned char) * MEM_SIZE);
-		ft_bzero(mem->map[i], (sizeof(unsigned char) * MEM_SIZE));
+		g_vm->map[i] = (unsigned char *)malloc(sizeof(unsigned char) * MEM_SIZE);
+		ft_bzero(g_vm->map[i], (sizeof(unsigned char) * MEM_SIZE));
 	}
-	mem->damp = -1;
-	mem->game == 1;
-	mem->to_die = CYCLE_TO_DIE;
-	return (mem);
+	g_vm->damp = -1;
+	g_vm->game == 1;
+	g_vm->to_die = CYCLE_TO_DIE;
+	return ;
 }
 
 /*
 ** vm_init - выделяем память под основную структуру виртуальной машины - t_vm.
 */
 
-void		vm_init_champs(t_vm *vm)
+void		vm_init_champs(void)
 {
 	int				i;
 	int				q;
 	int				w;
 
 	q = -1;
-	while (vm->champs[++q] != NULL)
+	while (g_vm->champs[++q] != NULL)
 	{
-		w = (MEM_SIZE / (vm->champs_nmbr)) * q;
-		vm->map[2][w] = 1;
-		vm_init_car(vm, w, vm->champs[q]->nmbr, NULL);
+		w = (MEM_SIZE / (g_vm->champs_nmbr)) * q;
+		g_vm->map[2][w] = 1;
+		vm_init_car(w, g_vm->champs[q]->nmbr, NULL);
 		i = -1;
-		while (++i < vm->champs[q]->size)
+		while (++i < g_vm->champs[q]->size)
 		{
-			vm->map[0][w] = vm->champs[q]->src[i];
-			vm->map[1][w++] = q + 1;
+			g_vm->map[0][w] = g_vm->champs[q]->src[i];
+			g_vm->map[1][w++] = q + 1;
 		}
 	}
 }
@@ -69,7 +66,7 @@ void		vm_init_champs(t_vm *vm)
 ** еще пилю это.//////////////////////////////////////////////////////////////////////
 */
 
-void		vm_init_car(t_vm *vm, int pos, int champ_nmbr, int *reg)
+void		vm_init_car(int pos, int champ_nmbr, int *reg)
 {
 	t_car buf;
 
@@ -82,6 +79,7 @@ void		vm_init_car(t_vm *vm, int pos, int champ_nmbr, int *reg)
 	buf->car_reg[0] = (reg == NULL) ? champ_nmbr * -1 : reg[0];
 	buf->car_pos = pos;
 	buf->next_car = NULL;
-	buf->next_car = vm->cars;
-	vm->cars = buf;
+	if (g_vm->cars != NULL)
+		buf->next_car = g_vm->cars;
+	g_vm->cars = buf;
 }
