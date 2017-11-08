@@ -68,6 +68,7 @@ typedef struct		s_vm
 	t_car			*cars;
 	int				damp;
 	int				cycle;
+	int				die_cycle;
 	int				game;
 	int				to_die;
 }					t_vm;
@@ -88,6 +89,12 @@ t_vm				*g_vm;
 ** ** ** значение клетки == номеру бота.
 ** ** map[2] - если клетка == 1, на ней размещена каретка.
 ** ** map[3] - если клетка == 1, за последние Х циклов тут изменился код (решить чему рвен Х)
+** cars - список цсех кареток / процессов
+** damp - при применении флага damp, останавливает игру на указанном цикле и выводит результат на экран. //// еще не реализованно
+** cycle - номер текущего игрового цикла
+** to_die - через сколько циклов с последней чистки трупов кареток произойдет следующая
+** die_cycle - цикл на котором произойдет очередная смерть кареток не подавших
+** ** признаков жизнию
 */
 
 /*
@@ -95,7 +102,7 @@ t_vm				*g_vm;
 */
 
 int					main(int argv, char **argc);
-t_vm				*vm_init(void);
+void				vm_init(void);
 t_champ				*vm_parsing(int fd);
 void				vm_read(int argv, char **argc);
 unsigned char		*vm_read_script(int i, int fd, int flag);
@@ -109,6 +116,16 @@ int					vm_read_size(int i, int fd);
 
 void				vm_init_champs(void);
 void				vm_init_car(int pos, int champ_nmbr, int *reg);
+
+/*
+** VM_game
+*/
+
+void				vm_make_game(void);
+void				vm_car_to_die(void);
+void				vm_car_to_die2(void);
+t_car				*vm_read_comand(t_car *move);
+t_car				*vm_make_move(t_car *move);
 
 /*
 ** VM_error_management

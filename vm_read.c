@@ -104,7 +104,7 @@ t_champ				*vm_parsing(int fd)
 ** tmp->src - исходный код чемпиона. размещается на игровом поле.
 */
 
-int					vm_read_size(t_vm *vm, int i, int fd)
+int					vm_read_size(int i, int fd)
 {
 	int				z;
 	int				x;
@@ -113,8 +113,8 @@ int					vm_read_size(t_vm *vm, int i, int fd)
 	z = 0;
 	x = -1;
 	if (read(fd, &buf, i) != i)
-		vm->error = 2;
-	if (vm->error == -1)
+		g_vm->error = 2;
+	if (g_vm->error == -1)
 	{
 		while (++x < i)
 			z = z << 8 | buf[x];
@@ -129,7 +129,7 @@ int					vm_read_size(t_vm *vm, int i, int fd)
 ** каст происходит задом наперед.
 */
 
-unsigned char		*vm_read_script(t_vm *vm, int i, int fd, int flag)
+unsigned char		*vm_read_script(int i, int fd, int flag)
 {
 	unsigned char	buf[i];
 	unsigned char	*mem;
@@ -137,13 +137,13 @@ unsigned char		*vm_read_script(t_vm *vm, int i, int fd, int flag)
 
 	s = -1;
 	if (read(fd, &buf, i) != i)
-		vm->error = 2;
-	if (flag == 1 && vm->error == -1 && (buf[i - 1] != 0 || buf[i - 2] != 0 ||
+		g_vm->error = 2;
+	if (flag == 1 && g_vm->error == -1 && (buf[i - 1] != 0 || buf[i - 2] != 0 ||
 		buf[i - 3] != 0 || buf[i - 4] != 0))
-		vm->error = 5;
-	if (flag == 1 && vm->error == -1)
+		g_vm->error = 5;
+	if (flag == 1 && g_vm->error == -1)
 		return ((unsigned char *)ft_strdup((char *)buf));
-	else if (vm->error == -1)
+	else if (g_vm->error == -1)
 	{
 		if (!(mem = (unsigned char *)malloc(sizeof(unsigned char) * i + 1)))
 			return (NULL);
@@ -164,21 +164,21 @@ unsigned char		*vm_read_script(t_vm *vm, int i, int fd, int flag)
 ** 0 - ничего проверять не надо, просто читываем С КОНЦА.
 */
 
-int					vm_read_magic(t_vm *vm, int fd)
+int					vm_read_magic(int fd)
 {
 	union u_read	smpl;
 	unsigned char	r[4];
 
 	smpl.mg = COREWAR_EXEC_MAGIC;
 	if (read(fd, &r, 4) != 4)
-		vm->error = 2;
-	if (vm->error == -1 && (r[0] == smpl.bit[3] || r[0] == smpl.bit[0]) &&
+		g_vm->error = 2;
+	if (g_vm->error == -1 && (r[0] == smpl.bit[3] || r[0] == smpl.bit[0]) &&
 		(r[1] == smpl.bit[2] || r[1] == smpl.bit[1]) &&
 		(r[2] == smpl.bit[1] || r[2] == smpl.bit[2]) &&
 		(r[3] == smpl.bit[0] || r[3] == smpl.bit[3]))
 		return (1);
-	else if (vm->error == -1)
-		vm->error = 3;
+	else if (g_vm->error == -1)
+		g_vm->error = 3;
 	return (0);
 }
 

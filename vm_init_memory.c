@@ -30,8 +30,9 @@ void			vm_init(void)
 		ft_bzero(g_vm->map[i], (sizeof(unsigned char) * MEM_SIZE));
 	}
 	g_vm->damp = -1;
-	g_vm->game == 1;
+	g_vm->game = 1;
 	g_vm->to_die = CYCLE_TO_DIE;
+	g_vm->die_cycle = g_vm->to_die;
 	return ;
 }
 
@@ -68,7 +69,7 @@ void		vm_init_champs(void)
 
 void		vm_init_car(int pos, int champ_nmbr, int *reg)
 {
-	t_car buf;
+	t_car *buf;
 
 	if (!(buf = (t_car *)malloc(sizeof(t_car))))
 		return ;
