@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "vm.h"
+#include "corewar.h"
 
 void	print_maps(void)
 {
@@ -37,7 +37,7 @@ void	print_maps(void)
 			printf("\n");
 		z++;
 	}
-			printf("caretki\n");
+	printf("caretki\n");
 	i = -1;
 	z = 1;
 	while (++i < MEM_SIZE)
@@ -56,19 +56,19 @@ int		vm_error(int error)
 	if (error == 1)
 		return(vm_usage("Invalid argument.\n\0"));
 	else if (error == 2)
-		ft_putstr("Invalid or empty file.\n\0");
+		ft_putstr_fd("Invalid or empty file.\n\0", 2);
 	else if (error == 3)
-		ft_putstr("Wrong MAGIC.\n\0");	
+		ft_putstr_fd("Wrong MAGIC.\n\0", 2);
 	else if (error == 4)
-		ft_putstr("Champion size too big. > CHAMP_MAX_SIZE\n\0");
+		ft_putstr_fd("Champion size too big. > CHAMP_MAX_SIZE\n\0", 2);
 	else if (error == 5)
-		ft_putstr("We need \\0 at the end of champion name or comment\n\0");
+		ft_putstr_fd("We need \\0 at the end of champion name or comment\n\0", 2);
 	else if (error == 6)
-		ft_putstr("Champion size error. Size != encoded size by Assembler\n\0");
+		ft_putstr_fd("Champion size error. Size != encoded size by Assembler\n\0", 2);
 	else if (error == 7)
 		vm_usage("We need a champion!\n\0");
 	else
-		ft_putstr("Some unknow error.\n\0");
+		ft_putstr_fd("Some unknow error.\n\0", 2);
 	return (0);
 }
 
@@ -87,7 +87,7 @@ int		vm_error(int error)
 int		vm_usage(char *re)
 {
 	if (re != NULL)
-		ft_putstr(re);
+		ft_putstr_fd(re, 2);
 	ft_putstr("Usage:\n./corewar [-flags] <champion1.cor> <...>\n\0");
 	return (0);
 }

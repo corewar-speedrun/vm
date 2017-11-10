@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "vm.h"
+#include "corewar.h"
 
 void			vm_init(void)
 {
@@ -80,6 +80,7 @@ void		vm_init_car(int pos, int champ_nmbr, int *reg)
 	buf->car_reg[0] = (reg == NULL) ? champ_nmbr * -1 : reg[0];
 	buf->car_pos = pos;
 	buf->next_car = NULL;
+	buf->carry = FALSE;
 	if (g_vm->cars != NULL)
 		buf->next_car = g_vm->cars;
 	g_vm->cars = buf;

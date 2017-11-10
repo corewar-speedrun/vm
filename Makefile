@@ -10,11 +10,11 @@
 #                                                                              #
 # **************************************************************************** #
 
-NAME = corewar_vm
+NAME = corewar
 
 CFLAGS = -Wall -Wextra -Werror -g
 
-SRC = vm.c vm_init_memory.c vm_read.c vm_helps.c
+SRC = vm.c vm_init_memory.c vm_read.c vm_helps.c vm_game1.c vm_game2.c
 
 OBJ = $(SRC:.c=.o)
 
@@ -38,5 +38,3 @@ fclean: clean
 	@make fclean -C libft
 
 re: fclean all
-
-
