@@ -12,23 +12,23 @@
 
 #include "corewar.h"
 
-void	vm_make_game(t_car *move)
+void	vm_make_game(t_car *car)
 {
 	while (g_vm->game > 0)
 	{
 
-		move = g_vm->cars;
-		while (move != NULL)
+		car = g_vm->cars;
+		while (car != NULL)
 		{
-			if (move->comand == 0)
-				move = vm_read_comand(move);
-			else if (move->count == 0 && move->comand != 0)
-				move = vm_make_move(move);
+			if (car->comand == 0)
+				car = vm_read_comand(car);
+			else if (car->count == 0 && car->comand != 0)
+				car = vm_make_move(car);
 			else
-				move->count--;
-			if (g_vm->map[2][move->car_pos] != 1)
-				g_vm->map[2][move->car_pos] = 1;
-			move = move->next_car;
+				car->count--;
+			if (g_vm->map[2][car->car_pos] != 1)
+				g_vm->map[2][car->car_pos] = 1;
+			car = car->next_car;
 		}
 		if (++g_vm->cycle == g_vm->die_cycle)
 			vm_car_to_die();
@@ -36,14 +36,14 @@ void	vm_make_game(t_car *move)
 	}
 }
 
-void	vm_make_game2(t_car *move)
+void	vm_make_game2(t_car *car)
 {
-	move = g_vm->cars;
-	while (move != NULL)
+	car = g_vm->cars;
+	while (car != NULL)
 	{
-		if (move->car_next_pos != 0)
-			move = vm_car_next_pos(move);
-		move = move->next_car;
+		if (car->car_next_pos != 0)
+			car = vm_car_next_pos(car);
+		car = car->next_car;
 	}
 	// while (g_vm->game > 1)
 	// {
@@ -58,17 +58,16 @@ void	vm_make_game2(t_car *move)
 ** еще пилю это.////////////////////////////////////////////////////////////////////
 */
 
-t_car		*vm_car_next_pos(t_car *move)
+t_car		*vm_car_next_pos(t_car *car)
 {
-	if (move->car_next_pos < 1)
-		return (move);
-
-	if ((move->car_pos + move->car_next_pos) > MEM_SIZE)
-		move->car_pos += move->car_next_pos;
+	if (car->car_next_pos < 1)
+		return (car);
+	if ((car->car_pos + car->car_next_pos) > MEM_SIZE)
+		car->car_pos += car->car_next_pos;
 	else
-		move->car_pos = (move->car_pos + move->car_next_pos) - MEM_SIZE;
-	move->car_next_pos = 0;
-	return (move);
+		car->car_pos = (car->car_pos + car->car_next_pos) - MEM_SIZE;
+	car->car_next_pos = 0;
+	return (car);
 }
 
 void	vm_car_to_die(void)
