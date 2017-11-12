@@ -62,7 +62,11 @@ t_car		*vm_car_next_pos(t_car *car)
 {
 	if (car->car_next_pos < 1)
 		return (car);
+<<<<<<< HEAD
 	if ((car->car_pos + car->car_next_pos) < MEM_SIZE)
+=======
+	if ((car->car_pos + car->car_next_pos) > MEM_SIZE)
+>>>>>>> 0f3babc14b016879a4f1945b1d09df7627fde080
 		car->car_pos += car->car_next_pos;
 	else
 		car->car_pos = (car->car_pos + car->car_next_pos) - MEM_SIZE;

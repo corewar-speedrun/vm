@@ -154,7 +154,10 @@ t_car				*vm_car_next_pos(t_car *car);
 */
 
 t_car				*vm_com_live(t_car *car);
+<<<<<<< HEAD
 void				vm_com_live2(int champ_namber);
+=======
+>>>>>>> 0f3babc14b016879a4f1945b1d09df7627fde080
 t_car				*vm_com_ld(t_car *car);
 t_car				*vm_com_st(t_car *car);
 t_car				*vm_com_add(t_car *car);
@@ -184,6 +187,6 @@ int					vm_usage(char *re);
 
 //char				*vm_strjoin(char *t, char *y);
 void				print_maps(void);
-int					vm_cycles_lib(int tmp);
+int					vm_cycles_count(int tmp);
 
 #endif
