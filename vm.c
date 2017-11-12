@@ -122,7 +122,7 @@ char		*vm_parse_code_byte(t_car *car)
 	arg[0] = (code_byte << 4) >> 6;
 	arg[1] = (code_byte << 2) >> 6;
 	arg[2] = code_byte >> 6;
-	return(arg);
+	return (arg);
 
 
 	// if (tmp != REG_CODE)
