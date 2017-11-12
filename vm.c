@@ -108,3 +108,38 @@ t_car		*vm_com_sub(t_car *car)
 	car->comand = 0;
 	return (car);
 }
+
+
+char		*vm_parse_code_byte(t_car *car)
+{
+	char			*arg;
+	unsigned char	code_byte;
+	int				i;
+
+	i = 0;
+	arg = ft_strnew(3);
+	code_byte = g_vm->map[0][car->car_pos + 1];
+	arg[0] = (code_byte << 4) >> 6;
+	arg[1] = (code_byte << 2) >> 6;
+	arg[2] = code_byte >> 6;
+	return(arg);
+
+
+	// if (tmp != REG_CODE)
+	// 	//kommanda ne vipolitsa
+	// tmp = (code_byte << 2) >> 6;
+	// if (tmp == DIR_CODE)
+	// 	//do it
+	// else if (tmp == IND_CODE)
+	// 	//do it
+	// else if (tmp == REG_CODE)
+	// 	//do it
+	// tmp = code_byte >> 6;
+	// if (tmp == DIR_CODE)
+	// 	//do it
+	// else if (tmp == IND_CODE)
+	// 	//do it
+	// else if (tmp == REG_CODE)
+
+}
+
