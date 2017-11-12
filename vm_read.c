@@ -12,15 +12,6 @@
 
 #include "corewar.h"
 
-union				u_read
-{
-	unsigned char	bit[4];
-	unsigned int	mg;
-};
-
-/*
-** u_read - вспомогательная структура для парсинга
-*/
 
 /*
 ** vm_read_flag - работа с флагами. Закодить.////////////////////////////////////////////
@@ -28,8 +19,10 @@ union				u_read
 
 void			vm_read_flag(char *str)
 {
-	if (str)
-		return ;
+	if (str[1] == 'l')
+		g_vm->flag_say_alive = 1;
+	else 
+	 	return ;
 	return ;
 }
 

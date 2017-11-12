@@ -49,7 +49,7 @@ typedef struct		s_car
 	int				count;
 	int				comand;
 //	int				cost;
-	int				car_reg[16];
+	int				car_reg[REG_NUMBER];
 	int				carry;
 	int				live;
 	struct s_car	*next_car;
@@ -78,6 +78,7 @@ typedef struct		s_vm
 	int				cycle;
 	int				die_cycle;
 	int				to_die;
+	int				flag_say_alive;
 }					t_vm;
 
 t_vm				*g_vm;
@@ -105,6 +106,16 @@ t_vm				*g_vm;
 ** ** признаков жизнию
 */
 
+union				u_read
+{
+	unsigned char	bit[4];
+	unsigned int	mg;
+};
+
+/*
+** u_read - вспомогательная структура для парсинга
+*/
+
 /*
 ** VM_parsing
 */
@@ -123,41 +134,42 @@ int					vm_read_size(int i, int fd);
 */
 
 void				vm_init_champs(void);
-void				vm_init_car(int pos, int champ_nmbr, int *reg);
+void				vm_init_car(int pos, int champ_nmbr, t_car *origin);
 
 /*
 ** VM_game
 */
 
-void				vm_make_game(t_car *move);
-void				vm_make_game2(t_car *move);
+void				vm_make_game(t_car *car);
+void				vm_make_game2(t_car *car);
 void				vm_car_to_die(void);
 void				vm_car_to_die2(void);
-t_car				*vm_read_comand(t_car *move);
-t_car				*vm_make_move(t_car *move);
-t_car				*vm_make_move2(t_car *move);
-t_car				*vm_car_next_pos(t_car *move);
+t_car				*vm_read_comand(t_car *car);
+t_car				*vm_make_move(t_car *car);
+t_car				*vm_make_move2(t_car *car);
+t_car				*vm_car_next_pos(t_car *car);
 
 /*
 ** VM_comands
 */
 
-t_car				*vm_com_live(t_car *move);
-t_car				*vm_com_ld(t_car *move);
-t_car				*vm_com_st(t_car *move);
-t_car				*vm_com_add(t_car *move);
-t_car				*vm_com_sub(t_car *move);
-t_car				*vm_com_and(t_car *move);
-t_car				*vm_com_or(t_car *move);
-t_car				*vm_com_xor(t_car *move);
-t_car				*vm_com_zjmp(t_car *move);
-t_car				*vm_com_ldi(t_car *move);
-t_car				*vm_com_sti(t_car *move);
-t_car				*vm_com_fork(t_car *move);
-t_car				*vm_com_lld(t_car *move);
-t_car				*vm_com_lldi(t_car *move);
-t_car				*vm_com_ifork(t_car *move);
-t_car				*vm_com_aff(t_car *move);
+t_car				*vm_com_live(t_car *car);
+void				vm_com_live2(int champ_namber);
+t_car				*vm_com_ld(t_car *car);
+t_car				*vm_com_st(t_car *car);
+t_car				*vm_com_add(t_car *car);
+t_car				*vm_com_sub(t_car *car);
+t_car				*vm_com_and(t_car *car);
+t_car				*vm_com_or(t_car *car);
+t_car				*vm_com_xor(t_car *car);
+t_car				*vm_com_zjmp(t_car *car);
+t_car				*vm_com_ldi(t_car *car);
+t_car				*vm_com_sti(t_car *car);
+t_car				*vm_com_fork(t_car *car);
+t_car				*vm_com_lld(t_car *car);
+t_car				*vm_com_lldi(t_car *car);
+t_car				*vm_com_ifork(t_car *car);
+t_car				*vm_com_aff(t_car *car);
 
 /*
 ** VM_error_management

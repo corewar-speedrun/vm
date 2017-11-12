@@ -32,7 +32,7 @@ void			vm_init(void)
 	g_vm->damp = -1;
 	g_vm->game = 1;
 	g_vm->to_die = CYCLE_TO_DIE;
-	g_vm->die_cycle = g_vm->to_die;
+	g_vm->die_cycle = g_vm->to_die; 
 	return ;
 }
 
@@ -67,21 +67,17 @@ void		vm_init_champs(void)
 ** еще пилю это.//////////////////////////////////////////////////////////////////////
 */
 
-void		vm_init_car(int pos, int champ_nmbr, int *reg)
+void		vm_init_car(int pos, int champ_nmbr, t_car *origin)
 {
-	t_car *buf;
+	t_car *mem;
 
-	if (!(buf = (t_car *)malloc(sizeof(t_car))))
+	if (!(mem = (t_car *)malloc(sizeof(t_car))))
 		return ;
-	ft_bzero(buf, sizeof(t_car));
-	// if (!(buf->car_reg = (int *)malloc(sizeof(int) * 16)))
-	// 	buf->car_reg = NULL;
-	// ft_bzero(buf->car_reg, sizeof(int) * 16);
-	buf->car_reg[0] = (reg == NULL) ? champ_nmbr * -1 : reg[0];
-	buf->car_pos = pos;
-	buf->next_car = NULL;
-	buf->carry = FALSE;
-	if (g_vm->cars != NULL)
-		buf->next_car = g_vm->cars;
-	g_vm->cars = buf;
+	ft_bzero(mem, sizeof(t_car));
+	mem->car_reg[0] = (origin == NULL) ? champ_nmbr * -1 : origin->car_reg[0];
+	mem->car_pos = pos;
+	mem->next_car = (g_vm->cars == NULL) ? NULL : g_vm->cars;
+	mem->carry = FALSE;
+	mem->live = (origin == NULL) ? FALSE : origin->live;
+	g_vm->cars = mem;
 }

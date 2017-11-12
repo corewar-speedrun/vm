@@ -12,73 +12,25 @@
 
 #include "corewar.h"
 
-t_car	*vm_read_comand(t_car *move)
+t_car	*vm_read_comand(t_car *car)
 {
 	unsigned char tmp;
 
-	tmp = g_vm->map[0][move->car_pos];
+	tmp = g_vm->map[0][car->car_pos];
 	if (tmp > 0 && tmp < 17)
 	{
-		move->comand = (int)tmp;
-		move->count = vm_cycles_lib((int)tmp);
-		if (move->comand == 1)
-			move->live = 1;
+		car->comand = (int)tmp;
+		car->count = vm_cycles_lib((int)tmp);
+		if (car->comand == 1)
+			car->live = 1;
 	}
 	else
-		move->car_next_pos += 1;
-	return (move);
+	{
+		car->car_next_pos += 1;
+		car->comand = 0;
+	}
+	return (car);
 }
-
-t_car	*vm_make_move(t_car *move)
-{
-	// g_vm->map[2][move->car_pos] = 0;
-	// if (move->comand == 1)
-	// 	move = vm_com_live(move);
-	// else if (move->comand == 2)
-	// 	move = vm_com_ld(move);
-	// else if (move->comand == 3)
-	// 	move = vm_com_st(move);
-	// else if (move->comand == 4)
-	// 	move = vm_com_add(move);
-	// else if (move->comand == 5)
-	// 	move = vm_com_sub(move);
-	// else if (move->comand == 6)
-	// 	move = vm_com_and(move);
-	// else if (move->comand == 7)
-	// 	move = vm_com_or(move);
-	// else if (move->comand == 8)
-	// 	move = vm_com_xor(move);
-	// else
-	// 	move = vm_make_move2(move);
-	// if (move->car_next_pos == 0) ///////////////////////////////////////////////////////////
-	// 	move->car_next_pos += 1;
-	return (move);
-}
-
-t_car	*vm_make_move2(t_car *move)
-{
-	// if (move->comand == 9)
-	// 	move = vm_com_zjmp(move);
-	// else if (move->comand == 10)
-	// 	move = vm_com_ldi(move);
-	// else if (move->comand == 11)
-	// 	move = vm_com_sti(move);
-	// else if (move->comand == 12)
-	// 	move = vm_com_fork(move);
-	// else if (move->comand == 13)
-	// 	move = vm_com_lld(move);
-	// else if (move->comand == 14)
-	// 	move = vm_com_lldi(move);
-	// else if (move->comand == 15)
-	// 	move = vm_com_ifork(move);
-	// else if (move->comand == 16)
-	// 	move = vm_com_aff(move);
-	// else
-	// 	ft_putstr_fd("Some unknow error.\n\0", 2);
-	return (move);
-}
-
-
 
 int		vm_cycles_lib(int tmp)
 {
@@ -102,3 +54,56 @@ int		vm_cycles_lib(int tmp)
 		return (1000);
 	return (0);
 }
+
+t_car	*vm_make_move(t_car *car)
+{
+	g_vm->map[2][car->car_pos] = 0;
+	if (car->comand == 1)
+		car = vm_com_live(car);
+	// else if (car->comand == 2)
+	// 	car = vm_com_ld(car);
+	// else if (car->comand == 3)
+	// 	car = vm_com_st(car);
+	else if (car->comand == 4)
+		car = vm_com_add(car);
+	else if (car->comand == 5)
+		car = vm_com_sub(car);
+	// else if (car->comand == 6)
+	// 	car = vm_com_and(car);
+	// else if (car->comand == 7)
+	// 	car = vm_com_or(car);
+	// else if (car->comand == 8)
+	// 	car = vm_com_xor(car);
+	// else
+	// 	car = vm_make_move2(car);
+	if (car->car_next_pos == 0) ///////////////////////////////////////////////////////////
+		car->car_next_pos += 1;
+	return (car);
+}
+
+t_car	*vm_make_move2(t_car *car)
+{
+	// if (car->comand == 9)
+	// 	car = vm_com_zjmp(car);
+	// else if (car->comand == 10)
+	// 	car = vm_com_ldi(car);
+	// else if (car->comand == 11)
+	// 	car = vm_com_sti(car);
+	// else if (car->comand == 12)
+	// 	car = vm_com_fork(car);
+	// else if (car->comand == 13)
+	// 	car = vm_com_lld(car);
+	// else if (car->comand == 14)
+	// 	car = vm_com_lldi(car);
+	// else if (car->comand == 15)
+	// 	car = vm_com_ifork(car);
+	// else if (car->comand == 16)
+	// 	car = vm_com_aff(car);
+	// else
+	// 	ft_putstr_fd("Some unknow error.\n\0", 2);
+	return (car);
+}
+
+
+
+
