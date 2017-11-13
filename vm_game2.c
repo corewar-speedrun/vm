@@ -20,7 +20,6 @@ t_car	*vm_read_comand(t_car *car)
 	if (tmp > 0 && tmp < 17)
 	{
 		car->comand = (int)tmp;
-		car->count = vm_cycles_lib((int)tmp);
 		car->count = vm_cycles_count((int)tmp);
 		if (car->comand == 1)
 			car->live = 1;

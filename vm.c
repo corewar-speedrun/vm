@@ -23,7 +23,9 @@ int		main(int i, char **arg)
 	if (g_vm->error != -1)
 		return (vm_error(g_vm->error));
 	vm_init_champs();
-	vm_make_game(NULL);
+	print_maps();
+	//vm_make_game(NULL);
+	 return (0);
 }
 
 t_car	*vm_com_live(t_car *car)
@@ -39,7 +41,7 @@ t_car	*vm_com_live(t_car *car)
 		tmp = g_vm->map[0][car->car_pos + z];
 		champ_namber = champ_namber << 8 | tmp;
 	}
-	if (champ_namber >= 1 && champ_namber <= g_vm->champ_namber)
+	if (champ_namber >= 1 && champ_namber <= g_vm->champs_nmbr)
 	{
 		g_vm->champs[champ_namber]->live += 1;
 		g_vm->champs[champ_namber]->last_live = g_vm->cycle;
