@@ -14,11 +14,6 @@
 
 int		vm_find_next_pos(t_car *car, int args)
 {
-	
-
-	((car->c_byte[0] > 0 && car->c_byte[0] < 4) &&
-		(car->c_byte[1] > 0 && car->c_byte[1] < 4) &&
-		(car->c_byte[2] > 0 && car->c_byte[2] < 4))
 
 	return (car);
 }

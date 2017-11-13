@@ -14,6 +14,8 @@
 # define COREWAR_H
 
 # include <unistd.h>
+# include <ncurses.h>
+# include <mach/mach_types.h>
 # include <stdio.h>////////////////////////////////////////////////////////////////
 # include "libft/libft.h"
 # include "op.h"
@@ -191,5 +193,7 @@ int					vm_usage(char *re);
 //char				*vm_strjoin(char *t, char *y);
 void				print_maps(void);
 int					vm_cycles_count(int tmp);
+
+int ncurses(int kakoito_int, int sleep);
 
 #endif
