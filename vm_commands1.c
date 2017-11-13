@@ -29,7 +29,7 @@ t_car	*vm_com_live(t_car *car)
 	{
 		g_vm->champs[champ_namber]->live += 1;
 		g_vm->champs[champ_namber]->last_live = g_vm->cycle;
-		if (g_vm->flag_say_alive == 1)
+		if (g_vm->flag_say_alive == 1 && g_vm->flag_visualize != 1)
 			vm_com_live2(champ_namber);
 	}
 	car->car_next_pos = 5;
@@ -55,7 +55,6 @@ t_car		*vm_com_add(t_car *car)
 	unsigned char	tmp2;
 	unsigned char	tmp3;
 
-	car = vm_parse_code_byte(car);
 	car->carry = 0;
 	if (car->c_byte[0] == 1 && car->c_byte[1] == 1 && car->c_byte[2] == 1)
 	{
@@ -85,7 +84,6 @@ t_car		*vm_com_sub(t_car *car)
 	unsigned char	tmp2;
 	unsigned char	tmp3;
 
-	car = vm_parse_code_byte(car);
 	car->carry = 0;
 	if (car->c_byte[0] == 1 && car->c_byte[1] == 1 && car->c_byte[2] == 1)
 	{

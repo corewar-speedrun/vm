@@ -21,8 +21,10 @@ void			vm_read_flag(char *str)
 {
 	if (str[1] == 'l')
 		g_vm->flag_say_alive = 1;
-	else 
-	 	return ;
+	else if (str[1] == 'v')
+		g_vm->flag_visualize = 1;
+	else
+		g_vm->error = 8;
 	return ;
 }
 
@@ -39,7 +41,7 @@ void			vm_read(int i, char **arg)
 		if (arg[x][0] == '-' && g_vm->error == -1)
 			vm_read_flag(arg[x]);
 		else if (vm_read_magic(fd) == 1 && g_vm->error == -1)
-			g_vm->champs[g_vm->champs_nmbr++] = vm_parsing(fd);
+			g_vm->champs[++g_vm->champs_nmbr] = vm_parsing(fd);
 		else
 			g_vm->error = 1;
 		if (g_vm->error != -1)

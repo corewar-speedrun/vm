@@ -29,14 +29,14 @@ void	vm_make_game(t_car *car)
 				g_vm->map[2][car->car_pos] = 1;
 			car = car->next_car;
 		}
-		if (++g_vm->cycle == g_vm->die_cycle)
-			vm_car_to_die();
 		vm_make_game2(NULL);
 	}
 }
 
 void	vm_make_game2(t_car *car)
 {
+	if (++g_vm->cycle == g_vm->die_cycle)
+		vm_car_to_die();
 	car = g_vm->cars;
 	while (car != NULL)
 	{
@@ -44,10 +44,6 @@ void	vm_make_game2(t_car *car)
 			car = vm_car_next_pos(car);
 		car = car->next_car;
 	}
-	// while (g_vm->game > 1)
-	// {
-	// 	/////////////////////////////////////////////////////////// для написания ифа под кейхук паузы и шага назад
-	// }
 }
 
 /*
@@ -79,6 +75,7 @@ void	vm_car_to_die(void)
 	{
 		tmp = start->next_car;
 		free(start);
+		g_vm->cars_nmbr -= 1;
 		start = tmp;
 	}
 	g_vm->cars = start;
@@ -102,6 +99,7 @@ void	vm_car_to_die2(void)
 		if (tmp2->live < 1)
 		{
 			free(tmp2);
+			g_vm->cars_nmbr -= 1;
 			tmp1->next_car = tmp3;
 		}
 		else

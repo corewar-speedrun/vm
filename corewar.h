@@ -73,6 +73,7 @@ typedef struct		s_vm
 	int				game;
 	int				error;
 	int				champs_nmbr;
+	int				cars_nmbr;
 	t_champ			**champs;
 	unsigned char	**map;
 	t_car			*cars;
@@ -81,6 +82,7 @@ typedef struct		s_vm
 	int				die_cycle;
 	int				to_die;
 	int				flag_say_alive;
+	int				flag_visualize;
 }					t_vm;
 
 t_vm				*g_vm;

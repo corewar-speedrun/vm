@@ -12,7 +12,7 @@
 
 #include "corewar.h"
 
-void	print_maps(void)
+void	print_maps(void) ////////////////////////////////\\\\\\\\\\\\\\\\\\\\\ del 
 {
 	int i = -1;
 	int z = 1;
@@ -67,6 +67,8 @@ int		vm_error(int error)
 		ft_putstr_fd("Champion size error. Size != encoded size by Assembler\n\0", 2);
 	else if (error == 7)
 		vm_usage("We need a champion!\n\0");
+	else if (error == 8)
+		vm_usage("Some unknow flag\n\0");
 	else
 		ft_putstr_fd("Some unknow error.\n\0", 2);
 	return (0);

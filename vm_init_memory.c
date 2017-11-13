@@ -18,8 +18,8 @@ void			vm_init(void)
 
 	i = -1;
 	ft_bzero(g_vm, sizeof(g_vm));
-	g_vm->champs = (t_champ **)malloc(sizeof(t_champ *) * MAX_PLAYERS);
-	while (++i < MAX_PLAYERS)
+	g_vm->champs = (t_champ **)malloc(sizeof(t_champ *) * (MAX_PLAYERS + 1));
+	while (++i < MAX_PLAYERS + 1)
 		g_vm->champs[i] = NULL;
 	g_vm->error = -1;
 	g_vm->map = (unsigned char **)malloc(sizeof(unsigned char *) * 4);
@@ -46,17 +46,17 @@ void		vm_init_champs(void)
 	int				q;
 	int				w;
 
-	q = -1;
+	q = 0;
 	while (g_vm->champs[++q] != NULL)
 	{
-		w = (MEM_SIZE / (g_vm->champs_nmbr)) * q;
+		w = (MEM_SIZE / (g_vm->champs_nmbr)) * (q - 1);
 		g_vm->map[2][w] = 1;
 		vm_init_car(w, g_vm->champs[q]->nmbr, NULL);
 		i = -1;
 		while (++i < g_vm->champs[q]->size)
 		{
 			g_vm->map[0][w] = g_vm->champs[q]->src[i];
-			g_vm->map[1][w++] = q + 1;
+			g_vm->map[1][w++] = q;
 		}
 	}
 }
@@ -80,4 +80,5 @@ void		vm_init_car(int pos, int champ_nmbr, t_car *origin)
 	mem->carry = FALSE;
 	mem->live = (origin == NULL) ? FALSE : origin->live;
 	g_vm->cars = mem;
+	g_vm->cars_nmbr += 1;
 }
