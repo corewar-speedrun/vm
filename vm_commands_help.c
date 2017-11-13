@@ -15,7 +15,7 @@
 int		vm_find_next_pos(t_car *car, int args)
 {
 
-	return (car);
+	return (2);
 }
 
 t_car		*vm_parse_code_byte(t_car *car)

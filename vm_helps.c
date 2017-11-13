@@ -91,6 +91,7 @@ int		vm_usage(char *re)
 	if (re != NULL)
 		ft_putstr_fd(re, 2);
 	ft_putstr("Usage:\n./corewar [-flags] <champion1.cor> <...>\n\0");
+	ft_putstr("-v - visual mode\n\0");
 	return (0);
 }
 
