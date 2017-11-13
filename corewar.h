@@ -48,8 +48,8 @@ typedef struct		s_car
 	int				car_next_pos;
 	int				count;
 	int				comand;
-	unsigned char	com_args[3];
-	unsigned char	code_byte[3];
+//	unsigned char	com_args[3];
+	unsigned char	c_byte[3];
 //	int				cost;
 	int				car_reg[REG_NUMBER];
 	int				carry;
@@ -172,6 +172,8 @@ t_car				*vm_com_lld(t_car *car);
 t_car				*vm_com_lldi(t_car *car);
 t_car				*vm_com_ifork(t_car *car);
 t_car				*vm_com_aff(t_car *car);
+t_car				*vm_parse_code_byte(t_car *car);
+int					vm_find_next_pos(t_car *car, int args);
 
 /*
 ** VM_error_management
