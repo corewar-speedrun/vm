@@ -48,6 +48,8 @@ typedef struct		s_car
 	int				car_next_pos;
 	int				count;
 	int				comand;
+	unsigned char	com_args[3];
+	unsigned char	code_byte[3];
 //	int				cost;
 	int				car_reg[REG_NUMBER];
 	int				carry;
