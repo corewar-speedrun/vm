@@ -55,7 +55,6 @@ t_car		*vm_com_add(t_car *car)
 	unsigned char	tmp3;
 
 	car->carry = 0;
-	vm_parse_code_byte(car);
 	if (car->c_byte[0] == 1 && car->c_byte[1] == 1 && car->c_byte[2] == 1)
 	{
 		tmp1 = g_vm->map[0][car->car_pos + 2];
@@ -75,8 +74,6 @@ t_car		*vm_com_add(t_car *car)
 	return (car);
 }
 
-
-
 t_car		*vm_com_sub(t_car *car)
 {
 	unsigned char	tmp1;
@@ -84,7 +81,6 @@ t_car		*vm_com_sub(t_car *car)
 	unsigned char	tmp3;
 
 	car->carry = 0;
-	vm_parse_code_byte(car);
 	if (car->c_byte[0] == 1 && car->c_byte[1] == 1 && car->c_byte[2] == 1)
 	{
 		tmp1 = g_vm->map[0][car->car_pos + 2];
