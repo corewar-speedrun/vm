@@ -47,7 +47,7 @@ t_car		*vm_com_or(t_car *car)
 	i = 2;
 	i += vm_get_arg(car, 0, i);
 	i += vm_get_arg(car, 1, i);
-	if (vm_get_first_arg  && vm_get_second_arg && car->c_byte[2] == 1)
+	if (vm_get_arg(car, 0, i) && vm_get_arg(car, 1, i) && car->c_byte[2] == 1)
 	{
 		tmp = g_vm->map[0][car->car_pos + i];
 		if (tmp >= 0 && tmp < 16)
