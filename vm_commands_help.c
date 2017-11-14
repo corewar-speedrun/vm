@@ -12,13 +12,44 @@
 
 #include "corewar.h"
 
-int		vm_find_next_pos(t_car *car, int args)
+int		vm_find_next_pos(t_car *car, int c_nmbr)
 {
+	int i;
+	int r;
 
-	return (2);
+	i = -1;
+	r = 2;
+	while (++i < 3)
+	{
+		if (car->c_byte[i] == 1)
+			r += 1;
+		else if (car->c_byte[i] == 2 && ((c_nmbr >= 1 && c_nmbr <= 8) ||
+			c_nmbr == 13 || c_nmbr == 16))
+			r += 2;
+		else if (car->c_byte[i] == 2 && ((c_nmbr >= 9 && c_nmbr <= 12) ||
+			c_nmbr == 14 || c_nmbr == 15))
+			r += 4;
+		else if (car->c_byte[i] == 3)
+			r += 2;
+	}
+	return (r);
 }
 
-t_car		*vm_parse_code_byte(t_car *car)
+void	vm_car_clean(t_car *car)
+{
+	int i;
+
+	i = -1;
+	while (++i < 3)
+	{
+		car->c_byte[i] = 0;
+		car->com_args[i] = 0;
+	}
+	car->count = 0;
+	car->comand = 0;
+}
+
+void		vm_parse_code_byte(t_car *car)
 {
 	unsigned char	code_byte;
 
@@ -26,8 +57,9 @@ t_car		*vm_parse_code_byte(t_car *car)
 	car->c_byte[0] = (code_byte << 4) >> 6;
 	car->c_byte[1] = (code_byte << 2) >> 6;
 	car->c_byte[2] = code_byte >> 6;
-	return (car);
 }
+
+/////////////// заче возвращать ничего не значащие инты? возвращай сразу нужные значения.
 
 int		vm_get_t_reg(t_car *car, int index, int i)
 {
@@ -70,3 +102,14 @@ int		vm_get_t_ind(t_car *car, int index, int i)
 	}
 	tmp1 = g_vm->map[0][car->car_pos + i];
 }
+
+// int		vm_get_arg(t_car *car, int arg, int i)
+// {
+// 	if (car->c_byte[0] == REG_CODE)
+// 		return (vm_get_t_reg(car, arg, i));
+// 	else if (car->c_byte[0] == DIR_CODE)
+// 		return (vm_get_t_dir(car, arg, i));
+// 	else if (car->c_byte[0] == IND_CODE)
+// 		return (vm_get_t_ind(car, arg, i));
+// 	return (0);
+// }
