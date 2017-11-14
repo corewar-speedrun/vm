@@ -97,6 +97,14 @@ int		vm_get_first_arg(t_car *car, int i)
 		return (vm_get_t_ind(car, 0, i));
 	return (0);
 }
+/// REG_CODE == 1
+/// DIR_CODE == 2
+/// IND_CODE == 3
+/// можно просто заменить дефайны на значения
+
+/// обе ф-ции делают идентичную задачу, меняется одна цифра. чтобы не плодить ф-ции, я бы урезал эти две ф-ции в одну. 
+/// vm_get_arg(t_car *car, int arg, int i)
+/// arg  == номер аргумента, который хотим взять
 
 int		vm_get_second_arg(t_car *car, int i)
 {

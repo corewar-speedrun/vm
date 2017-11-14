@@ -115,7 +115,7 @@ int					vm_read_size(int i, int fd)
 	if (g_vm->error == -1)
 	{
 		while (++x < i)
-			z = z << 8 | buf[x];
+			z = (z << 8) | buf[x];
 	}
 	return (z);
 }

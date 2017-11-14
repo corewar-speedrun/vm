@@ -48,7 +48,7 @@ int		vm_get_t_dir(t_car *car, int index, int i)
 	int 			z;
 
 	z = -1;
-	while (++z < 4)
+	while (++z < 4) ////////////////////////////////////// иногда t_dir возвращает 2 байта, иногда 4.
 	{
 		tmp1 = g_vm->map[0][car_pos + z + i];
 		car->com_args[index] = (car->com_args[index] << 8) | tmp1;
@@ -60,7 +60,7 @@ int		vm_get_t_ind(t_car *car, int index, int i)
 {
 	unsigned char	tmp1;
 	int 			z;
-	int				move;
+	int				move; //////////////////////////////////// не используется
 
 	z = -1;
 	while (++z < 2)

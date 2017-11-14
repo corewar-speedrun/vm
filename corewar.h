@@ -21,8 +21,11 @@
 # include "libft/libft.h"
 # include "op.h"
 
-# define TRUE 1 
-# define FALSE 0 
+# define TRUE 1
+# define FALSE 0
+// # define REG_CODE 1
+// # define DIR_CODE 2
+// # define IND_CODE 3
 
 typedef struct		s_champ
 {
@@ -51,7 +54,7 @@ typedef struct		s_car
 	int				car_next_pos;
 	int				count;
 	int				comand;
-//	unsigned char	com_args[3];
+	int				com_args[3];
 	unsigned char	c_byte[3];
 //	int				cost;
 	int				car_reg[REG_NUMBER];
