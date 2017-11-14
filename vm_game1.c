@@ -41,7 +41,7 @@ void	vm_make_game2(t_car *car)
 	while (car != NULL)
 	{
 		if (car->car_next_pos != 0)
-			car = vm_car_next_pos(car);
+			vm_car_next_pos(car);
 		car = car->next_car;
 	}
 }
@@ -53,16 +53,11 @@ void	vm_make_game2(t_car *car)
 ** еще пилю это.////////////////////////////////////////////////////////////////////
 */
 
-t_car		*vm_car_next_pos(t_car *car)
+void	vm_car_next_pos(t_car *car)
 {
 	if (car->car_next_pos < 1)
-		return (car);
-	if ((car->car_pos + car->car_next_pos) < MEM_SIZE)
-		car->car_pos += car->car_next_pos;
-	else
-		car->car_pos = (car->car_pos + car->car_next_pos) - MEM_SIZE;
-	car->car_next_pos = 0;
-	return (car);
+		return ;
+	car->car_pos = ((car->car_pos + car->car_next_pos) % MEM_SIZE);
 }
 
 void	vm_car_to_die(void)

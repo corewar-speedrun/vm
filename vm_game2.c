@@ -87,7 +87,7 @@ t_car	*vm_make_move(t_car *car)
 t_car	*vm_make_move2(t_car *car)
 {
 	// if (car->comand == 9)
-	// 	car = vm_com_zjmp(car);
+		// vm_com_zjmp(car);
 	// else if (car->comand == 10)
 	// 	car = vm_com_ldi(car);
 	// else if (car->comand == 11)
