@@ -31,7 +31,7 @@ t_car	*vm_read_comand(t_car *car)
 	}
 	if (car->comand > 1 && car->comand < 17 && car->comand != 9 &&
 		car->comand != 12 && car->comand != 15)
-		car = vm_parse_code_byte(car);
+		vm_parse_code_byte(car);
 	return (car);
 }
 

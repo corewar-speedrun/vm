@@ -21,8 +21,11 @@
 # include "libft/libft.h"
 # include "op.h"
 
-# define TRUE 1 
-# define FALSE 0 
+# define TRUE 1
+# define FALSE 0
+// # define REG_CODE 1
+// # define DIR_CODE 2
+// # define IND_CODE 3
 
 typedef struct		s_champ
 {
@@ -177,8 +180,9 @@ t_car				*vm_com_lld(t_car *car);
 t_car				*vm_com_lldi(t_car *car);
 t_car				*vm_com_ifork(t_car *car);
 t_car				*vm_com_aff(t_car *car);
-t_car				*vm_parse_code_byte(t_car *car);
+void				vm_parse_code_byte(t_car *car);
 int					vm_find_next_pos(t_car *car, int args);
+void				vm_car_clean(t_car *car);
 
 /*
 ** VM_error_management
@@ -195,6 +199,6 @@ int					vm_usage(char *re);
 void				print_maps(void);
 int					vm_cycles_count(int tmp);
 
-int ncurses(int kakoito_int, int sleep);
+int					ncurses(int kakoito_int, int sleep);
 
 #endif

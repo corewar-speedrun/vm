@@ -68,7 +68,7 @@ int		vm_error(int error)
 	else if (error == 7)
 		vm_usage("We need a champion!\n\0");
 	else if (error == 8)
-		vm_usage("Some unknow flag\n\0");
+		vm_usage("Some unknown flag\n\0");
 	else
 		ft_putstr_fd("Some unknow error.\n\0", 2);
 	return (0);
@@ -84,6 +84,7 @@ int		vm_error(int error)
 ** error == 5 - no \0 at the end of champion name or comment
 ** error == 6 - Champion size != encoded size by Assembler
 ** error == 7 - Wee need a champion > 0! 
+** error == 8 - Wrong flag 
 */
 
 int		vm_usage(char *re)
@@ -91,7 +92,7 @@ int		vm_usage(char *re)
 	if (re != NULL)
 		ft_putstr_fd(re, 2);
 	ft_putstr("Usage:\n./corewar [-flags] <champion1.cor> <...>\n\0");
-	ft_putstr("-v - visual mode\n\0");
+	ft_putstr("-v - Visual mode or -l - Show lives\n\0");
 	return (0);
 }
 
