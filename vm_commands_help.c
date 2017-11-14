@@ -12,11 +12,13 @@
 
 #include "corewar.h"
 
-int		vm_find_next_pos(t_car *car, int c_nmbr)
+int		vm_find_next_pos(t_car *car)
 {
 	int i;
 	int r;
+	int c_nmbr
 
+	c_nmbr = car->comand;
 	i = -1;
 	r = 2;
 	while (++i < 3)
@@ -25,10 +27,10 @@ int		vm_find_next_pos(t_car *car, int c_nmbr)
 			r += 1;
 		else if (car->c_byte[i] == 2 && ((c_nmbr >= 1 && c_nmbr <= 8) ||
 			c_nmbr == 13 || c_nmbr == 16))
-			r += 2;
+			r += 4;
 		else if (car->c_byte[i] == 2 && ((c_nmbr >= 9 && c_nmbr <= 12) ||
 			c_nmbr == 14 || c_nmbr == 15))
-			r += 4;
+			r += 2;
 		else if (car->c_byte[i] == 3)
 			r += 2;
 	}
@@ -61,11 +63,29 @@ void		vm_parse_code_byte(t_car *car)
 
 int		vm_get_arg(t_car *car, int arg, int i)
 {
-	if (car->c_byte[arg] == REG_CODE)
+	if (car->c_byte[arg] == 1)
 		return (vm_get_t_reg(car, arg, i));
-	else if (car->c_byte[arg] == DIR_CODE)
+	else if (car->c_byte[arg] == 2)
 		return (vm_get_t_dir(car, arg, i));
-	else if (car->c_byte[arg] == IND_CODE)
+	else if (car->c_byte[arg] == 3)
 		return (vm_get_t_ind(car, arg, i));
 	return (0);
 }
+
+// void		vm_get_arg_un(t_car *car, int args)
+// {
+// 	unsigned char	tmp;
+// 	int z;
+// 	int r;
+
+// 	z = -1;
+// 	r = 0;
+
+// 	while (++z < size)
+// 	{
+// 		tmp = g_vm->map[0][car->car_pos + (read_position + z)];
+// 		r = (r << 8) | tmp;
+// 	}
+// 	return (r);
+// }
+

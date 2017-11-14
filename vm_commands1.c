@@ -20,7 +20,7 @@ t_car	*vm_com_live(t_car *car)
 
 	z = 0;
 	champ_namber = 0;
-	while (++z < 4)
+	while (++z < 5)
 	{
 		tmp = g_vm->map[0][car->car_pos + z];
 		champ_namber = (champ_namber << 8) | tmp;
@@ -69,7 +69,7 @@ t_car		*vm_com_add(t_car *car)
 		}
 	}
 	else 
-		car->car_next_pos = vm_find_next_pos(car, 4);
+		car->car_next_pos = vm_find_next_pos(car);
 	vm_car_clean(car);
 	return (car);
 }
@@ -95,7 +95,7 @@ t_car		*vm_com_sub(t_car *car)
 		}
 	}
 	else 
-		car->car_next_pos = vm_find_next_pos(car, 5);
+		car->car_next_pos = vm_find_next_pos(car);
 	vm_car_clean(car);
 	return (car);
 }

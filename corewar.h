@@ -57,7 +57,7 @@ typedef struct		s_car
 	int				com_args[3];
 	unsigned char	c_byte[3];
 //	int				cost;
-	int				car_reg[REG_NUMBER];
+	int				car_reg[REG_NUMBER + 1];
 	int				carry;
 	int				live;
 	struct s_car	*next_car;
@@ -144,7 +144,7 @@ int					vm_read_size(int i, int fd);
 */
 
 void				vm_init_champs(void);
-void				vm_init_car(int pos, int champ_nmbr, t_car *origin);
+void				vm_init_car(int pos, int next, int champ_nmbr, t_car *origin);
 
 /*
 ** VM_game
@@ -157,7 +157,7 @@ void				vm_car_to_die2(void);
 t_car				*vm_read_comand(t_car *car);
 t_car				*vm_make_move(t_car *car);
 t_car				*vm_make_move2(t_car *car);
-t_car				*vm_car_next_pos(t_car *car);
+void				vm_car_next_pos(t_car *car);
 
 /*
 ** VM_comands
@@ -172,7 +172,7 @@ t_car				*vm_com_sub(t_car *car);
 t_car				*vm_com_and(t_car *car);
 t_car				*vm_com_or(t_car *car);
 t_car				*vm_com_xor(t_car *car);
-t_car				*vm_com_zjmp(t_car *car);
+void				vm_com_zjmp(t_car *car);
 t_car				*vm_com_ldi(t_car *car);
 t_car				*vm_com_sti(t_car *car);
 t_car				*vm_com_fork(t_car *car);

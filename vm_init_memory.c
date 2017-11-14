@@ -51,7 +51,7 @@ void		vm_init_champs(void)
 	{
 		w = (MEM_SIZE / (g_vm->champs_nmbr)) * (q - 1);
 		g_vm->map[2][w] = 1;
-		vm_init_car(w, g_vm->champs[q]->nmbr, NULL);
+		vm_init_car(w, 0, g_vm->champs[q]->nmbr, NULL);
 		i = -1;
 		while (++i < g_vm->champs[q]->size)
 		{
@@ -67,15 +67,26 @@ void		vm_init_champs(void)
 ** еще пилю это.//////////////////////////////////////////////////////////////////////
 */
 
-void		vm_init_car(int pos, int champ_nmbr, t_car *origin)
+void		vm_init_car(int pos, int next, int champ_nmbr, t_car *car)
 {
 	t_car *mem;
 
 	if (!(mem = (t_car *)malloc(sizeof(t_car))))
 		return ;
 	ft_bzero(mem, sizeof(t_car));
-	mem->car_reg[0] = (origin == NULL) ? champ_nmbr * -1 : origin->car_reg[0];
+	mem->car_reg[1] = champ_nmbr * -1;
 	mem->car_pos = pos;
+	mem->car_next_pos = next;
+	if (mem->car_next_pos != 0)
+			vm_car_next_pos(mem);
+	if (car != NULL)
+	{
+		mem->live = car->live;
+		mem->carry = car->carry;
+		next = -1;
+		while (++next < (REG_NUMBER + 2))
+			mem->car_reg[next] = car->car_reg[next];
+	} 
 	mem->next_car = (g_vm->cars == NULL) ? NULL : g_vm->cars;
 	mem->carry = FALSE;
 	mem->live = (origin == NULL) ? FALSE : origin->live;
