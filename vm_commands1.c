@@ -52,7 +52,7 @@ t_car		*vm_com_add(t_car *car)
 	unsigned char	tmp2;
 	unsigned char	tmp3;
 
-	car->carry = 0;
+	car->carry = FALSE;
 	if (car->c_byte[0] == 1 && car->c_byte[1] == 1 && car->c_byte[2] == 1)
 	{
 		tmp1 = g_vm->map[0][(car->car_pos + 2) % MEM_SIZE];
@@ -62,7 +62,7 @@ t_car		*vm_com_add(t_car *car)
 			(tmp3 >= 0 && tmp3 < 16))
 		{
 			car->car_reg[tmp3] = car->car_reg[tmp1] + car->car_reg[tmp2];
-			car->carry = 1;
+			car->carry = TRUE;
 		}
 	}
 	car->car_next_pos = vm_find_next_pos(car);
@@ -76,7 +76,7 @@ t_car		*vm_com_sub(t_car *car)
 	unsigned char	tmp2;
 	unsigned char	tmp3;
 
-	car->carry = 0;
+	car->carry = FALSE;
 	if (car->c_byte[0] == 1 && car->c_byte[1] == 1 && car->c_byte[2] == 1)
 	{
 		tmp1 = g_vm->map[0][(car->car_pos + 2) % MEM_SIZE];
@@ -86,7 +86,7 @@ t_car		*vm_com_sub(t_car *car)
 			(tmp3 >= 0 && tmp3 < 16))
 		{
 			car->car_reg[tmp3] = car->car_reg[tmp1] - car->car_reg[tmp2];
-			car->carry = 1;
+			car->carry = TRUE;
 		}
 	}
 	car->car_next_pos = vm_find_next_pos(car);
