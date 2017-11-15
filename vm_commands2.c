@@ -12,32 +12,14 @@
 
 #include "corewar.h"
 
-void	vm_com_zjmp(t_car *car)
-{
-	car->car_next_pos = 3;
-	if (car->carry == FALSE)
-		return ;
-	car->c_byte[0] = 2;
-	vm_get_reg_dir(car, 0, 1);
-	car->car_next_pos = car->car_pos + car->com_args[0];
-	vm_car_clean(car);
-}
-
 void	vm_com_fork(t_car *car)
 {
-	unsigned char	tmp;
-	int 			z;
-	t_car			*new;
-
-	z = 0;
-	while (++z < 3)
-	{
-		tmp = g_vm->map[0][car->car_pos + z];
-		car->com_args[0] = (car->com_args[0] << 8) | tmp;
-	}
+	car->c_byte[0] = 2;
+	vm_get_reg_dir(car, 0, 1);
+	vm_init_car(car->car_pos, car->com_args[0], car->car_reg[1], car);
 	car->com_args[0] = car->com_args[0] % IDX_MOD;
 	vm_init_car(car->car_pos, car->com_args[0], car->car_reg[1], car);
-	car->car_next_pos = car->car_pos + 3;
+	car->car_next_pos = vm_find_next_pos(car);
 	vm_car_clean(car);
 }
 
@@ -46,89 +28,75 @@ void	vm_com_ifork(t_car *car)
 	car->c_byte[0] = 2;
 	vm_get_reg_dir(car, 0, 1);
 	vm_init_car(car->car_pos, car->com_args[0], car->car_reg[1], car);
-	car->car_next_pos = car->car_pos + 3;
+	car->car_next_pos = vm_find_next_pos(car);
 	vm_car_clean(car);
 }
 
 void	vm_com_st(t_car *car)
 {
+	int tmp;
+
+	tmp = 0;
 	if (car->c_byte[0] == 1 && (car->c_byte[1] == 1 || car->c_byte[1] == 3))
 	{
-		car->com_args[0] = g_vm->map[0][car->car_pos + 2];
-		if (car->c_byte[1] == 1)
-			car->com_args[1] = g_vm->map[0][car->car_pos + 3];
-		else
-		{
-			car->com_args[1] = (car->com_args[1] << 8) | g_vm->map[0][car->car_pos + 3];
-			car->com_args[1] = (car->com_args[1] << 8) | g_vm->map[0][car->car_pos + 4];
-		}
+		vm_get_reg_dir(car, 0, 2);
+		vm_get_reg_dir(car, 1, 3);
+		if (car->com_args[0] > 0 && car->com_args[0] < 17)
+			tmp = car->car_reg[car->com_args[0]];
 		if (car->c_byte[1] == 1 &&
 			(car->com_args[0] > 0 && car->com_args[0] < 17) && 
 			(car->com_args[1] > 0 && car->com_args[1] < 17))
 			car->car_reg[car->com_args[1]] = car->car_reg[car->com_args[0]];
-		else if (car->c_byte[1] == 3 &&
-			(car->com_args[0] > 0 && car->com_args[0] < 17))
-			g_vm->map[0][(car->car_pos + (car->car_reg[1] % IDX_MOD)) % MEM_SIZE] = car->car_reg[car->com_args[0]];
+		else if (car->c_byte[1] == 3)
+			g_vm->map[0][(car->com_args[1] % IDX_MOD) % MEM_SIZE] = tmp;
 	}
 	car->car_next_pos = vm_find_next_pos(car);
 	vm_car_clean(car);
-}
-
-значение а1 записывается по индексу ((а2 + а3) % IDX_MOD) . Если а2 T_IND - берет 4-байтовое значение по адресу а2, 
-складывает его с а3, и только потом берет % IDX_MOD, T_IND адресс может быть в диапазоне [-32768, 32767].
-
-Take a registry, and two indexes (potentially registries) add the
-two indexes, and use this result as an address where the value of the first parameter
-will be copied.
-
-sti r2,%4,%5 sti copies REG_SIZE bytes of r2 at address (4 + 5)
-Parameters 2 and 3 are indexes. If they are, in fact, registers,
-we’ll use their contents as indexes.
-
-T_REG	T_REG | T_DIR | T_IND	T_DIR | T_REG						
+}				
 
 void	vm_com_sti(t_car *car)
 {
-	if (car->c_byte[0] == 1 && (car->c_byte[1] == 1 || car->c_byte[1] == 3))
+	int i;
+
+	i = 3
+	if (car->c_byte[0] == 1 && (car->c_byte[2] == 1 || car->c_byte[2] == 2))
 	{
-		car->com_args[0] = g_vm->map[0][car->car_pos + 2];
-		if (car->c_byte[1] == 1)
-			car->com_args[1] = g_vm->map[0][car->car_pos + 3];
+		vm_get_reg_dir(car, 0, 2);
+		if (car->c_byte[1] == 1 || car->c_byte[1] == 2)
+		{
+			vm_get_reg_dir(car, 1, i);
+			i += (car->c_byte[1] == 1) ? 1 : 2;
+		}
 		else
 		{
-			car->com_args[1] = (car->com_args[1] << 8) | g_vm->map[0][car->car_pos + 3];
-			car->com_args[1] = (car->com_args[1] << 8) | g_vm->map[0][car->car_pos + 4];
+			vm_get_ind(car, 1, i);
+			i += 2;		
 		}
-		if (car->c_byte[1] == 1 &&
-			(car->com_args[0] > 0 && car->com_args[0] < 17) && 
-			(car->com_args[1] > 0 && car->com_args[1] < 17))
-			car->car_reg[car->com_args[1]] = car->car_reg[car->com_args[0]];
-		else if (car->c_byte[1] == 3 &&
-			(car->com_args[0] > 0 && car->com_args[0] < 17))
-			g_vm->map[0][(car->car_pos + (car->car_reg[1] % IDX_MOD)) % MEM_SIZE] = car->car_reg[car->com_args[0]];
+		vm_get_reg_dir(car, 2, i);
+		vm_com_sti2(car);
 	}
 	car->car_next_pos = vm_find_next_pos(car);
 	vm_car_clean(car);
 }
 
+void	vm_com_sti2(t_car *car)
+{
+	int tmp;
+	int tmp2;
+	int tmp3;
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+	tmp = 0;
+	tmp2 = 0;
+	tmp3 = 0;
+	if (car->com_args[0] > 0 && car->com_args[0] < 17)
+		tmp = car->car_reg[car->com_args[0]];
+	if (car->c_byte[1] == 1 && (car->com_args[1] > 0 && car->com_args[1] < 17))
+		tmp2 = car->car_reg[car->com_args[1]];
+	else if (car->c_byte[1] == 2 || car->c_byte[1] == 3)
+		tmp2 = car->com_args[1];
+	if (car->c_byte[2] == 1 && (car->com_args[2] > 0 && car->com_args[2] < 17))
+		tmp3 = car->car_reg[car->com_args[2]];
+	else if (car->c_byte[2] == 2)
+		tmp3 = car->com_args[2];
+	g_vm->map[0][((tmp2 + tmp3) % IDX_MOD) % MEM_SIZE] = tmp;	
+}

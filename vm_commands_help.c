@@ -76,6 +76,8 @@ void	vm_get_reg_dir(t_car *car, int index, int i)
 	else if (car->c_byte[i] == 2 && ((c_nmbr >= 9 && c_nmbr <= 12) ||
 		c_nmbr == 14 || c_nmbr == 15))
 		size = 2;
+	else if (car->c_byte[i] == 3)
+		size = 2;
 	z = -1;
 	while (++z < size)
 	{
@@ -105,8 +107,7 @@ void	vm_get_ind(t_car *car, int index, int i)
 		ind = (ind << 8) | tmp;
 	}
 	z = -1;
-	if (car->command == 2 || car->command == 3 || car->command == 10 ||
-		car->command == 11)
+	if (car->command == 2 || car->command == 10)
 		ind = ind % IDX_MOD;
 	tmp = 0;
 	while (++z < 4)

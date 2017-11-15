@@ -65,7 +65,7 @@ t_car		*vm_com_add(t_car *car)
 			car->carry = 1;
 		}
 	}
-	vm_find_next_pos(car);
+	car->car_next_pos = vm_find_next_pos(car);
 	vm_car_clean(car);
 	return (car);
 }
@@ -89,7 +89,18 @@ t_car		*vm_com_sub(t_car *car)
 			car->carry = 1;
 		}
 	}
-	vm_find_next_pos(car);
+	car->car_next_pos = vm_find_next_pos(car);
 	vm_car_clean(car);
 	return (car);
+}
+
+void	vm_com_zjmp(t_car *car)
+{
+	car->car_next_pos = 3;
+	if (car->carry == FALSE)
+		return ;
+	car->c_byte[0] = 2;
+	vm_get_reg_dir(car, 0, 1);
+	car->car_next_pos = car->car_pos + car->com_args[0];
+	vm_car_clean(car);
 }
