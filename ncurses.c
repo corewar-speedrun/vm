@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include <ncurses.h>
-#include <unistd.h>
 #include <stdlib.h>
 #include <mach/mach_types.h>
 #include "corewar.h"

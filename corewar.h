@@ -14,9 +14,7 @@
 # define COREWAR_H
 
 # include <unistd.h>
-# include <ncurses.h>
-# include  <fcntl.h>
-# include <mach/mach_types.h>
+# include <fcntl.h>
 # include <stdio.h>////////////////////////////////////////////////////////////////
 # include "libft/libft.h"
 # include "op.h"
