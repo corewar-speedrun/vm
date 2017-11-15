@@ -60,7 +60,7 @@ void	vm_com_sti(t_car *car)
 {
 	int i;
 
-	i = 3
+	i = 3;
 	car->carry = FALSE;
 	if (car->c_byte[0] == 1 && (car->c_byte[2] == 1 || car->c_byte[2] == 2))
 	{

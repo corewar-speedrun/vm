@@ -21,9 +21,6 @@
 
 # define TRUE 1
 # define FALSE 0
-// # define REG_CODE 1
-// # define DIR_CODE 2
-// # define IND_CODE 3
 
 typedef struct		s_champ
 {
@@ -142,7 +139,7 @@ int					vm_read_size(int i, int fd);
 */
 
 void				vm_init_champs(void);
-void				vm_init_car(int pos, int next, int champ_nmbr, t_car *origin);
+void				vm_init_car(int pos, int next, int champ_nmbr, t_car *car);
 
 /*
 ** VM_game
@@ -152,35 +149,46 @@ void				vm_make_game(t_car *car);
 void				vm_make_game2(t_car *car);
 void				vm_car_to_die(void);
 void				vm_car_to_die2(void);
-t_car				*vm_read_comand(t_car *car);
-t_car				*vm_make_move(t_car *car);
-t_car				*vm_make_move2(t_car *car);
+void				vm_read_comand(t_car *car);
+void				vm_make_move(t_car *car);
+void				vm_make_move2(t_car *car);
 void				vm_car_next_pos(t_car *car);
+int					vm_cycles_count(int tmp);
 
 /*
 ** VM_comands
 */
 
-t_car				*vm_com_live(t_car *car);
+void				vm_com_live(t_car *car);
 void				vm_com_live2(int champ_namber);
-t_car				*vm_com_ld(t_car *car);
-t_car				*vm_com_st(t_car *car);
-t_car				*vm_com_add(t_car *car);
-t_car				*vm_com_sub(t_car *car);
-t_car				*vm_com_and(t_car *car);
-t_car				*vm_com_or(t_car *car);
-t_car				*vm_com_xor(t_car *car);
+void				vm_com_ld(t_car *car);
+void				vm_com_st(t_car *car);
+void				vm_com_add(t_car *car);
+void				vm_com_sub(t_car *car);
+void				vm_com_and(t_car *car);
+void				vm_com_or(t_car *car);
+void				vm_com_xor(t_car *car);
 void				vm_com_zjmp(t_car *car);
-t_car				*vm_com_ldi(t_car *car);
-t_car				*vm_com_sti(t_car *car);
-t_car				*vm_com_fork(t_car *car);
-t_car				*vm_com_lld(t_car *car);
-t_car				*vm_com_lldi(t_car *car);
-t_car				*vm_com_ifork(t_car *car);
-t_car				*vm_com_aff(t_car *car);
+void				vm_com_ldi(t_car *car);
+void				vm_com_ldi2(t_car *car);
+void				vm_com_sti(t_car *car);
+void				vm_com_sti2(t_car *car);
+void				vm_com_fork(t_car *car);
+void				vm_com_lld(t_car *car);
+void				vm_com_lldi(t_car *car);
+void				vm_com_lldi2(t_car *car);
+void				vm_com_ifork(t_car *car);
+void				vm_com_aff(t_car *car);
 void				vm_parse_code_byte(t_car *car);
-int					vm_find_next_pos(t_car *car, int args);
+int					vm_find_next_pos(t_car *car);
 void				vm_car_clean(t_car *car);
+void				vm_parse_code_byte(t_car *car);
+void				vm_get_reg_dir(t_car *car, int index, int i);
+void				vm_get_ind(t_car *car, int index, int i);
+int					vm_get_arg(t_car *car, int arg, int i);
+int					vm_get_t_reg(t_car *car, int index, int i);
+int					vm_get_t_dir(t_car *car, int index, int i);
+int					vm_get_t_ind(t_car *car, int index, int i);
 
 /*
 ** VM_error_management

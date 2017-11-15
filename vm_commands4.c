@@ -12,7 +12,7 @@
 
 #include "corewar.h"
 
-t_car		*vm_com_and(t_car *car)
+void		vm_com_and(t_car *car)
 {
 	int				i;
 	unsigned char	tmp;
@@ -32,14 +32,13 @@ t_car		*vm_com_and(t_car *car)
 	}
 	else 
 	{
-		car->car_next_pos = vm_find_next_pos(car, 3);
+		car->car_next_pos = vm_find_next_pos(car);
 		car->carry = 0;
 	}
 	vm_car_clean(car);
-	return (car);
 }
 
-t_car		*vm_com_or(t_car *car)
+void		vm_com_or(t_car *car)
 {
 	int				i;
 	unsigned char	tmp;
@@ -59,14 +58,13 @@ t_car		*vm_com_or(t_car *car)
 	}
 	else 
 	{
-		car->car_next_pos = vm_find_next_pos(car, 3);
+		car->car_next_pos = vm_find_next_pos(car);
 		car->carry = 0;
 	}
 	vm_car_clean(car);
-	return (car);
 }
 
-t_car		*vm_com_xor(t_car *car)
+void		vm_com_xor(t_car *car)
 {
 	int				i;
 	unsigned char	tmp;
@@ -86,14 +84,13 @@ t_car		*vm_com_xor(t_car *car)
 	}
 	else 
 	{
-		car->car_next_pos = vm_find_next_pos(car, 3);
+		car->car_next_pos = vm_find_next_pos(car);
 		car->carry = 0;
 	}
 	vm_car_clean(car);
-	return (car);
 }
 
-t_car		*vm_com_ld(t_car *car)
+void		vm_com_ld(t_car *car)
 {
 	int				i;
 	unsigned char	tmp;
@@ -112,15 +109,14 @@ t_car		*vm_com_ld(t_car *car)
 	}
 	else 
 	{
-		car->car_next_pos = vm_find_next_pos(car, 2);
+		car->car_next_pos = vm_find_next_pos(car);
 		car->carry = 0;
 	}
 	vm_car_clean(car);
-	return (car);
 }
 
 
-t_car		*vm_com_lld(t_car *car)
+void		vm_com_lld(t_car *car)
 {
 	int				i;
 	unsigned char	tmp;
@@ -139,9 +135,8 @@ t_car		*vm_com_lld(t_car *car)
 	}
 	else 
 	{
-		car->car_next_pos = vm_find_next_pos(car, 2);
+		car->car_next_pos = vm_find_next_pos(car);
 		car->carry = 0;
 	}
 	vm_car_clean(car);
-	return (car);
 }
