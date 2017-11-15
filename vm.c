@@ -30,13 +30,13 @@ int		main(int i, char **arg)
 	vm_init_champs();
 	if (g_vm->flag_visualize == 1)
 	{
-		while (z < 2147483646)
-            sleep = ncurses(++z, sleep);
+		while (z < 2147483646);
+           // sleep = ncurses(++z, sleep);
 	}
 	else
 	{
 		print_maps();
-	//	vm_make_game(NULL);
+		vm_make_game(NULL);
 	}
 	return (0);
 }
