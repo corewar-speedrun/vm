@@ -160,7 +160,7 @@ t_car				*vm_make_move2(t_car *car);
 void				vm_car_next_pos(t_car *car);
 
 /*
-** VM_comands
+** VM_comandss
 */
 
 t_car				*vm_com_live(t_car *car);
