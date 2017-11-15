@@ -61,31 +61,65 @@ void		vm_parse_code_byte(t_car *car)
 	car->c_byte[2] = code_byte >> 6;
 }
 
-int		vm_get_arg(t_car *car, int arg, int i)
+void	vm_get_reg_dir(t_car *car, int index, int i)
 {
-	if (car->c_byte[arg] == 1)
-		return (vm_get_t_reg(car, arg, i));
-	else if (car->c_byte[arg] == 2)
-		return (vm_get_t_dir(car, arg, i));
-	else if (car->c_byte[arg] == 3)
-		return (vm_get_t_ind(car, arg, i));
-	return (0);
+	unsigned char	tmp;
+	int				z;
+	int				size;
+
+	size = 0;
+	if (car->c_byte[i] == 1)
+		size = 1;
+	else if (car->c_byte[i] == 2 && ((c_nmbr >= 1 && c_nmbr <= 8) ||
+		c_nmbr == 13 || c_nmbr == 16))
+		size = 4;
+	else if (car->c_byte[i] == 2 && ((c_nmbr >= 9 && c_nmbr <= 12) ||
+		c_nmbr == 14 || c_nmbr == 15))
+		size = 2;
+	z = -1;
+	while (++z < size)
+	{
+		tmp1 = g_vm->map[0][(car_pos + z + i) % MEM_SIZE];
+		car->com_args[index] = (car->com_args[index] << 8) | tmp1;
+	}
 }
 
-// void		vm_get_arg_un(t_car *car, int args)
-// {
-// 	unsigned char	tmp;
-// 	int z;
-// 	int r;
+/*
+** vm_get_reg_dir - считывает и записывает в com_args[index] t_reg и t_dir
+**
+** index - номер аргумента, с которым работаем (от 0 до 2)
+** i - индекс смещения по памяти от car_pos
+*/
 
-// 	z = -1;
-// 	r = 0;
+void	vm_get_ind(t_car *car, int index, int i)
+{
+	unsigned char	tmp;
+	int 			z;
+	short int		ind;
 
-// 	while (++z < size)
-// 	{
-// 		tmp = g_vm->map[0][car->car_pos + (read_position + z)];
-// 		r = (r << 8) | tmp;
-// 	}
-// 	return (r);
-// }
+	z = -1;
+	ind = 0;
+	while (++z < 2)
+	{
+		tmp = g_vm->map[0][car_pos + z + i];
+		ind = (ind << 8) | tmp;
+	}
+	z = -1;
+	if (car->command == 2 || car->command == 3 || car->command == 10 ||
+		car->command == 11)
+		ind = ind % IDX_MOD;
+	tmp = 0;
+	while (++z < 4)
+	{
+		tmp = g_vm->map[0][(car_pos + ind + z) % MEM_SIZE];
+		car->com_args[index] = (car->com_args[index] << 8) | tmp;
+	}
+}
 
+/*
+** vm_get_ind - считывает адрес. парсит его. по адресу считывает чему равен
+** и записывает в com_args[index] t_ind
+**
+** index - номер аргумента, с которым работаем (от 0 до 2)
+** i - индекс смещения по памяти от car_pos
+*/

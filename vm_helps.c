@@ -69,6 +69,8 @@ int		vm_error(int error)
 		vm_usage("We need a champion!\n\0");
 	else if (error == 8)
 		vm_usage("Some unknown flag\n\0");
+	else if (error == 9)
+		vm_usage("Too many champions\n\0");
 	else
 		ft_putstr_fd("Some unknow error.\n\0", 2);
 	return (0);

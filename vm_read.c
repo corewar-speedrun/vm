@@ -42,7 +42,7 @@ void			vm_read(int i, char **arg)
 			g_vm->error = 2;
 		if (arg[x][0] == '-' && (g_vm->error == -1 || g_vm->error == 2))
 			vm_read_flag(arg[x]);
-		if (g_vm->champs_nmbr == 4)
+		else if (g_vm->champs_nmbr == 4)
 			g_vm->error = 9;
 		else if (vm_read_magic(fd) == 1 && g_vm->error == -1)
 			g_vm->champs[++g_vm->champs_nmbr] = vm_parsing(fd);
