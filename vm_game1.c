@@ -20,9 +20,9 @@ void	vm_make_game(t_car *car)
 		while (car != NULL)
 		{
 			if (car->comand == 0)
-				car = vm_read_comand(car);
+				vm_read_comand(car);
 			else if (car->count == 0 && car->comand != 0)
-				car = vm_make_move(car);
+				vm_make_move(car);
 			else
 				car->count--;
 			if (g_vm->map[2][car->car_pos] != 1)

@@ -34,26 +34,6 @@ void				vm_com_aff(t_car *car)
 	vm_car_clean(car);
 }
 
-T_REG | T_DIR | T_IND	T_DIR | T_REG	T_REG
-
-складываеся значение в аргументе 1 и аргументе 2 и значение % IDX_MOD 
-по полученному индеку записывается в аргумент 3 (загрузка в регистр)
-
-((а1 + а2) % IDX_MOD) по полученному индеку считывает 4байта  и 
-значение записывает в а3. Может сдвигаться назад (негативный сдвиг)
-
-• ldi: ldi, ldi, as per the name, does not imply to go swimming in chestnut cream,
-even if its code is 0x0a. Instead, it will use 2 indexes and 1 registry, adding 
-the first
-two, treating that like an address, reading a value of a registry’s size and putting
-it on the third.
-
-This operation modifies the carry. ldi 3,%4,r1 reads IND_SIZE
-bytes at address: (PC + (3 % IDX_MOD)), adds 4 to this value.
-We will name this sum S. Read REG_SIZE bytes at address (PC
-+ (S % IDX_MOD)), which are copied to r1. Parameters 1 and 2
-are indexes.
-
 void				vm_com_ldi(t_car *car)
 {
 	int i;
@@ -76,6 +56,7 @@ void				vm_com_ldi(t_car *car)
 		else
 			i +=2;
 		vm_get_reg_dir(car, 2, i);
+		vm_com_ldi2(car);
 		car->carry = TRUE;
 	}
 	car->car_next_pos = vm_find_next_pos(car);
@@ -84,5 +65,59 @@ void				vm_com_ldi(t_car *car)
 
 void				vm_com_ldi2(t_car *car)
 {
+	int tmp;
+	int tmp2;
+	int tmp3;
 
+	tmp3 = -1;
+	tmp2 = 0;
+	tmp = (car->com_args[0] + car->com_args[1]) % IDX_MOD + car->car_pos;
+	while (++tmp3 < 4)
+		tmp2 = (tmp2 << 8) | g_vm->map[0][(tmp + tmp3) % MEM_SIZE];
+	if (car->com_args[2] > 0 && car->com_args[2] < 17)
+		car->car_reg[car->com_args[2]] = tmp2;
+}
+
+void				vm_com_lldi(t_car *car)
+{
+	int i;
+
+	i = 2;
+	car->carry = FALSE;
+	if ((car->c_byte[1] == 1 || car->c_byte[1] == 2) && car->c_byte[2] == 1)
+	{
+		if (car->c_byte[1] == 3)
+			vm_get_ind(car, 0, i);
+		else
+			vm_get_reg_dir(car, 0, i);
+		if (car->c_byte[0] == 1)
+			i +=1;
+		else
+			i +=2;
+		vm_get_reg_dir(car, 1, i);
+		if (car->c_byte[1] == 1)
+			i +=1;
+		else
+			i +=2;
+		vm_get_reg_dir(car, 2, i);
+		vm_com_ldi2(car);
+		car->carry = TRUE;
+	}
+	car->car_next_pos = vm_find_next_pos(car);
+	vm_car_clean(car);
+}
+
+void				vm_com_lldi2(t_car *car)
+{
+	int tmp;
+	int tmp2;
+	int tmp3;
+
+	tmp3 = -1;
+	tmp2 = 0;
+	tmp = car->com_args[0] + car->com_args[1] + car->car_pos;
+	while (++tmp3 < 4)
+		tmp2 = (tmp2 << 8) | g_vm->map[0][(tmp + tmp3) % MEM_SIZE];
+	if (car->com_args[2] > 0 && car->com_args[2] < 17)
+		car->car_reg[car->com_args[2]] = tmp2;
 }

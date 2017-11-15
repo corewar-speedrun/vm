@@ -12,9 +12,8 @@
 
 #include "corewar.h"
 
-t_car	*vm_com_live(t_car *car)
+void	vm_com_live(t_car *car)
 {
-	unsigned char	tmp;
 	int 			champ_namber;
 	int 			z;
 
@@ -33,7 +32,6 @@ t_car	*vm_com_live(t_car *car)
 	car->car_next_pos = vm_find_next_pos(car);
 	car->live += 1;
 	vm_car_clean(car);
-	return (car);
 }
 
 void	vm_com_live2(int champ_namber)
@@ -46,7 +44,7 @@ void	vm_com_live2(int champ_namber)
 	ft_putstr("is said to be alive\n\0");	
 }
 
-t_car		*vm_com_add(t_car *car)
+void		vm_com_add(t_car *car)
 {
 	unsigned char	tmp1;
 	unsigned char	tmp2;
@@ -67,10 +65,9 @@ t_car		*vm_com_add(t_car *car)
 	}
 	car->car_next_pos = vm_find_next_pos(car);
 	vm_car_clean(car);
-	return (car);
 }
 
-t_car		*vm_com_sub(t_car *car)
+void		vm_com_sub(t_car *car)
 {
 	unsigned char	tmp1;
 	unsigned char	tmp2;
@@ -91,7 +88,6 @@ t_car		*vm_com_sub(t_car *car)
 	}
 	car->car_next_pos = vm_find_next_pos(car);
 	vm_car_clean(car);
-	return (car);
 }
 
 void	vm_com_zjmp(t_car *car)

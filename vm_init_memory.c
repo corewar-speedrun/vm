@@ -77,8 +77,8 @@ void		vm_init_car(int pos, int next, int champ_nmbr, t_car *car)
 	mem->car_reg[1] = champ_nmbr * -1;
 	mem->car_pos = pos;
 	mem->car_next_pos = next;
-	// if (mem->car_next_pos != 0)
-	// 		vm_car_next_pos(mem);
+	if (mem->car_next_pos != 0)
+			vm_car_next_pos(mem);
 	if (car != NULL)
 	{
 		mem->live = car->live;
