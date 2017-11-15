@@ -42,9 +42,9 @@ void			vm_read(int i, char **arg)
 			g_vm->error = 2;
 		if (arg[x][0] == '-' && (g_vm->error == -1 || g_vm->error == 2))
 			vm_read_flag(arg[x]);
-		else if (vm_read_magic(fd) == 1 && g_vm->champs_nmbr == 4)
+		else if (vm_read_magic(fd, 0) == 1 && g_vm->champs_nmbr == 4)
 			g_vm->error = 9;
-		else if (vm_read_magic(fd) == 1 && g_vm->error == -1)
+		else if (vm_read_magic(fd, 1) == 1 && g_vm->error == -1)
 			g_vm->champs[++g_vm->champs_nmbr] = vm_parsing(fd);
 		else if (g_vm->error == -1)
 			g_vm->error = 1;
@@ -52,8 +52,8 @@ void			vm_read(int i, char **arg)
 			break ;
 		close(fd);
 	}
-	// if (g_vm->champs_nmbr < 1 && g_vm->error != -1)
-	// 	g_vm->error = 7;
+	if (g_vm->champs_nmbr < 1 && g_vm->error != -1)
+		g_vm->error = 7;
 }
 
 /*
@@ -164,14 +164,17 @@ unsigned char		*vm_read_script(int i, int fd, int flag)
 ** 0 - ничего проверять не надо, просто читываем С КОНЦА.
 */
 
-int					vm_read_magic(int fd)
+int					vm_read_magic(int fd, int flag)
 {
 	union u_read	smpl;
 	unsigned char	r[4];
 
 	smpl.mg = COREWAR_EXEC_MAGIC;
-	if (read(fd, &r, 4) != 4)
-		g_vm->error = 2;
+	if (flag == 0)
+	{
+		if (read(fd, &r, 4) != 4)
+			g_vm->error = 2;
+	}
 	if (g_vm->error == -1 && (r[0] == smpl.bit[3] || r[0] == smpl.bit[0]) &&
 		(r[1] == smpl.bit[2] || r[1] == smpl.bit[1]) &&
 		(r[2] == smpl.bit[1] || r[2] == smpl.bit[2]) &&
