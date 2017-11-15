@@ -20,11 +20,9 @@ t_car	*vm_com_live(t_car *car)
 
 	z = 0;
 	champ_namber = 0;
-	while (++z < 5)
-	{
-		tmp = g_vm->map[0][car->car_pos + z];
-		champ_namber = (champ_namber << 8) | tmp;
-	}
+	car->c_byte[0] = 2;
+	vm_get_reg_dir(car, 0, 1);
+	champ_namber = car->com_args[0];
 	if (champ_namber > 0 && champ_namber <= g_vm->champs_nmbr)
 	{
 		g_vm->champs[champ_namber]->live += 1;
@@ -32,7 +30,7 @@ t_car	*vm_com_live(t_car *car)
 		if (g_vm->flag_say_alive == 1 && g_vm->flag_visualize != 1)
 			vm_com_live2(champ_namber);
 	}
-	car->car_next_pos = 5;
+	car->car_next_pos = vm_find_next_pos(car);
 	car->live += 1;
 	vm_car_clean(car);
 	return (car);
@@ -57,19 +55,17 @@ t_car		*vm_com_add(t_car *car)
 	car->carry = 0;
 	if (car->c_byte[0] == 1 && car->c_byte[1] == 1 && car->c_byte[2] == 1)
 	{
-		tmp1 = g_vm->map[0][car->car_pos + 2];
-		tmp2 = g_vm->map[0][car->car_pos + 3];
-		tmp3 = g_vm->map[0][car->car_pos + 4];
+		tmp1 = g_vm->map[0][(car->car_pos + 2) % MEM_SIZE];
+		tmp2 = g_vm->map[0][(car->car_pos + 3) % MEM_SIZE];
+		tmp3 = g_vm->map[0][(car->car_pos + 4) % MEM_SIZE];
 		if ((tmp1 >= 0 && tmp1 < 16) && (tmp2 >= 0 && tmp2 < 16) && 
 			(tmp3 >= 0 && tmp3 < 16))
 		{
 			car->car_reg[tmp3] = car->car_reg[tmp1] + car->car_reg[tmp2];
 			car->carry = 1;
-			car->car_next_pos = 5;
 		}
 	}
-	else 
-		car->car_next_pos = vm_find_next_pos(car);
+	vm_find_next_pos(car);
 	vm_car_clean(car);
 	return (car);
 }
@@ -83,43 +79,17 @@ t_car		*vm_com_sub(t_car *car)
 	car->carry = 0;
 	if (car->c_byte[0] == 1 && car->c_byte[1] == 1 && car->c_byte[2] == 1)
 	{
-		tmp1 = g_vm->map[0][car->car_pos + 2];
-		tmp2 = g_vm->map[0][car->car_pos + 3];
-		tmp3 = g_vm->map[0][car->car_pos + 4];
+		tmp1 = g_vm->map[0][(car->car_pos + 2) % MEM_SIZE];
+		tmp2 = g_vm->map[0][(car->car_pos + 3) % MEM_SIZE];
+		tmp3 = g_vm->map[0][(car->car_pos + 4) % MEM_SIZE];
 		if ((tmp1 >= 0 && tmp1 < 16) && (tmp2 >= 0 && tmp2 < 16) && 
 			(tmp3 >= 0 && tmp3 < 16))
 		{
 			car->car_reg[tmp3] = car->car_reg[tmp1] - car->car_reg[tmp2];
 			car->carry = 1;
-			car->car_next_pos = 5;
 		}
 	}
-	else 
-		car->car_next_pos = vm_find_next_pos(car);
+	vm_find_next_pos(car);
 	vm_car_clean(car);
 	return (car);
-}
-
-void	vm_com_st(t_car *car)
-{
-	if (car->c_byte[0] == 1 && (car->c_byte[1] == 1 || car->c_byte[1] == 3))
-	{
-		car->com_args[0] = g_vm->map[0][car->car_pos + 2];
-		if (car->c_byte[1] == 1)
-			car->com_args[1] = g_vm->map[0][car->car_pos + 3];
-		else
-		{
-			car->com_args[1] = (car->com_args[1] << 8) | g_vm->map[0][car->car_pos + 3];
-			car->com_args[1] = (car->com_args[1] << 8) | g_vm->map[0][car->car_pos + 4];
-		}
-		if (car->c_byte[1] == 1 &&
-			(car->com_args[0] > 0 && car->com_args[0] < 17) && 
-			(car->com_args[1] > 0 && car->com_args[1] < 17))
-			car->car_reg[car->com_args[1]] = car->car_reg[car->com_args[0]];
-		else if (car->c_byte[1] == 3 &&
-			(car->com_args[0] > 0 && car->com_args[0] < 17))
-			g_vm->map[0][(car->car_pos + (car->car_reg[1] % IDX_MOD)) % MEM_SIZE] = car->car_reg[car->com_args[0]];
-	}
-	car->car_next_pos = vm_find_next_pos(car);
-	vm_car_clean(car);
 }

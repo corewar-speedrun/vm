@@ -89,7 +89,7 @@ void		vm_init_car(int pos, int next, int champ_nmbr, t_car *car)
 	} 
 	mem->next_car = (g_vm->cars == NULL) ? NULL : g_vm->cars;
 	mem->carry = FALSE;
-	mem->live = (origin == NULL) ? FALSE : origin->live;
+	mem->live = (car == NULL) ? FALSE : car->live;
 	g_vm->cars = mem;
 	g_vm->cars_nmbr += 1;
 }
