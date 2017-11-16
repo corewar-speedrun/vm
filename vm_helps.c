@@ -102,6 +102,8 @@ int		vm_usage(char *re)
 
 void	vm_map_vrite(int c, int p)
 {
+	if (c < 0)
+		c = c * -1;
 	if (c <= 255)
 		g_vm->map[0][p % MEM_SIZE] = c & 255;
 	else if (c <= 65535)
