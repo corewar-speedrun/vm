@@ -14,9 +14,12 @@
 
 void	vm_make_game(t_car *car)
 {
+	g_vm->sleep = 10000;
 	while (g_vm->game > 0)
 	{
 		car = g_vm->cars;
+		if (g_vm->flag_visualize == 1)
+          g_vm->sleep = ncurses(g_vm->sleep);
 		while (car != NULL)
 		{
 			if (car->comand == 0)

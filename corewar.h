@@ -84,6 +84,7 @@ typedef struct		s_vm
 	int				to_die;
 	int				flag_say_alive;
 	int				flag_visualize;
+	int             sleep;
 }					t_vm;
 
 t_vm				*g_vm;
@@ -206,6 +207,6 @@ int					vm_usage(char *re);
 void				print_maps(void);
 int					vm_cycles_count(int tmp);
 
-int					ncurses(int kakoito_int, int sleep);
+int					ncurses(int sleep);
 
 #endif
