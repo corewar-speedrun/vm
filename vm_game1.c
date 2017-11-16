@@ -18,8 +18,8 @@ void	vm_make_game(t_car *car)
 	while (g_vm->game > 0)
 	{
 		car = g_vm->cars;
-//		if (g_vm->flag_visualize == 1)
-//          g_vm->sleep = ncurses(g_vm->sleep);
+		if (g_vm->flag_visualize == 1)
+         g_vm->sleep = ncurses(g_vm->sleep);
 		while (car != NULL)
 		{
 			if (g_vm->map[2][car->car_pos] != 1)
@@ -60,7 +60,11 @@ void	vm_car_next_pos(t_car *car)
 {
 	if (car->car_next_pos < 1)
 		return ;
+	if (g_vm->map[2][car->car_pos] == 1)
+		g_vm->map[2][car->car_pos] = 0;
 	car->car_pos = ((car->car_pos + car->car_next_pos) % MEM_SIZE);
+	if (g_vm->map[2][car->car_pos] != 1)
+		g_vm->map[2][car->car_pos] = 1;
 }
 
 void	vm_car_to_die(void)
