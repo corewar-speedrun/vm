@@ -16,16 +16,16 @@ void	print_maps(void) ////////////////////////////////\\\\\\\\\\\\\\\\\\\\\ del
 {
 	int i = -1;
 	int z = 1;
-	while (++i < MEM_SIZE)
-	{
-		printf("|%x| ", g_vm->map[0][i]);
-		if (z % 4 == 0)
-			printf("  ");
-		if (z % 32 == 0)
-			printf("\n");
-		z++;
-	}
-	printf("\n");
+//	while (++i < MEM_SIZE)
+//	{
+//		printf("|%x| ", g_vm->map[0][i]);
+//		if (z % 4 == 0)
+//			printf("  ");
+//		if (z % 32 == 0)
+//			printf("\n");
+//		z++;
+//	}
+//	printf("\n");
 //	i = -1;
 //	z = 1;
 //	printf("champs\n");
@@ -38,18 +38,19 @@ void	print_maps(void) ////////////////////////////////\\\\\\\\\\\\\\\\\\\\\ del
 //			printf("\n");
 //		z++;
 //	}
-//	printf("caretki\n");
-//	i = -1;
-//	z = 1;
-//	while (++i < MEM_SIZE)
-//	{
-//		printf("|%x| ", g_vm->map[2][i]);
-//		if (z % 4 == 0)
-//			printf("  ");
-//		if (z % 32 == 0)
-//			printf("\n");
-//		z++;
-//	}
+	printf("caretki\n");
+	i = -1;
+	z = 1;
+	while (++i < MEM_SIZE)
+	{
+		printf("|%x| ", g_vm->map[2][i]);
+		if (z % 4 == 0)
+			printf("  ");
+		if (z % 32 == 0)
+			printf("\n");
+		z++;
+	}
+	printf("\n");
 }
 
 int		vm_error(int error)
@@ -98,4 +99,41 @@ int		vm_usage(char *re)
 	ft_putstr("-v - Visual mode or -l - Show lives\n\0");
 	return (0);
 }
+
+void	vm_map_vrite(int c, int p)
+{
+	if (c <= 255)
+		g_vm->map[0][p % MEM_SIZE] = c & 255;
+	else if (c <= 65535)
+	{
+		g_vm->map[0][p % MEM_SIZE] = (c >> 8) & 255;
+		g_vm->map[0][(p + 1) % MEM_SIZE] = c & 255;
+	}
+	else if (c <= 16777215)
+	{
+		g_vm->map[0][p % MEM_SIZE] = (c >> 12) & 255;
+		g_vm->map[0][(p + 1) % MEM_SIZE] = (c >> 8) & 255;
+		g_vm->map[0][(p + 2) % MEM_SIZE] = c & 255;
+	}
+	else
+	{
+		g_vm->map[0][p % MEM_SIZE] = (c >> 16) & 255;
+		g_vm->map[0][(p + 1) % MEM_SIZE] = (c >> 12) & 255;
+		g_vm->map[0][(p + 2) % MEM_SIZE] = (c >> 8) & 255;
+		g_vm->map[0][(p + 3) % MEM_SIZE] = c & 255;
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
 

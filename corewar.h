@@ -156,6 +156,7 @@ void				vm_make_move2(t_car *car);
 void				vm_car_next_pos(t_car *car);
 int					vm_cycles_count(int tmp);
 void				vm_finish_game(void);
+void				vm_map_vrite(int c, int p);
 
 /*
 ** VM_comandss
