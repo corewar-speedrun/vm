@@ -22,7 +22,7 @@ void		vm_com_and(t_car *car)
 	i += vm_get_arg(car, 1, i);
 	if (vm_get_arg(car, 0, i) && vm_get_arg(car, 1, i) && car->c_byte[2] == 1)
 	{
-		tmp = g_vm->map[0][car->car_pos + i];
+		tmp = g_vm->map[0][(car->car_pos + i) % MEM_SIZE];
 		if (tmp >= 0 && tmp < 16)
 		{
 			car->car_reg[tmp] = car->com_args[0] & car->com_args[1];
@@ -48,7 +48,7 @@ void		vm_com_or(t_car *car)
 	i += vm_get_arg(car, 1, i);
 	if (vm_get_arg(car, 0, i) && vm_get_arg(car, 1, i) && car->c_byte[2] == 1)
 	{
-		tmp = g_vm->map[0][car->car_pos + i];
+		tmp = g_vm->map[0][(car->car_pos + i) % MEM_SIZE];
 		if (tmp >= 0 && tmp < 16)
 		{
 			car->car_reg[tmp] = car->com_args[0] | car->com_args[1];
@@ -74,7 +74,7 @@ void		vm_com_xor(t_car *car)
 	i += vm_get_arg(car, 1, i);
 	if (vm_get_arg(car, 0, i) && vm_get_arg(car, 1, i) && car->c_byte[2] == 1)
 	{
-		tmp = g_vm->map[0][car->car_pos + i];
+		tmp = g_vm->map[0][(car->car_pos + i) % MEM_SIZE];
 		if (tmp >= 0 && tmp < 16)
 		{
 			car->car_reg[tmp] = car->com_args[0] ^ car->com_args[1];
@@ -99,7 +99,7 @@ void		vm_com_ld(t_car *car)
 	i += vm_get_arg(car, 0, i);
 	if (vm_get_arg(car, 0, i) && car->c_byte[1] == 1)
 	{
-		tmp = g_vm->map[0][car->car_pos + i];
+		tmp = g_vm->map[0][(car->car_pos + i) % MEM_SIZE];
 		if (tmp >= 0 && tmp < 16)
 		{
 			car->car_reg[tmp] = car->com_args[0];
@@ -125,7 +125,7 @@ void		vm_com_lld(t_car *car)
 	i += vm_get_arg(car, 0, i);
 	if (vm_get_arg(car, 0, i) && car->c_byte[1] == 1)
 	{
-		tmp = g_vm->map[0][car->car_pos + i];
+		tmp = g_vm->map[0][(car->car_pos + i) % MEM_SIZE];
 		if (tmp >= 0 && tmp < 16)
 		{
 			car->car_reg[tmp] = car->com_args[0];

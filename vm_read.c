@@ -86,6 +86,8 @@ t_champ				*vm_parsing(int fd)
 		tmp->comment = (char *)vm_read_script(COMMENT_LENGTH + 4, fd, 1);
 	if (g_vm->error == -1 && tmp->size <= (MEM_SIZE / 6))
 		tmp->src = vm_read_script(tmp->size, fd, 0);
+	if (g_vm->error == -1)
+		tmp->nmbr = g_vm->champs_nmbr + 1;
 	else if (g_vm->error == -1)
 		g_vm->error = 4;
 	if (read(fd, &buf, 10) != 0)

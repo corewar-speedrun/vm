@@ -55,7 +55,7 @@ void		vm_parse_code_byte(t_car *car)
 {
 	unsigned char	code_byte;
 
-	code_byte = g_vm->map[0][car->car_pos + 1];
+	code_byte = g_vm->map[0][(car->car_pos + 1) % MEM_SIZE];
 	car->c_byte[0] = (code_byte << 4) >> 6;
 	car->c_byte[1] = (code_byte << 2) >> 6;
 	car->c_byte[2] = code_byte >> 6;
@@ -105,7 +105,7 @@ void	vm_get_ind(t_car *car, int index, int i)
 	ind = 0;
 	while (++z < 2)
 	{
-		tmp = g_vm->map[0][car->car_pos + z + i];
+		tmp = g_vm->map[0][(car->car_pos + z + i) % MEM_SIZE];
 		ind = (ind << 8) | tmp;
 	}
 	z = -1;

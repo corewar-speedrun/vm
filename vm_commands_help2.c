@@ -27,7 +27,7 @@ int		vm_get_t_reg(t_car *car, int index, int i)
 {
 	unsigned char	tmp1;
 
-	tmp1 = g_vm->map[0][car->car_pos + i]; //////////////////////////////////////// [(car_pos + i) % MEM_SIZE]
+	tmp1 = g_vm->map[0][(car->car_pos + i) % MEM_SIZE];
 	if (tmp1 >= 0 && tmp1 < 16)
 	{
 		car->com_args[index] = car->car_reg[tmp1];
@@ -47,7 +47,7 @@ int		vm_get_t_dir(t_car *car, int index, int i)
 		car->comand == 13 || car->comand == 16) ? 4 : 2;
 	while (++z < size)
 	{
-		tmp1 = g_vm->map[0][car->car_pos + z + i];///////////////////////////// [(car_pos + z + i) % MEM_SIZE]
+		tmp1 = g_vm->map[0][(car->car_pos + z + i) % MEM_SIZE];
 		car->com_args[index] = (car->com_args[index] << 8) | tmp1;
 	}
 	return (size);
