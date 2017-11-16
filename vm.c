@@ -28,15 +28,7 @@ int		main(int i, char **arg)
 	if (g_vm->error != -1)
 		return (vm_error(g_vm->error));
 	vm_init_champs();
-	if (g_vm->flag_visualize == 1)
-	{
-		while (z < 2147483646);
-           //sleep = ncurses(++z, sleep);
-	}
-	else
-	{
-		print_maps();
-		vm_make_game(NULL);
-	}
+	//print_maps();
+	vm_make_game(NULL);
 	return (0);
 }

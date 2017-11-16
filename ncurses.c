@@ -144,7 +144,7 @@ void	init()
 }
 
 //КОМПИЛИТЬ С ФЛАГОМ -lncurses   !!!!
-int ncurses(int kakoito_int, int sleep)
+int ncurses(int sleep)
 {
 	WINDOW *win[2];
 	int y;
@@ -158,7 +158,7 @@ int ncurses(int kakoito_int, int sleep)
 	keypad(win[1], TRUE);
 	mvwprintw(win[1], 2, 4, "%s   ", "** RUNNING **");
 	mvwprintw(win[1], 4, 4, "%s   ", "Cycles/second limit :");
-	mvwprintw(win[1], 7, 4, "%s %d", "Cycle :", kakoito_int);
+	mvwprintw(win[1], 7, 4, "%s %d", "Cycle :", g_vm->cycle);
 	mvwprintw(win[1], 9, 4, "%s %d", "Processes :",  g_vm->cars_nmbr);
     print_players(win);
     mvwprintw(win[1], 5, 27,  "speed %d         ",  sleep);
