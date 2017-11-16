@@ -25,30 +25,31 @@ void	print_maps(void) ////////////////////////////////\\\\\\\\\\\\\\\\\\\\\ del
 			printf("\n");
 		z++;
 	}
-	i = -1;
-	z = 1;
-	printf("champs\n");
-	while (++i < MEM_SIZE)
-	{
-		printf("|%x| ", g_vm->map[1][i]);
-		if (z % 4 == 0)
-			printf("  ");
-		if (z % 32 == 0)
-			printf("\n");
-		z++;
-	}
-	printf("caretki\n");
-	i = -1;
-	z = 1;
-	while (++i < MEM_SIZE)
-	{
-		printf("|%x| ", g_vm->map[2][i]);
-		if (z % 4 == 0)
-			printf("  ");
-		if (z % 32 == 0)
-			printf("\n");
-		z++;
-	}
+	printf("\n");
+//	i = -1;
+//	z = 1;
+//	printf("champs\n");
+//	while (++i < MEM_SIZE)
+//	{
+//		printf("|%x| ", g_vm->map[1][i]);
+//		if (z % 4 == 0)
+//			printf("  ");
+//		if (z % 32 == 0)
+//			printf("\n");
+//		z++;
+//	}
+//	printf("caretki\n");
+//	i = -1;
+//	z = 1;
+//	while (++i < MEM_SIZE)
+//	{
+//		printf("|%x| ", g_vm->map[2][i]);
+//		if (z % 4 == 0)
+//			printf("  ");
+//		if (z % 32 == 0)
+//			printf("\n");
+//		z++;
+//	}
 }
 
 int		vm_error(int error)

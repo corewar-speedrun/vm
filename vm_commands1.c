@@ -15,10 +15,7 @@
 void	vm_com_live(t_car *car)
 {
 	int 			champ_namber;
-	int 			z;
 
-	z = 0;
-	champ_namber = 0;
 	car->c_byte[0] = 2;
 	vm_get_reg_dir(car, 0, 1);
 	champ_namber = car->car_reg[1] * -1;

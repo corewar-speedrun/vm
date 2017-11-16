@@ -29,7 +29,7 @@ void	vm_read_comand(t_car *car)
 		car->car_next_pos += 1;
 		car->comand = 0;
 	}
-	if (car->comand > 1 && car->comand < 17 && car->comand != 9 &&
+	if ((car->comand > 1 && car->comand < 17) && car->comand != 9 &&
 		car->comand != 12 && car->comand != 15)
 		vm_parse_code_byte(car);
 }
@@ -110,6 +110,7 @@ void	vm_finish_game(void)
 	int won;
 	int live;
 
+	print_maps();
 	i = 0;
 	won = 0;
 	live = 0;
