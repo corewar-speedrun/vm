@@ -66,7 +66,7 @@ void	vm_car_to_die(void)
 	t_car *start;
 
 	start = g_vm->cars;
-	while (start->live < 1 && start != NULL)
+	while (start != NULL && start->live < 1)
 	{
 		tmp = start->next_car;
 		free(start);
@@ -76,6 +76,8 @@ void	vm_car_to_die(void)
 	g_vm->cars = start;
 	if (g_vm->cars != NULL)
 		vm_car_to_die2();
+	else
+		vm_finish_game();
 	g_vm->to_die -= CYCLE_DELTA;
 	g_vm->die_cycle += g_vm->to_die;
 }

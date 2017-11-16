@@ -47,9 +47,9 @@ void		vm_init_champs(void)
 	int				w;
 
 	q = 0;
-	while (g_vm->champs[++q] != NULL)
+	while (++q <= g_vm->champs_nmbr)
 	{
-		w = (MEM_SIZE / (g_vm->champs_nmbr)) * (q - 1);
+		w = (MEM_SIZE / g_vm->champs_nmbr) * (q - 1);
 		g_vm->map[2][w] = 1;
 		vm_init_car(w, 0, g_vm->champs[q]->nmbr, NULL);
 		i = -1;

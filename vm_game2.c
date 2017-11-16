@@ -104,6 +104,29 @@ void	vm_make_move2(t_car *car)
 		ft_putstr_fd("Some unknow error.\n\0", 2);
 }
 
+void	vm_finish_game(void)
+{
+	int i;
+	int won;
+	int live;
 
+	i = 0;
+	won = 1;
+	live = 0;
+	while (++i <= g_vm->champs_nmbr)
+	{
+		if (live < g_vm->champs[i]->last_live)
+		{
+			live = g_vm->champs[i]->last_live;
+			won = i;
+		}
+	}
+	ft_putstr("Contestant \0");
+	ft_putnbr(won);
+	ft_putstr(", \"\0");
+	ft_putstr(g_vm->champs[won]->name);
+	ft_putstr("\", has won !\n\0");
+	g_vm->game = 0;
+}
 
 
