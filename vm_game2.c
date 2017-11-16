@@ -111,7 +111,7 @@ void	vm_finish_game(void)
 	int live;
 
 	i = 0;
-	won = 1;
+	won = 0;
 	live = 0;
 	while (++i <= g_vm->champs_nmbr)
 	{

@@ -21,7 +21,7 @@ void	vm_com_live(t_car *car)
 	champ_namber = 0;
 	car->c_byte[0] = 2;
 	vm_get_reg_dir(car, 0, 1);
-	champ_namber = car->com_args[0];
+	champ_namber = car->car_reg[1] * -1;
 	if (champ_namber > 0 && champ_namber <= g_vm->champs_nmbr)
 	{
 		g_vm->champs[champ_namber]->live += 1;
