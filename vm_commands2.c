@@ -24,8 +24,6 @@ void	vm_com_fork(t_car *car)
 
 void	vm_com_ifork(t_car *car)
 {
-	t_vm *p = g_vm;
-
 	car->c_byte[0] = 2;
 	vm_get_reg_dir(car, 0, 1);
 	vm_init_car(car->car_pos, car->com_args[0], car->car_reg[1] * -1, car);
