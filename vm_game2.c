@@ -59,7 +59,6 @@ int		vm_cycles_count(int tmp)
 
 void	vm_make_move(t_car *car)
 {
-	g_vm->map[2][car->car_pos] = 0;
 	if (car->comand == 1)
 		vm_com_live(car);
 	else if (car->comand == 2)

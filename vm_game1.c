@@ -22,14 +22,14 @@ void	vm_make_game(t_car *car)
 //          g_vm->sleep = ncurses(g_vm->sleep);
 		while (car != NULL)
 		{
+			if (g_vm->map[2][car->car_pos] != 1)
+				g_vm->map[2][car->car_pos] = 1;
 			if (car->comand == 0)
 				vm_read_comand(car);
 			else if (car->count == 0 && car->comand != 0)
 				vm_make_move(car);
 			else
 				car->count--;
-			if (g_vm->map[2][car->car_pos] != 1)
-				g_vm->map[2][car->car_pos] = 1;
 			car = car->next_car;
 		}
 		vm_make_game2(NULL);
