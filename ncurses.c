@@ -6,7 +6,7 @@
 /*   By: ireva <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/29 17:55:08 by ireva             #+#    #+#             */
-/*   Updated: 2017/10/31 14:49:29 by ireva            ###   ########.fr       */
+/*   Updated: 2017/11/16 22:21:33 by ireva            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,216 +15,222 @@
 #include <mach/mach_types.h>
 #include "corewar.h"
 
-int	paused(WINDOW *win[2], int sleep) {
-	int ch;
-	int i;
+int			paused(WINDOW *win[2], int sleep)
+{
+	int		ch;
+	int		i;
 
-	ch = wgetch(win[1]); //отслеживает паузу
-	if (ch == ' ') {
+	ch = wgetch(win[1]);
+	if (ch == ' ')
+	{
 		mvwprintw(win[1], 2, 4, "%s   ", "** PAUSED **");
 		wrefresh(win[1]);
 		i = 1;
-		while (i == 1) {
+		while (i == 1)
+		{
 			ch = wgetch(win[1]);
-			if (ch == ' ') {
+			if (ch == ' ')
+			{
 				mvwprintw(win[1], 2, 4, "%s   ", "** RUNNING **");
 				wrefresh(win[1]);
 				i--;
 			}
 		}
-
 	}
-    if (ch == KEY_DOWN && sleep != 0)
-        sleep -= 2500;
-    if (sleep <= 0)
-        sleep = 1;
-    if (ch == KEY_UP && sleep != 0)
-        sleep += 2500 ;
-	if (ch == 'q')
-		exit(0);
-    return (sleep);
-}
-
-void    players_color(WINDOW *win[2], int i)
-{
-    //Назначает цвет каждому плееру
-     if (g_vm->map[1][i] == 1)
-        wattron(win[0], COLOR_PAIR(7));
-    else if (g_vm->map[1][i] == 2)
-        wattron(win[0], COLOR_PAIR(8));
-    else if (g_vm->map[1][i] == 3)
-        wattron(win[0], COLOR_PAIR(6));
-    else if (g_vm->map[1][i] == 4)
-        wattron(win[0], COLOR_PAIR(9));
-     else
-         wattron(win[0], COLOR_PAIR(10));
-
-    wrefresh(win[1]);
-}
-
-void    print_cl_players(WINDOW *win[2])
-{
-    wattron(win[1], COLOR_PAIR(7));
-    mvwprintw(win[1], 11, 16, "%s",  g_vm->champs[1]->name);
-    if (g_vm->champs_nmbr > 1)
-    {
-        wattron(win[1], COLOR_PAIR(8));
-        mvwprintw(win[1], 15, 16, "%s", g_vm->champs[2]->name);
-    }
-    if (g_vm->champs_nmbr > 2)
-    {
-        wattron(win[1], COLOR_PAIR(6));
-        mvwprintw(win[1], 19 , 16, "%s", g_vm->champs[3]->name);
-    }
-    if (g_vm->champs_nmbr > 3)
-    {
-        wattron(win[1], COLOR_PAIR(9));
-        mvwprintw(win[1], 23, 16, "%s", g_vm->champs[4]->name);
-    }
-    wattroff(win[1], COLOR_PAIR(9));
-    wrefresh(win[1]);   
-}
-
-void	print_players(WINDOW *win[2])
-{
-//	int num_of_players;
-//Пришет кол-во игроков и  прочее"
-    mvwprintw(win[1], 11, 4, "%s", "Player -1 :");
-    mvwprintw(win[1], 12, 6, "%s  %d", "Last live :", g_vm->champs[1]->last_live);
-    mvwprintw(win[1], 13, 6, "%s  %d", "Lives in current period :", g_vm->champs[1]->live);
-    if (g_vm->champs_nmbr > 1) {
-        mvwprintw(win[1], 15, 4, "%s", "Player -2 :");
-        mvwprintw(win[1], 16, 6, "%s %d", "Last live :", g_vm->champs[2]->last_live);
-        mvwprintw(win[1], 17, 6, "%s %d", "Lives in current period :", g_vm->champs[2]->live);
-    }
-    if (g_vm->champs_nmbr > 2) {
-        mvwprintw(win[1], 19, 4, "%s", "Player -3 :");
-        mvwprintw(win[1], 20, 6, "%s %d", "Last live :", g_vm->champs[3]->last_live);
-        mvwprintw(win[1], 21, 6, "%s %d", "Lives in current period :", g_vm->champs[3]->live);
-    }
-    if (g_vm->champs_nmbr > 3) {
-        mvwprintw(win[1], 23, 4, "%s", "Player -4 :");
-        mvwprintw(win[1], 24, 6, "%s %d", "Last live :", g_vm->champs[4]->last_live);
-        mvwprintw(win[1], 25, 6, "%s %d", "Lives in current period :", g_vm->champs[4]->live);
-    }
-    mvwprintw(win[1], 13 + (4 * (g_vm->champs_nmbr - 1)) + 8, 6, "%s %d", "CYCLE_TO_DIE :", g_vm->to_die);
-    mvwprintw(win[1], 13 + (4 * (g_vm->champs_nmbr - 1)) + 10, 6, "%s %d", "CYCLE_DELTA :", CYCLE_DELTA);
-    mvwprintw(win[1], 13 + (4 * (g_vm->champs_nmbr - 1)) + 12, 6, "%s %d", "NBR_LIVE :", NBR_LIVE);
-    mvwprintw(win[1], 13 + (4 * (g_vm->champs_nmbr - 1)) + 14, 6, "%s %d", "MAX_CHECKS :", MAX_CHECKS);
-    print_cl_players(win);
+	(ch == KEY_DOWN && sleep != 0) ? sleep -= 1000 : 0;
+	(sleep <= 0) ? sleep = 1 : 0;
+	(ch == KEY_UP && sleep != 0) ? sleep += 1000 : 0;
+	(ch == 'q') ? exit(0) : 0;
+	return (sleep);
 }
 
 
-void	print_window(WINDOW *win[2])
+
+void		players_color(WINDOW *win[2], int i)
 {
-	win[0] = newwin(68, 196, 0, 0); //окно для поля
-	win[1] = newwin(68, 70, 0, 195);// окно для статы
-	nodelay(win[1], TRUE); 
-	nodelay(win[0], TRUE); 
-	//keypad(draw->win[0], TRUE);
-	wattron(win[0], COLOR_PAIR(5)); // каждый раз когда хотим менять цвет указываем номер пары цветов (строка 9), перед выводом
-	wborder(win[0], '*', '*', '*', '*', '*', '*', '*', '*');  // рамка
-	wattron(win[1], COLOR_PAIR(5)); 
+	if (g_vm->map[1][i] == 1)
+		wattron(win[0], COLOR_PAIR(7));
+	else if (g_vm->map[1][i] == 2)
+		wattron(win[0], COLOR_PAIR(8));
+	else if (g_vm->map[1][i] == 3)
+		wattron(win[0], COLOR_PAIR(6));
+	else if (g_vm->map[1][i] == 4)
+		wattron(win[0], COLOR_PAIR(9));
+	else
+		wattron(win[0], COLOR_PAIR(10));
+	wrefresh(win[1]);
+}
+
+void		print_cl_players(WINDOW *win[2])
+{
+	wattron(win[1], COLOR_PAIR(7));
+	mvwprintw(win[1], 11, 16, "%s", g_vm->champs[1]->name);
+	if (g_vm->champs_nmbr > 1)
+	{
+		wattron(win[1], COLOR_PAIR(8));
+		mvwprintw(win[1], 15, 16, "%s", g_vm->champs[2]->name);
+	}
+	if (g_vm->champs_nmbr > 2)
+	{
+		wattron(win[1], COLOR_PAIR(6));
+		mvwprintw(win[1], 19, 16, "%s", g_vm->champs[3]->name);
+	}
+	if (g_vm->champs_nmbr > 3)
+	{
+		wattron(win[1], COLOR_PAIR(9));
+		mvwprintw(win[1], 23, 16, "%s", g_vm->champs[4]->name);
+	}
+	wattroff(win[1], COLOR_PAIR(9));
+	wrefresh(win[1]);
+}
+
+void		print_players(WINDOW *win[2])
+{
+	mvwprintw(win[1], 11, 4, "%s", "Player -1 :");
+	mvwprintw(win[1], 12, 6, "%s %d",
+		"Last live :", g_vm->champs[1]->last_live);
+	mvwprintw(win[1], 13, 6, "%s %d",
+		"Lives in current period :", g_vm->champs[1]->live);
+	if (g_vm->champs_nmbr > 1)
+	{
+		mvwprintw(win[1], 15, 4, "%s", "Player -2 :");
+		mvwprintw(win[1], 16, 6, "%s %d",
+			"Last live :", g_vm->champs[2]->last_live);
+		mvwprintw(win[1], 17, 6, "%s %d",
+			"Lives in current period :", g_vm->champs[2]->live);
+	}
+	if (g_vm->champs_nmbr > 2)
+	{
+		mvwprintw(win[1], 19, 4, "%s", "Player -3 :");
+		mvwprintw(win[1], 20, 6, "%s %d",
+			"Last live :", g_vm->champs[3]->last_live);
+		mvwprintw(win[1], 21, 6, "%s %d",
+			"Lives in current period :", g_vm->champs[3]->live);
+	}
+	if (g_vm->champs_nmbr > 3)
+	{
+		mvwprintw(win[1], 23, 4, "%s", "Player -4 :");
+		mvwprintw(win[1], 24, 6, "%s %d",
+			"Last live :", g_vm->champs[4]->last_live);
+		mvwprintw(win[1], 25, 6, "%s %d",
+			"Lives in current period :", g_vm->champs[4]->live);
+	}
+	mvwprintw(win[1], 13 + (4 * (g_vm->champs_nmbr - 1)) +
+		8, 6, "%s %d", "CYCLE_TO_DIE :", g_vm->to_die);
+	mvwprintw(win[1], 13 + (4 * (g_vm->champs_nmbr - 1)) +
+		10, 6, "%s %d", "CYCLE_DELTA :", CYCLE_DELTA);
+	mvwprintw(win[1], 13 + (4 * (g_vm->champs_nmbr - 1)) +
+		12, 6, "%s %d", "NBR_LIVE :", NBR_LIVE);
+	mvwprintw(win[1], 13 + (4 *
+		(g_vm->champs_nmbr - 1)) + 14, 6, "%s %d", "MAX_CHECKS :", MAX_CHECKS);
+	print_cl_players(win);
+}
+
+void		print_window(WINDOW *win[2])
+{
+	win[0] = newwin(68, 196, 0, 0);
+	win[1] = newwin(68, 70, 0, 195);
+	nodelay(win[1], TRUE);
+	nodelay(win[0], TRUE);
+	wattron(win[0], COLOR_PAIR(5));
+	wborder(win[0], '*', '*', '*', '*', '*', '*', '*', '*');
+	wattron(win[1], COLOR_PAIR(5));
 	wborder(win[1], '*', '*', '*', '*', '*', '*', '*', '*');
-	wattron(win[0], COLOR_PAIR(6)); 
+	wattron(win[0], COLOR_PAIR(6));
 	wattron(win[1], COLOR_PAIR(7));
 }
 
-void	init()
+void		init(void)
 {
-	initscr(); //инициализация окна 
-	start_color();//для того чтобы цвета запускались
-	init_pair(5, COLOR_BLACK, COLOR_WHITE); // объявляем цвет белый фон, черный шрифт
-	init_pair(6, COLOR_RED, COLOR_BLACK); 
+	initscr();
+	start_color();
+	init_pair(5, COLOR_BLACK, COLOR_WHITE);
+	init_pair(6, COLOR_RED, COLOR_BLACK);
 	init_pair(7, COLOR_GREEN, COLOR_BLACK);
-    init_pair(8, COLOR_BLUE, COLOR_BLACK);
-    init_pair(9, COLOR_CYAN, COLOR_BLACK);
-    init_pair(10, 247, COLOR_BLACK);
-    init_pair(11, COLOR_GREEN, COLOR_WHITE);
-    init_pair(12, COLOR_BLUE, COLOR_WHITE);
-    init_pair(13, COLOR_RED, COLOR_WHITE);
-    init_pair(14, COLOR_CYAN, COLOR_WHITE);
+	init_pair(8, COLOR_BLUE, COLOR_BLACK);
+	init_pair(9, COLOR_CYAN, COLOR_BLACK);
+	init_pair(10, 247, COLOR_BLACK);
+	init_pair(11, COLOR_WHITE, COLOR_GREEN);
+	init_pair(15, 120, COLOR_BLACK);
+	init_pair(16, 75, COLOR_BLACK);
+	init_pair(17, 162, COLOR_BLACK);
+	init_pair(18, 51, COLOR_BLACK);
+	init_pair(12, COLOR_WHITE, COLOR_BLUE);
+	init_pair(13, COLOR_WHITE, COLOR_RED);
+	init_pair(14, COLOR_WHITE, COLOR_CYAN);
 }
 
-void    shit(WINDOW *win[2], int i)
+void		fnkg_shit(WINDOW *win[2], int i)
 {
-    if (g_vm->map[1][i] == 1)
-        wattron(win[0], COLOR_PAIR(11));
-    else if (g_vm->map[1][i] == 2)
-        wattron(win[0], COLOR_PAIR(12));
-    else if (g_vm->map[1][i] == 3)
-        wattron(win[0], COLOR_PAIR(13));
-    else if (g_vm->map[1][i] == 4)
-        wattron(win[0], COLOR_PAIR(14));
-     else
-         wattron(win[0], COLOR_PAIR(5));
-    wrefresh(win[1]);
+		if (g_vm->map[1][i] == 1)
+		wattron(win[0], COLOR_PAIR(15));
+	else if (g_vm->map[1][i] == 2)
+		wattron(win[0], COLOR_PAIR(16));
+	else if (g_vm->map[1][i] == 3)
+		wattron(win[0], COLOR_PAIR(17));
+	else if (g_vm->map[1][i] == 4)
+		wattron(win[0], COLOR_PAIR(18));
+	else
+		wattron(win[0], COLOR_PAIR(5));
+	wrefresh(win[1]);
+
 }
 
-//КОМПИЛИТЬ С ФЛАГОМ -lncurses   !!!!
-int ncurses(int sleep)
+void		shit(WINDOW *win[2], int i)
 {
-	WINDOW *win[2];
-	int y;
-	int x;
-	int z;
-	int i;
+	if (g_vm->map[1][i] == 1)
+		wattron(win[0], COLOR_PAIR(11));
+	else if (g_vm->map[1][i] == 2)
+		wattron(win[0], COLOR_PAIR(12));
+	else if (g_vm->map[1][i] == 3)
+		wattron(win[0], COLOR_PAIR(13));
+	else if (g_vm->map[1][i] == 4)
+		wattron(win[0], COLOR_PAIR(14));
+	else
+		wattron(win[0], COLOR_PAIR(5));
+	wrefresh(win[1]);
+}
+
+int			ncurses(int sleep)
+{
+	WINDOW	*win[2];
+	int		y;
+	int		x;
+	int		z;
+	int		i;
 
 	init();
-	noecho();// потом будет полезно
+	noecho();
 	print_window(win);
 	keypad(win[1], TRUE);
 	mvwprintw(win[1], 2, 4, "%s   ", "** RUNNING **");
 	mvwprintw(win[1], 4, 4, "%s   ", "Cycles/second limit :");
 	mvwprintw(win[1], 7, 4, "%s %d", "Cycle :", g_vm->cycle);
-	mvwprintw(win[1], 9, 4, "%s %d", "Processes :",  g_vm->cars_nmbr);
-    print_players(win);
-    mvwprintw(win[1], 5, 27,  "speed %d         ",  sleep);
+	mvwprintw(win[1], 9, 4, "%s %d", "Processes :", g_vm->cars_nmbr);
+	print_players(win);
+	mvwprintw(win[1], 5, 27, "speed %d         ", sleep);
 	y = 1;
 	x = 0;
-    i = 0;
-    z  = 1;
-	//переместить курсор
-  //  move_cur(win);
-	//wmove(win[0], y,x);
-	//цикл который рисует память
-    sleep = paused(win, sleep);
-    //speed(win);
-	while (++y < 66) {
-        x = 2;
-        while (x < 194) {
-            players_color(win, i);
-            if (g_vm->map[2][i] == 1)
-              shit(win, i);
-            mvwprintw(win[0], y, x, "%.2x", g_vm->map[0][i]);
-            x += 3;
-           // players_color(win, i);
-            i++;
-        }
-        usleep((useconds_t) sleep);
-    }
-	wrefresh(win[0]); //перерисовывать
+	i = 0;
+	z = 1;
+	sleep = paused(win, sleep);
+	while (++y < 66)
+	{
+		x = 2;
+		while (x < 194)
+		{
+			players_color(win, i);
+			if (g_vm->map[2][i] == 1)
+				shit(win, i);
+			if (g_vm->map[3][i] == 1)
+				fnkg_shit(win, i);
+			mvwprintw(win[0], y, x, "%.2x", g_vm->map[0][i]);
+			x += 3;
+			i++;
+		}
+		usleep((useconds_t)sleep);
+	}
+	wrefresh(win[0]);
 	wrefresh(win[1]);
-//    players_color(win, 2, kakoito_int);
-//	while (1)
-//	{}
-  //  usleep((useconds_t) sleep);
 	return (sleep);
 }
-
-//int	main()
-//{
-//	int i;
-//	int j;
-//    int sleep;
-//
-//	i = 0;
-//	j = 0;
-//    sleep = 10000;
-//	while (i < 2147483646)
-//	{
-//		sleep = ncurses(j, sleep);
-//		j++;
-//		i++;
-//	}
-//}
