@@ -21,6 +21,8 @@ int		vm_find_next_pos(t_car *car)
 	c_nmbr = car->comand;
 	i = -1;
 	r = 2;
+	if (c_nmbr == 1 || c_nmbr == 9 || c_nmbr == 12 || c_nmbr == 15)
+		r -= 1;
 	while (++i < 3)
 	{
 		if (car->c_byte[i] == 1)

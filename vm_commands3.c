@@ -100,7 +100,7 @@ void				vm_com_lldi(t_car *car)
 		else
 			i +=2;
 		vm_get_reg_dir(car, 2, i);
-		vm_com_ldi2(car);
+		vm_com_lldi2(car);
 		car->carry = TRUE;
 	}
 	car->car_next_pos = vm_find_next_pos(car);
