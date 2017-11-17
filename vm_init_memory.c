@@ -14,6 +14,9 @@
 
 void			vm_init(void)
 {
+	int i;
+
+	i = 0;
 	ft_bzero(g_vm, sizeof(*g_vm));
 	g_vm->champs = (t_champ **)malloc(sizeof(t_champ *) * (MAX_PLAYERS + 1));
 	while (++i < MAX_PLAYERS + 1)

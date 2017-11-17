@@ -144,7 +144,7 @@ int		vm_usage(char *re)
 
 void	vm_map_write(int c, int p, t_car *car)
 {
-	t_vm *z = g_vm;
+	//t_vm *z = g_vm;
 //	if (c >= 0 && c <= 16777215)
 //	{
 //		g_vm->map0[(p + 2) % MEM_SIZE] = c & 255;
