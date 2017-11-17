@@ -88,6 +88,8 @@ void	vm_get_reg_dir(t_car *car, int index, int i)
 		tmp = g_vm->map[0][(car->car_pos + z + i) % MEM_SIZE];
 		car->com_args[index] = (car->com_args[index] << 8) | tmp;
 	}
+	if (car->c_byte[index] == 3)
+		car->com_args[index] = (short int)car->com_args[index];
 }
 
 /*

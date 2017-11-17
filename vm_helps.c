@@ -115,47 +115,47 @@ int		vm_usage(char *re)
 	return (0);
 }
 
+//void	vm_map_write(int c, int p, t_car *car)
+//{
+//	if (c >= 0 && c <= 255)
+//	{
+//		g_vm->map[0][p % MEM_SIZE] = c & 255;
+//		g_vm->map[1][p % MEM_SIZE] = car->car_reg[1] * -1;
+//		g_vm->map[3][p % MEM_SIZE] = 1;
+//	}
+//	else if (c >= 0 && c <= 65535)
+//	{
+//		g_vm->map[0][p % MEM_SIZE] = (c >> 8) & 255;
+//		g_vm->map[0][(p + 1) % MEM_SIZE] = c & 255;
+//		g_vm->map[1][p % MEM_SIZE] = car->car_reg[1] * -1;
+//		g_vm->map[1][(p + 1) % MEM_SIZE] = car->car_reg[1] * -1;
+//		g_vm->map[3][p % MEM_SIZE] = 1;
+//		g_vm->map[3][(p + 1) % MEM_SIZE] = 1;
+//	}
+//	else if (c >= 0 && c <= 16777215)
+//	{
+//		g_vm->map[0][p % MEM_SIZE] = (c >> 12) & 255;
+//		g_vm->map[0][(p + 1) % MEM_SIZE] = (c >> 8) & 255;
+//		vm_map_write2(c, p, car);
+//	}
+//	else
+//		vm_map_write2(c, p, car);
+//}
+
 void	vm_map_write(int c, int p, t_car *car)
 {
-	if (c >= 0 && c <= 255)
-	{
-		g_vm->map[0][p % MEM_SIZE] = c & 255;
-		g_vm->map[1][p % MEM_SIZE] = car->car_reg[1] * -1;
-		g_vm->map[3][p % MEM_SIZE] = 1;
-	}
-	else if (c >= 0 && c <= 65535)
-	{
-		g_vm->map[0][p % MEM_SIZE] = (c >> 8) & 255;
-		g_vm->map[0][(p + 1) % MEM_SIZE] = c & 255;
-		g_vm->map[1][p % MEM_SIZE] = car->car_reg[1] * -1;
-		g_vm->map[1][(p + 1) % MEM_SIZE] = car->car_reg[1] * -1;
-		g_vm->map[3][p % MEM_SIZE] = 1;
-		g_vm->map[3][(p + 1) % MEM_SIZE] = 1;
-	}
-	else if (c >= 0 && c <= 16777215)
-	{
-		g_vm->map[0][p % MEM_SIZE] = (c >> 12) & 255;
-		g_vm->map[0][(p + 1) % MEM_SIZE] = (c >> 8) & 255;
-		vm_map_write2(c, p, car);
-	}
-	else
-		vm_map_write2(c, p, car);
-}
-
-void	vm_map_write2(int c, int p, t_car *car)
-{
-	if (c >= 0 && c <= 16777215)
-	{
-		g_vm->map[0][(p + 2) % MEM_SIZE] = c & 255;
-		g_vm->map[1][p % MEM_SIZE] = car->car_reg[1] * -1;
-		g_vm->map[1][(p + 1) % MEM_SIZE] = car->car_reg[1] * -1;
-		g_vm->map[1][(p + 2) % MEM_SIZE] = car->car_reg[1] * -1;
-		g_vm->map[3][p % MEM_SIZE] = 1;
-		g_vm->map[3][(p + 1) % MEM_SIZE] = 1;
-		g_vm->map[3][(p + 2) % MEM_SIZE] = 1;
-	}
-	else
-	{
+//	if (c >= 0 && c <= 16777215)
+//	{
+//		g_vm->map[0][(p + 2) % MEM_SIZE] = c & 255;
+//		g_vm->map[1][p % MEM_SIZE] = car->car_reg[1] * -1;
+//		g_vm->map[1][(p + 1) % MEM_SIZE] = car->car_reg[1] * -1;
+//		g_vm->map[1][(p + 2) % MEM_SIZE] = car->car_reg[1] * -1;
+//		g_vm->map[3][p % MEM_SIZE] = 1;
+//		g_vm->map[3][(p + 1) % MEM_SIZE] = 1;
+//		g_vm->map[3][(p + 2) % MEM_SIZE] = 1;
+//	}
+//	else
+//	{
 		g_vm->map[0][p % MEM_SIZE] = (c >> 16) & 255;
 		g_vm->map[0][(p + 1) % MEM_SIZE] = (c >> 12) & 255;
 		g_vm->map[0][(p + 2) % MEM_SIZE] = (c >> 8) & 255;
@@ -168,7 +168,7 @@ void	vm_map_write2(int c, int p, t_car *car)
 		g_vm->map[3][(p + 1) % MEM_SIZE] = 1;
 		g_vm->map[3][(p + 2) % MEM_SIZE] = 1;
 		g_vm->map[3][(p + 3) % MEM_SIZE] = 1;
-	}
+//	}
 }
 
 

@@ -104,7 +104,7 @@ void		vm_com_ld(t_car *car)///////////////////// car->car_next_pos должно 
 		{
 			car->car_reg[tmp] = car->com_args[0];
 			(car->car_reg[tmp] == 0) ? (car->carry = 1) : 0;
-			car->car_next_pos = i + 1;
+			car->car_next_pos = i + 1; //////////////////// добавил +1, чтобы возвращало что надо и мог дальше тестит остальные команды
 		}	
 	}
 	else 
