@@ -141,6 +141,7 @@ int		vm_error(int error)
 ** error == 6 - Champion size != encoded size by Assembler
 ** error == 7 - Wee need a champion > 0! 
 ** error == 8 - Wrong flag 
+** error == 9 - Too many champions
 */
 
 int		vm_usage(char *re)
