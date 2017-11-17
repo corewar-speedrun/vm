@@ -14,6 +14,11 @@
 
 int		main(int i, char **arg)
 {
+	int z;
+	int sleep;
+
+	sleep = 10000;
+	z = 0;
 	if (i < 2)
 		return(vm_usage(NULL));
 	if (!(g_vm = (t_vm *)malloc(sizeof(t_vm))))

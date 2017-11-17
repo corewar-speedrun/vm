@@ -129,11 +129,11 @@ union				u_read
 int					main(int argv, char **argc);
 void				vm_init(void);
 t_champ				*vm_parsing(int fd);
-void				vm_read(int argv, char **argc);
 unsigned char		*vm_read_script(int i, int fd, int flag);
 int					vm_read_magic(int fd, int flag);
 void				vm_read_flag(char *str);
 int					vm_read_size(int i, int fd);
+void				vm_read(int i, char **arg);
 
 /*
 ** VM_init_game_&&_plase_champs
