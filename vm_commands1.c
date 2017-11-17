@@ -12,13 +12,13 @@
 
 #include "corewar.h"
 
-void	vm_com_live(t_car *car)
+void	vm_com_live(t_car *car)/////////////////////
 {
 	int 			champ_namber;
 
 	car->c_byte[0] = 2;
 	vm_get_reg_dir(car, 0, 1);
-	champ_namber = car->car_reg[1] * -1;
+	champ_namber = car->com_args[0] * -1;
 	if (champ_namber > 0 && champ_namber <= g_vm->champs_nmbr)
 	{
 		g_vm->champs[champ_namber]->live += 1;
@@ -94,6 +94,6 @@ void	vm_com_zjmp(t_car *car)
 		return ;
 	car->c_byte[0] = 2;
 	vm_get_reg_dir(car, 0, 1);
-	car->car_next_pos = car->car_pos + car->com_args[0];
+	car->car_next_pos = (short int)car->com_args[0];
 	vm_car_clean(car);
 }

@@ -84,8 +84,8 @@ void		vm_init_car(int pos, int next, int champ_nmbr, t_car *car)
 	{
 		mem->live = car->live;
 		mem->carry = car->carry;
-		next = -1;
-		while (++next < (REG_NUMBER + 2))
+		next = 0;
+		while (++next <= (REG_NUMBER + 1))
 			mem->car_reg[next] = car->car_reg[next];
 	} 
 	mem->next_car = (g_vm->cars == NULL) ? NULL : g_vm->cars;

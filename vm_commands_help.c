@@ -21,6 +21,8 @@ int		vm_find_next_pos(t_car *car)
 	c_nmbr = car->comand;
 	i = -1;
 	r = 2;
+	if (c_nmbr == 1 || c_nmbr == 9 || c_nmbr == 12 || c_nmbr == 15)
+		r -= 1;
 	while (++i < 3)
 	{
 		if (car->c_byte[i] == 1)
@@ -28,8 +30,8 @@ int		vm_find_next_pos(t_car *car)
 		else if (car->c_byte[i] == 2 && ((c_nmbr >= 1 && c_nmbr <= 8) ||
 			c_nmbr == 13 || c_nmbr == 16))
 			r += 4;
-		else if (car->c_byte[i] == 2 && ((c_nmbr >= 9 && c_nmbr <= 12) ||
-			c_nmbr == 14 || c_nmbr == 15))
+		else if (car->c_byte[i] == 2 && ((c_nmbr >= 9 && c_nmbr < 12) ||
+			c_nmbr == 14))
 			r += 2;
 		else if (car->c_byte[i] == 3)
 			r += 2;
@@ -88,6 +90,8 @@ void	vm_get_reg_dir(t_car *car, int index, int i)
 		tmp = g_vm->map[0][(car->car_pos + z + i) % MEM_SIZE];
 		car->com_args[index] = (car->com_args[index] << 8) | tmp;
 	}
+	if (car->c_byte[index] == 3)
+		car->com_args[index] = (short int)car->com_args[index];
 }
 
 /*

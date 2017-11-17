@@ -14,6 +14,7 @@
 
 void	print_maps(void) ////////////////////////////////\\\\\\\\\\\\\\\\\\\\\ del 
 {
+<<<<<<< HEAD
 	int i = -1;
 	int z = 1;
 	while (++i < MEM_SIZE)
@@ -51,6 +52,60 @@ void	print_maps(void) ////////////////////////////////\\\\\\\\\\\\\\\\\\\\\ del
 		z++;
 	}
 	printf("\n");
+=======
+//	int i = -1;
+//	int z = 1;
+	// while (++i < MEM_SIZE)
+	// {
+	// 	printf("|%x| ", g_vm->map[0][i]);
+	// 	if (z % 4 == 0)
+	// 		printf("  ");
+	// 	if (z % 32 == 0)
+	// 		printf("\n");
+	// 	z++;
+	// }
+	// printf("\n");
+	// i = -1;
+	// z = 1;
+	// printf("\n");
+	// printf("champs\n");
+	// while (++i < MEM_SIZE)
+	// {
+	// 	printf("|%x| ", g_vm->map[1][i]);
+	// 	if (z % 4 == 0)
+	// 		printf("  ");
+	// 	if (z % 32 == 0)
+	// 		printf("\n");
+	// 	z++;
+	// }
+	// printf("\n");
+	// printf("caretki\n");
+	// i = -1;
+	// z = 1;
+	// while (++i < MEM_SIZE)
+	// {
+	// 	printf("|%x| ", g_vm->map[2][i]);
+	// 	if (z % 4 == 0)
+	// 		printf("  ");
+	// 	if (z % 32 == 0)
+	// 		printf("\n");
+	// 	z++;
+	// }
+//	printf("\n");
+//	printf("last modifay\n");
+//	i = -1;
+//	z = 1;
+//	while (++i < MEM_SIZE)
+//	{
+//		printf("|%x| ", g_vm->map[3][i]);
+//		if (z % 4 == 0)
+//			printf("  ");
+//		if (z % 32 == 0)
+//			printf("\n");
+//		z++;
+//	}
+//	printf("\n");
+>>>>>>> 28b809d860176eb4a250363e4c935ea050e5e355
 }
 
 int		vm_error(int error)
@@ -100,28 +155,60 @@ int		vm_usage(char *re)
 	return (0);
 }
 
-void	vm_map_vrite(int c, int p)
+//void	vm_map_write(int c, int p, t_car *car)
+//{
+//	if (c >= 0 && c <= 255)
+//	{
+//		g_vm->map[0][p % MEM_SIZE] = c & 255;
+//		g_vm->map[1][p % MEM_SIZE] = car->car_reg[1] * -1;
+//		g_vm->map[3][p % MEM_SIZE] = 1;
+//	}
+//	else if (c >= 0 && c <= 65535)
+//	{
+//		g_vm->map[0][p % MEM_SIZE] = (c >> 8) & 255;
+//		g_vm->map[0][(p + 1) % MEM_SIZE] = c & 255;
+//		g_vm->map[1][p % MEM_SIZE] = car->car_reg[1] * -1;
+//		g_vm->map[1][(p + 1) % MEM_SIZE] = car->car_reg[1] * -1;
+//		g_vm->map[3][p % MEM_SIZE] = 1;
+//		g_vm->map[3][(p + 1) % MEM_SIZE] = 1;
+//	}
+//	else if (c >= 0 && c <= 16777215)
+//	{
+//		g_vm->map[0][p % MEM_SIZE] = (c >> 12) & 255;
+//		g_vm->map[0][(p + 1) % MEM_SIZE] = (c >> 8) & 255;
+//		vm_map_write2(c, p, car);
+//	}
+//	else
+//		vm_map_write2(c, p, car);
+//}
+
+void	vm_map_write(int c, int p, t_car *car)
 {
-	if (c <= 255)
-		g_vm->map[0][p % MEM_SIZE] = c & 255;
-	else if (c <= 65535)
-	{
-		g_vm->map[0][p % MEM_SIZE] = (c >> 8) & 255;
-		g_vm->map[0][(p + 1) % MEM_SIZE] = c & 255;
-	}
-	else if (c <= 16777215)
-	{
-		g_vm->map[0][p % MEM_SIZE] = (c >> 12) & 255;
-		g_vm->map[0][(p + 1) % MEM_SIZE] = (c >> 8) & 255;
-		g_vm->map[0][(p + 2) % MEM_SIZE] = c & 255;
-	}
-	else
-	{
+//	if (c >= 0 && c <= 16777215)
+//	{
+//		g_vm->map[0][(p + 2) % MEM_SIZE] = c & 255;
+//		g_vm->map[1][p % MEM_SIZE] = car->car_reg[1] * -1;
+//		g_vm->map[1][(p + 1) % MEM_SIZE] = car->car_reg[1] * -1;
+//		g_vm->map[1][(p + 2) % MEM_SIZE] = car->car_reg[1] * -1;
+//		g_vm->map[3][p % MEM_SIZE] = 1;
+//		g_vm->map[3][(p + 1) % MEM_SIZE] = 1;
+//		g_vm->map[3][(p + 2) % MEM_SIZE] = 1;
+//	}
+//	else
+//	{
 		g_vm->map[0][p % MEM_SIZE] = (c >> 16) & 255;
 		g_vm->map[0][(p + 1) % MEM_SIZE] = (c >> 12) & 255;
 		g_vm->map[0][(p + 2) % MEM_SIZE] = (c >> 8) & 255;
 		g_vm->map[0][(p + 3) % MEM_SIZE] = c & 255;
-	}
+		g_vm->map[1][p % MEM_SIZE] = car->car_reg[1] * -1;
+		g_vm->map[1][(p + 1) % MEM_SIZE] = car->car_reg[1] * -1;
+		g_vm->map[1][(p + 2) % MEM_SIZE] = car->car_reg[1] * -1;
+		g_vm->map[1][(p + 3) % MEM_SIZE] = car->car_reg[1] * -1;
+		g_vm->map[3][p % MEM_SIZE] = 1;
+		g_vm->map[3][(p + 1) % MEM_SIZE] = 1;
+		g_vm->map[3][(p + 2) % MEM_SIZE] = 1;
+		g_vm->map[3][(p + 3) % MEM_SIZE] = 1;
+//	}
 }
 
 

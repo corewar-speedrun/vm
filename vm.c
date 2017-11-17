@@ -14,12 +14,15 @@
 
 int		main(int i, char **arg)
 {
+<<<<<<< HEAD
 	t_vm *tmp = g_vm;
 	int z;
 	int sleep;
 
 	sleep = 10000;
 	z = 0;
+=======
+>>>>>>> 28b809d860176eb4a250363e4c935ea050e5e355
 	if (i < 2)
 		return(vm_usage(NULL));
 	if (!(g_vm = (t_vm *)malloc(sizeof(t_vm))))
