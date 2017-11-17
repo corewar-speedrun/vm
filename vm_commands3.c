@@ -73,7 +73,7 @@ void				vm_com_ldi2(t_car *car)
 	tmp2 = 0;
 	tmp = (car->com_args[0] + car->com_args[1]) % IDX_MOD + car->car_pos;
 	while (++tmp3 < 4)
-		tmp2 = (tmp2 << 8) | g_vm->map[0][(tmp + tmp3) % MEM_SIZE];
+		tmp2 = (tmp2 << 8) | g_vm->map0[(tmp + tmp3) % MEM_SIZE];
 	if (car->com_args[2] > 0 && car->com_args[2] < 17)
 		car->car_reg[car->com_args[2]] = tmp2;
 }
@@ -117,7 +117,7 @@ void				vm_com_lldi2(t_car *car)
 	tmp2 = 0;
 	tmp = car->com_args[0] + car->com_args[1] + car->car_pos;
 	while (++tmp3 < 4)
-		tmp2 = (tmp2 << 8) | g_vm->map[0][(tmp + tmp3) % MEM_SIZE];
+		tmp2 = (tmp2 << 8) | g_vm->map0[(tmp + tmp3) % MEM_SIZE];
 	if (car->com_args[2] > 0 && car->com_args[2] < 17)
 		car->car_reg[car->com_args[2]] = tmp2;
 }

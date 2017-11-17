@@ -14,21 +14,19 @@
 
 void			vm_init(void)
 {
-	int 			i;
-
-	i = -1;
 	ft_bzero(g_vm, sizeof(*g_vm));
 	g_vm->champs = (t_champ **)malloc(sizeof(t_champ *) * (MAX_PLAYERS + 1));
 	while (++i < MAX_PLAYERS + 1)
 		g_vm->champs[i] = NULL;
 	g_vm->error = -1;
-	g_vm->map = (unsigned char **)malloc(sizeof(unsigned char *) * 4);
-	i = -1;
-	while (++i < 4)
-	{
-		g_vm->map[i] = (unsigned char *)malloc(sizeof(unsigned char) * MEM_SIZE);
-		ft_bzero(g_vm->map[i], (sizeof(unsigned char) * MEM_SIZE));
-	}
+	g_vm->map0 = (unsigned char *)malloc(sizeof(unsigned char) * MEM_SIZE);
+	ft_bzero(g_vm->map0, (sizeof(unsigned char) * MEM_SIZE));
+	g_vm->map1 = (unsigned char *)malloc(sizeof(unsigned char) * MEM_SIZE);
+	ft_bzero(g_vm->map1, (sizeof(unsigned char) * MEM_SIZE));
+	g_vm->map2 = (unsigned char *)malloc(sizeof(unsigned char) * MEM_SIZE);
+	ft_bzero(g_vm->map2, (sizeof(unsigned char) * MEM_SIZE));
+	g_vm->map3 = (unsigned char *)malloc(sizeof(unsigned char) * MEM_SIZE);
+	ft_bzero(g_vm->map3, (sizeof(unsigned char) * MEM_SIZE));
 	g_vm->damp = -1;
 	g_vm->game = 1;
 	g_vm->to_die = CYCLE_TO_DIE;
@@ -50,13 +48,13 @@ void		vm_init_champs(void)
 	while (++q <= g_vm->champs_nmbr)
 	{
 		w = (MEM_SIZE / g_vm->champs_nmbr) * (q - 1);
-		g_vm->map[2][w] = 1;
+		g_vm->map2[w] = 1;
 		vm_init_car(w, 0, g_vm->champs[q]->nmbr, NULL);
 		i = -1;
 		while (++i < g_vm->champs[q]->size)
 		{
-			g_vm->map[0][w] = g_vm->champs[q]->src[i];
-			g_vm->map[1][w++] = q;
+			g_vm->map0[w] = g_vm->champs[q]->src[i];
+			g_vm->map1[w++] = q;
 		}
 	}
 }

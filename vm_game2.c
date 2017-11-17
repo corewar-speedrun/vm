@@ -16,7 +16,7 @@ void	vm_read_comand(t_car *car)
 {
 	unsigned char tmp;
 
-	tmp = g_vm->map[0][car->car_pos];
+	tmp = g_vm->map0[car->car_pos];
 	if (tmp > 0 && tmp < 17)
 	{
 		car->comand = (int)tmp;

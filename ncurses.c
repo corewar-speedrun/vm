@@ -48,13 +48,13 @@ int			paused(WINDOW *win[2], int sleep)
 
 void		players_color(WINDOW *win[2], int i)
 {
-	if (g_vm->map[1][i] == 1)
+	if (g_vm->map1[i] == 1)
 		wattron(win[0], COLOR_PAIR(7));
-	else if (g_vm->map[1][i] == 2)
+	else if (g_vm->map1[i] == 2)
 		wattron(win[0], COLOR_PAIR(8));
-	else if (g_vm->map[1][i] == 3)
+	else if (g_vm->map1[i] == 3)
 		wattron(win[0], COLOR_PAIR(6));
-	else if (g_vm->map[1][i] == 4)
+	else if (g_vm->map1[i] == 4)
 		wattron(win[0], COLOR_PAIR(9));
 	else
 		wattron(win[0], COLOR_PAIR(10));
@@ -162,13 +162,13 @@ void		init(void)
 
 void		fnkg_shit(WINDOW *win[2], int i)
 {
-		if (g_vm->map[1][i] == 1)
+		if (g_vm->map1[i] == 1)
 		wattron(win[0], COLOR_PAIR(15));
-	else if (g_vm->map[1][i] == 2)
+	else if (g_vm->map1[i] == 2)
 		wattron(win[0], COLOR_PAIR(16));
-	else if (g_vm->map[1][i] == 3)
+	else if (g_vm->map1[i] == 3)
 		wattron(win[0], COLOR_PAIR(17));
-	else if (g_vm->map[1][i] == 4)
+	else if (g_vm->map1[i] == 4)
 		wattron(win[0], COLOR_PAIR(18));
 	else
 		wattron(win[0], COLOR_PAIR(5));
@@ -179,17 +179,17 @@ void		fnkg_shit(WINDOW *win[2], int i)
 void		shit(WINDOW *win[2], int i)
 {
 	attron(A_BOLD);
-	if (g_vm->map[1][i] == 1)
+	if (g_vm->map1[i] == 1)
 	{
 		attron(A_BOLD);
 		wattron(win[0], COLOR_PAIR(11));
 		attron(A_BOLD);
 	}
-	else if (g_vm->map[1][i] == 2)
+	else if (g_vm->map1[i] == 2)
 		wattron(win[0], COLOR_PAIR(12));
-	else if (g_vm->map[1][i] == 3)
+	else if (g_vm->map1[i] == 3)
 		wattron(win[0], COLOR_PAIR(13));
-	else if (g_vm->map[1][i] == 4)
+	else if (g_vm->map1[i] == 4)
 		wattron(win[0], COLOR_PAIR(14));
 	else
 		wattron(win[0], COLOR_PAIR(5));
@@ -225,11 +225,11 @@ int			ncurses(int sleep)
 		while (x < 194)
 		{
 			players_color(win, i);
-			if (g_vm->map[2][i] == 1)
+			if (g_vm->map2[i] == 1)
 				shit(win, i);
-			if (g_vm->map[3][i] == 1)
+			if (g_vm->map3[i] == 1)
 				fnkg_shit(win, i);
-			mvwprintw(win[0], y, x, "%.2x", g_vm->map[0][i]);
+			mvwprintw(win[0], y, x, "%.2x", g_vm->map0[i]);
 			x += 3;
 			i++;
 		}
