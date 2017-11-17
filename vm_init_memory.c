@@ -14,6 +14,7 @@
 
 void			vm_init(void)
 {
+	t_vm *tmp = g_vm;
 	int 			i;
 
 	i = -1;

@@ -1,0 +1,178 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXFileReference section */
+		1BE5D6CA1FBE25D30011641F /* .DS_Store */ = {isa = PBXFileReference; lastKnownFileType = file; path = .DS_Store; sourceTree = "<group>"; };
+		1BE5D6CB1FBE25D30011641F /* .git */ = {isa = PBXFileReference; lastKnownFileType = folder; path = .git; sourceTree = "<group>"; };
+		1BE5D6CC1FBE25D30011641F /* .idea */ = {isa = PBXFileReference; lastKnownFileType = folder; path = .idea; sourceTree = "<group>"; };
+		1BE5D6CD1FBE25D30011641F /* cmake-build-debug */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "cmake-build-debug"; sourceTree = "<group>"; };
+		1BE5D6CE1FBE25D30011641F /* CMakeLists.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = CMakeLists.txt; sourceTree = "<group>"; };
+		1BE5D6CF1FBE25D30011641F /* corewar.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = corewar.h; sourceTree = "<group>"; };
+		1BE5D6D01FBE25D30011641F /* jumper.cor */ = {isa = PBXFileReference; lastKnownFileType = file; path = jumper.cor; sourceTree = "<group>"; };
+		1BE5D6D11FBE25D30011641F /* libft */ = {isa = PBXFileReference; lastKnownFileType = folder; path = libft; sourceTree = "<group>"; };
+		1BE5D6D21FBE25D30011641F /* Makefile */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
+		1BE5D6D31FBE25D30011641F /* ncurses.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = ncurses.c; sourceTree = "<group>"; };
+		1BE5D6D41FBE25D30011641F /* op.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = op.h; sourceTree = "<group>"; };
+		1BE5D6D61FBE25D30011641F /* vm_commands1.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = vm_commands1.c; sourceTree = "<group>"; };
+		1BE5D6D71FBE25D30011641F /* vm_commands2.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = vm_commands2.c; sourceTree = "<group>"; };
+		1BE5D6D81FBE25D30011641F /* vm_commands3.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = vm_commands3.c; sourceTree = "<group>"; };
+		1BE5D6D91FBE25D30011641F /* vm_commands4.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = vm_commands4.c; sourceTree = "<group>"; };
+		1BE5D6DA1FBE25D30011641F /* vm_commands_help.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = vm_commands_help.c; sourceTree = "<group>"; };
+		1BE5D6DB1FBE25D30011641F /* vm_commands_help2.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = vm_commands_help2.c; sourceTree = "<group>"; };
+		1BE5D6DC1FBE25D30011641F /* vm_game1.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = vm_game1.c; sourceTree = "<group>"; };
+		1BE5D6DD1FBE25D30011641F /* vm_game2.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = vm_game2.c; sourceTree = "<group>"; };
+		1BE5D6DE1FBE25D30011641F /* vm_helps.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = vm_helps.c; sourceTree = "<group>"; };
+		1BE5D6DF1FBE25D30011641F /* vm_init_memory.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = vm_init_memory.c; sourceTree = "<group>"; };
+		1BE5D6E01FBE25D30011641F /* vm_read.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = vm_read.c; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXGroup section */
+		1BE5D6C41FBE25D30011641F = {
+			isa = PBXGroup;
+			children = (
+				1BE5D6CA1FBE25D30011641F /* .DS_Store */,
+				1BE5D6CB1FBE25D30011641F /* .git */,
+				1BE5D6CC1FBE25D30011641F /* .idea */,
+				1BE5D6CD1FBE25D30011641F /* cmake-build-debug */,
+				1BE5D6CE1FBE25D30011641F /* CMakeLists.txt */,
+				1BE5D6CF1FBE25D30011641F /* corewar.h */,
+				1BE5D6D01FBE25D30011641F /* jumper.cor */,
+				1BE5D6D11FBE25D30011641F /* libft */,
+				1BE5D6D21FBE25D30011641F /* Makefile */,
+				1BE5D6D31FBE25D30011641F /* ncurses.c */,
+				1BE5D6D41FBE25D30011641F /* op.h */,
+				1BE5D6D61FBE25D30011641F /* vm_commands1.c */,
+				1BE5D6D71FBE25D30011641F /* vm_commands2.c */,
+				1BE5D6D81FBE25D30011641F /* vm_commands3.c */,
+				1BE5D6D91FBE25D30011641F /* vm_commands4.c */,
+				1BE5D6DA1FBE25D30011641F /* vm_commands_help.c */,
+				1BE5D6DB1FBE25D30011641F /* vm_commands_help2.c */,
+				1BE5D6DC1FBE25D30011641F /* vm_game1.c */,
+				1BE5D6DD1FBE25D30011641F /* vm_game2.c */,
+				1BE5D6DE1FBE25D30011641F /* vm_helps.c */,
+				1BE5D6DF1FBE25D30011641F /* vm_init_memory.c */,
+				1BE5D6E01FBE25D30011641F /* vm_read.c */,
+			);
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXLegacyTarget section */
+		1BE5D6C91FBE25D30011641F /* corewar */ = {
+			isa = PBXLegacyTarget;
+			buildArgumentsString = "$(ACTION)";
+			buildConfigurationList = 1BE5D6E11FBE25D30011641F /* Build configuration list for PBXLegacyTarget "corewar" */;
+			buildPhases = (
+			);
+			buildToolPath = /usr/bin/make;
+			buildWorkingDirectory = /Users/nsharova/corewar;
+			dependencies = (
+			);
+			name = corewar;
+			passBuildSettingsInEnvironment = 1;
+			productName = corewar;
+		};
+/* End PBXLegacyTarget section */
+
+/* Begin PBXProject section */
+		1BE5D6C51FBE25D30011641F /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+			};
+			buildConfigurationList = 1BE5D6C81FBE25D30011641F /* Build configuration list for PBXProject "corewar" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 1BE5D6C41FBE25D30011641F;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				1BE5D6C91FBE25D30011641F /* corewar */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin XCBuildConfiguration section */
+		1BE5D6C61FBE25D30011641F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				COPY_PHASE_STRIP = NO;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx10.6;
+			};
+			name = Debug;
+		};
+		1BE5D6C71FBE25D30011641F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				COPY_PHASE_STRIP = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				SDKROOT = macosx10.6;
+			};
+			name = Release;
+		};
+		1BE5D6E21FBE25D30011641F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+				DEBUGGING_SYMBOLS = YES;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				OTHER_CFLAGS = "";
+				OTHER_LDFLAGS = "";
+				PRODUCT_NAME = corewar;
+			};
+			name = Debug;
+		};
+		1BE5D6E31FBE25D30011641F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				OTHER_CFLAGS = "";
+				OTHER_LDFLAGS = "";
+				PRODUCT_NAME = corewar;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		1BE5D6C81FBE25D30011641F /* Build configuration list for PBXProject "corewar" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1BE5D6C61FBE25D30011641F /* Debug */,
+				1BE5D6C71FBE25D30011641F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		1BE5D6E11FBE25D30011641F /* Build configuration list for PBXLegacyTarget "corewar" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1BE5D6E21FBE25D30011641F /* Debug */,
+				1BE5D6E31FBE25D30011641F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 1BE5D6C51FBE25D30011641F /* Project object */;
+}

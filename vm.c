@@ -14,6 +14,7 @@
 
 int		main(int i, char **arg)
 {
+	t_vm *tmp = g_vm;
 	int z;
 	int sleep;
 
