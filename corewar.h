@@ -76,7 +76,10 @@ typedef struct		s_vm
 	int				champs_nmbr;
 	int				cars_nmbr;
 	t_champ			**champs;
-	unsigned char	**map;
+	unsigned char	*map0;
+	unsigned char	*map1;
+	unsigned char	*map2;
+	unsigned char	*map3;
 	t_car			*cars;
 	int				damp;
 	int				cycle;

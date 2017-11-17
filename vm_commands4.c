@@ -103,7 +103,7 @@ void		vm_com_ld(t_car *car)///////////////////// car->car_next_pos должно 
 		if (tmp > 0 && tmp <= 16)
 		{
 			car->car_reg[tmp] = car->com_args[0];
-			(car->car_reg[tmp] == 0) ? (car->carry = 1) : 0;
+			car->carry = 1;
 			car->car_next_pos = i + 1; //////////////////// добавил +1, чтобы возвращало что надо и мог дальше тестит остальные команды
 		}	
 	}
@@ -129,7 +129,7 @@ void		vm_com_lld(t_car *car)
 		if (tmp > 0 && tmp <= 16)
 		{
 			car->car_reg[tmp] = car->com_args[0];
-			(car->car_reg[tmp] == 0) ? (car->carry = 1) : 0;
+			car->carry = 1;
 			car->car_next_pos = i;
 		}	
 	}

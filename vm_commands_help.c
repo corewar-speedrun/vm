@@ -51,15 +51,15 @@ void	vm_car_clean(t_car *car)
 	}
 	car->count = 0;
 	car->comand = 0;
-	if (g_vm->map[2][car->car_pos] == 1)
-		g_vm->map[2][car->car_pos] = 0;
+	if (g_vm->map2[car->car_pos] == 1)
+		g_vm->map2[car->car_pos] = 0;
 }
 
 void		vm_parse_code_byte(t_car *car)
 {
 	unsigned char code_byte;
 
-	code_byte = g_vm->map[0][(car->car_pos + 1) % MEM_SIZE];
+	code_byte = g_vm->map0[(car->car_pos + 1) % MEM_SIZE];
 	car->c_byte[0] = code_byte >> 6;
 	car->c_byte[1] = (code_byte >> 4) & 3;
 	car->c_byte[2] = (code_byte >> 2) & 3;
@@ -87,10 +87,10 @@ void	vm_get_reg_dir(t_car *car, int index, int i)
 	z = -1;
 	while (++z < size)
 	{
-		tmp = g_vm->map[0][(car->car_pos + z + i) % MEM_SIZE];
+		tmp = g_vm->map0[(car->car_pos + z + i) % MEM_SIZE];
 		car->com_args[index] = (car->com_args[index] << 8) | tmp;
 	}
-	if (car->c_byte[index] == 3)
+	if (car->c_byte[index] == 3 || car->c_byte[index] == 2)
 		car->com_args[index] = (short int)car->com_args[index];
 }
 
@@ -111,7 +111,7 @@ void	vm_get_ind(t_car *car, int index, int i)
 	ind = 0;
 	while (++z < 2)
 	{
-		tmp = g_vm->map[0][(car->car_pos + z + i) % MEM_SIZE];
+		tmp = g_vm->map0[(car->car_pos + z + i) % MEM_SIZE];
 		ind = (ind << 8) | tmp;
 	}
 	z = -1;
@@ -120,7 +120,7 @@ void	vm_get_ind(t_car *car, int index, int i)
 	tmp = 0;
 	while (++z < 4)
 	{
-		tmp = g_vm->map[0][(car->car_pos + ind + z) % MEM_SIZE];
+		tmp = g_vm->map0[(car->car_pos + ind + z) % MEM_SIZE];
 		car->com_args[index] = (car->com_args[index] << 8) | tmp;
 	}
 }
