@@ -14,95 +14,95 @@
 
 void	print_maps(void) ////////////////////////////////\\\\\\\\\\\\\\\\\\\\\ del 
 {
-	// int i = -1;
-	// int z = 1;
-	// while (++i < MEM_SIZE)
-	// {
-	// 	printf("|%x| ", g_vm->map[0][i]);
-	// 	if (z % 4 == 0)
-	// 		printf("  ");
-	// 	if (z % 32 == 0)
-	// 		printf("\n");
-	// 	z++;
-	// }
-	// printf("\n");
-	// i = -1;
-	// z = 1;
-	// printf("champs\n");
-	// while (++i < MEM_SIZE)
-	// {
-	// 	printf("|%x| ", g_vm->map[1][i]);
-	// 	if (z % 4 == 0)
-	// 		printf("  ");
-	// 	if (z % 32 == 0)
-	// 		printf("\n");
-	// 	z++;
-	// }
-	// printf("caretki\n");
-	// i = -1;
-	// z = 1;
-	// while (++i < MEM_SIZE)
-	// {
-	// 	printf("|%x| ", g_vm->map[2][i]);
-	// 	if (z % 4 == 0)
-	// 		printf("  ");
-	// 	if (z % 32 == 0)
-	// 		printf("\n");
-	// 	z++;
-	// }
-	// printf("\n");
-//	int i = -1;
-//	int z = 1;
-	// while (++i < MEM_SIZE)
-	// {
-	// 	printf("|%x| ", g_vm->map[0][i]);
-	// 	if (z % 4 == 0)
-	// 		printf("  ");
-	// 	if (z % 32 == 0)
-	// 		printf("\n");
-	// 	z++;
-	// }
-	// printf("\n");
-	// i = -1;
-	// z = 1;
-	// printf("\n");
-	// printf("champs\n");
-	// while (++i < MEM_SIZE)
-	// {
-	// 	printf("|%x| ", g_vm->map[1][i]);
-	// 	if (z % 4 == 0)
-	// 		printf("  ");
-	// 	if (z % 32 == 0)
-	// 		printf("\n");
-	// 	z++;
-	// }
-	// printf("\n");
-	// printf("caretki\n");
-	// i = -1;
-	// z = 1;
-	// while (++i < MEM_SIZE)
-	// {
-	// 	printf("|%x| ", g_vm->map[2][i]);
-	// 	if (z % 4 == 0)
-	// 		printf("  ");
-	// 	if (z % 32 == 0)
-	// 		printf("\n");
-	// 	z++;
-	// }
-//	printf("\n");
-//	printf("last modifay\n");
-//	i = -1;
-//	z = 1;
-//	while (++i < MEM_SIZE)
-//	{
-//		printf("|%x| ", g_vm->map[3][i]);
-//		if (z % 4 == 0)
-//			printf("  ");
-//		if (z % 32 == 0)
-//			printf("\n");
-//		z++;
-//	}
-//	printf("\n");
+	int i = -1;
+	int z = 1;
+	while (++i < MEM_SIZE)
+	{
+		printf("|%x| ", g_vm->map[0][i]);
+		if (z % 4 == 0)
+			printf("  ");
+		if (z % 32 == 0)
+			printf("\n");
+		z++;
+	}
+	printf("\n");
+	i = -1;
+	z = 1;
+	printf("champs\n");
+	while (++i < MEM_SIZE)
+	{
+		printf("|%x| ", g_vm->map[1][i]);
+		if (z % 4 == 0)
+			printf("  ");
+		if (z % 32 == 0)
+			printf("\n");
+		z++;
+	}
+	printf("caretki\n");
+	i = -1;
+	z = 1;
+	while (++i < MEM_SIZE)
+	{
+		printf("|%x| ", g_vm->map[2][i]);
+		if (z % 4 == 0)
+			printf("  ");
+		if (z % 32 == 0)
+			printf("\n");
+		z++;
+	}
+	printf("\n");
+		i = -1;
+		z = 1;
+	while (++i < MEM_SIZE)
+	{
+		printf("|%x| ", g_vm->map[0][i]);
+		if (z % 4 == 0)
+			printf("  ");
+		if (z % 32 == 0)
+			printf("\n");
+		z++;
+	}
+	printf("\n");
+	i = -1;
+	z = 1;
+	printf("\n");
+	printf("champs\n");
+	while (++i < MEM_SIZE)
+	{
+		printf("|%x| ", g_vm->map[1][i]);
+		if (z % 4 == 0)
+			printf("  ");
+		if (z % 32 == 0)
+			printf("\n");
+		z++;
+	}
+	printf("\n");
+	printf("caretki\n");
+	i = -1;
+	z = 1;
+	while (++i < MEM_SIZE)
+	{
+		printf("|%x| ", g_vm->map[2][i]);
+		if (z % 4 == 0)
+			printf("  ");
+		if (z % 32 == 0)
+			printf("\n");
+		z++;
+	}
+	printf("\n");
+	printf("last modifay\n");
+	i = -1;
+	z = 1;
+	while (++i < MEM_SIZE)
+	{
+		printf("|%x| ", g_vm->map[3][i]);
+		if (z % 4 == 0)
+			printf("  ");
+		if (z % 32 == 0)
+			printf("\n");
+		z++;
+	}
+	printf("\n");
 }
 
 int		vm_error(int error)
@@ -206,6 +206,7 @@ void	vm_map_write(int c, int p, t_car *car)
 		g_vm->map[3][(p + 1) % MEM_SIZE] = 1;
 		g_vm->map[3][(p + 2) % MEM_SIZE] = 1;
 		g_vm->map[3][(p + 3) % MEM_SIZE] = 1;
+		print_maps();
 //	}
 }
 
