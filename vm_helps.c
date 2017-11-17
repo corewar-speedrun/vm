@@ -14,7 +14,6 @@
 
 void	print_maps(void) ////////////////////////////////\\\\\\\\\\\\\\\\\\\\\ del 
 {
-<<<<<<< HEAD
 	int i = -1;
 	int z = 1;
 	while (++i < MEM_SIZE)
@@ -52,7 +51,6 @@ void	print_maps(void) ////////////////////////////////\\\\\\\\\\\\\\\\\\\\\ del
 		z++;
 	}
 	printf("\n");
-=======
 //	int i = -1;
 //	int z = 1;
 	// while (++i < MEM_SIZE)
@@ -105,7 +103,6 @@ void	print_maps(void) ////////////////////////////////\\\\\\\\\\\\\\\\\\\\\ del
 //		z++;
 //	}
 //	printf("\n");
->>>>>>> 28b809d860176eb4a250363e4c935ea050e5e355
 }
 
 int		vm_error(int error)
