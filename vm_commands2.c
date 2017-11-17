@@ -12,7 +12,7 @@
 
 #include "corewar.h"
 
-void	vm_com_fork(t_car *car)
+void	vm_com_fork(t_car *car)//////////////////////////////////////////////
 {
 	car->c_byte[0] = 2;
 	vm_get_reg_dir(car, 0, 1);
@@ -22,7 +22,7 @@ void	vm_com_fork(t_car *car)
 	vm_car_clean(car);
 }
 
-void	vm_com_ifork(t_car *car)
+void	vm_com_ifork(t_car *car)/////////////////////////////////////////////
 {
 	car->c_byte[0] = 2;
 	vm_get_reg_dir(car, 0, 1);
@@ -31,7 +31,7 @@ void	vm_com_ifork(t_car *car)
 	vm_car_clean(car);
 }
 
-void	vm_com_st(t_car *car)
+void	vm_com_st(t_car *car)///////////////////////////////////////////////
 {
 	int tmp;
 
@@ -40,10 +40,7 @@ void	vm_com_st(t_car *car)
 	if (car->c_byte[0] == 1 && (car->c_byte[1] == 1 || car->c_byte[1] == 3))
 	{
 		vm_get_reg_dir(car, 0, 2);
-		if (car->c_byte[1] == 1)
-			vm_get_reg_dir(car, 1, 3);
-		else
-			vm_get_ind(car, 1, 3);
+		vm_get_reg_dir(car, 1, 3);
 		if (car->com_args[0] > 0 && car->com_args[0] < 17)
 			tmp = car->car_reg[car->com_args[0]];
 		if (car->c_byte[1] == 1 &&

@@ -14,8 +14,8 @@
 
 void	print_maps(void) ////////////////////////////////\\\\\\\\\\\\\\\\\\\\\ del 
 {
-	int i = -1;
-	int z = 1;
+//	int i = -1;
+//	int z = 1;
 	// while (++i < MEM_SIZE)
 	// {
 	// 	printf("|%x| ", g_vm->map[0][i]);
@@ -52,20 +52,20 @@ void	print_maps(void) ////////////////////////////////\\\\\\\\\\\\\\\\\\\\\ del
 	// 		printf("\n");
 	// 	z++;
 	// }
-	printf("\n");
-	printf("last modifay\n");
-	i = -1;
-	z = 1;
-	while (++i < MEM_SIZE)
-	{
-		printf("|%x| ", g_vm->map[3][i]);
-		if (z % 4 == 0)
-			printf("  ");
-		if (z % 32 == 0)
-			printf("\n");
-		z++;
-	}
-	printf("\n");
+//	printf("\n");
+//	printf("last modifay\n");
+//	i = -1;
+//	z = 1;
+//	while (++i < MEM_SIZE)
+//	{
+//		printf("|%x| ", g_vm->map[3][i]);
+//		if (z % 4 == 0)
+//			printf("  ");
+//		if (z % 32 == 0)
+//			printf("\n");
+//		z++;
+//	}
+//	printf("\n");
 }
 
 int		vm_error(int error)
@@ -117,15 +117,13 @@ int		vm_usage(char *re)
 
 void	vm_map_write(int c, int p, t_car *car)
 {
-	if (c < 0)
-		c = c * -1;
-	if (c <= 255)
+	if (c >= 0 && c <= 255)
 	{
 		g_vm->map[0][p % MEM_SIZE] = c & 255;
 		g_vm->map[1][p % MEM_SIZE] = car->car_reg[1] * -1;
 		g_vm->map[3][p % MEM_SIZE] = 1;
 	}
-	else if (c <= 65535)
+	else if (c >= 0 && c <= 65535)
 	{
 		g_vm->map[0][p % MEM_SIZE] = (c >> 8) & 255;
 		g_vm->map[0][(p + 1) % MEM_SIZE] = c & 255;
@@ -134,7 +132,7 @@ void	vm_map_write(int c, int p, t_car *car)
 		g_vm->map[3][p % MEM_SIZE] = 1;
 		g_vm->map[3][(p + 1) % MEM_SIZE] = 1;
 	}
-	else if (c <= 16777215)
+	else if (c >= 0 && c <= 16777215)
 	{
 		g_vm->map[0][p % MEM_SIZE] = (c >> 12) & 255;
 		g_vm->map[0][(p + 1) % MEM_SIZE] = (c >> 8) & 255;
@@ -146,7 +144,7 @@ void	vm_map_write(int c, int p, t_car *car)
 
 void	vm_map_write2(int c, int p, t_car *car)
 {
-	if (c <= 16777215)
+	if (c >= 0 && c <= 16777215)
 	{
 		g_vm->map[0][(p + 2) % MEM_SIZE] = c & 255;
 		g_vm->map[1][p % MEM_SIZE] = car->car_reg[1] * -1;
