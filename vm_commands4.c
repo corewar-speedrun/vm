@@ -106,7 +106,6 @@ void		vm_com_ld(t_car *car)///////////////////// car->car_next_pos должно 
 	if ((car->c_byte[0] == 2 ||car->c_byte[0] == 3) && car->c_byte[1] == 1) /////vm_get_arg(car, 0, i) это удалил, это добавил "(car->c_byte[0] == 2 ||car->c_byte[0] == 3) &&"
 	{
 		tmp = g_vm->map[0][(car->car_pos + i) % MEM_SIZE];
-		printf("ETO TMP %d\n", tmp);
 		if (tmp > 0 && tmp <= 16)
 		{
 			car->car_reg[tmp] = car->com_args[0];
