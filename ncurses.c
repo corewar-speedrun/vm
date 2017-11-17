@@ -178,8 +178,13 @@ void		fnkg_shit(WINDOW *win[2], int i)
 
 void		shit(WINDOW *win[2], int i)
 {
+	attron(A_BOLD);
 	if (g_vm->map[1][i] == 1)
+	{
+		attron(A_BOLD);
 		wattron(win[0], COLOR_PAIR(11));
+		attron(A_BOLD);
+	}
 	else if (g_vm->map[1][i] == 2)
 		wattron(win[0], COLOR_PAIR(12));
 	else if (g_vm->map[1][i] == 3)
