@@ -6,7 +6,7 @@
 /*   By: ireva <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/29 17:55:08 by ireva             #+#    #+#             */
-/*   Updated: 2017/11/16 22:21:33 by ireva            ###   ########.fr       */
+/*   Updated: 2017/11/16 22:21:08 by ireva            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,14 @@ int			paused(WINDOW *win[2], int sleep)
 			}
 		}
 	}
-	(ch == KEY_DOWN && sleep != 0) ? sleep -= 2500 : 0;
-	(sleep <= 0) ? sleep = 1 : 0;
-	(ch == KEY_UP && sleep != 0) ? sleep += 2500 : 0;
-	(ch == 'q') ? exit(0) : 0;
+	if (ch == KEY_DOWN && sleep != 0)
+		sleep -= 2500;
+	if (sleep <= 0)
+		sleep = 1;
+	if (ch == KEY_UP && sleep != 0)
+		sleep += 2500;
+	if (ch == 'q')
+		exit(0);
 	return (sleep);
 }
 
@@ -171,7 +175,7 @@ void		shit(WINDOW *win[2], int i)
 
 int			ncurses(int sleep)
 {
-	WINDOW	*win[2];
+	WINDOW *win[2];
 	int		y;
 	int		x;
 	int		z;
