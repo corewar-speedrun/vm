@@ -37,12 +37,14 @@ int			paused(WINDOW *win[2], int sleep)
 			}
 		}
 	}
-	(ch == KEY_DOWN && sleep != 0) ? sleep -= 2500 : 0;
+	(ch == KEY_DOWN && sleep != 0) ? sleep -= 1000 : 0;
 	(sleep <= 0) ? sleep = 1 : 0;
-	(ch == KEY_UP && sleep != 0) ? sleep += 2500 : 0;
+	(ch == KEY_UP && sleep != 0) ? sleep += 1000 : 0;
 	(ch == 'q') ? exit(0) : 0;
 	return (sleep);
 }
+
+
 
 void		players_color(WINDOW *win[2], int i)
 {
@@ -148,10 +150,30 @@ void		init(void)
 	init_pair(8, COLOR_BLUE, COLOR_BLACK);
 	init_pair(9, COLOR_CYAN, COLOR_BLACK);
 	init_pair(10, 247, COLOR_BLACK);
-	init_pair(11, COLOR_GREEN, COLOR_WHITE);
-	init_pair(12, COLOR_BLUE, COLOR_WHITE);
-	init_pair(13, COLOR_RED, COLOR_WHITE);
-	init_pair(14, COLOR_CYAN, COLOR_WHITE);
+	init_pair(11, COLOR_WHITE, COLOR_GREEN);
+	init_pair(15, 120, COLOR_BLACK);
+	init_pair(16, 75, COLOR_BLACK);
+	init_pair(17, 162, COLOR_BLACK);
+	init_pair(18, 51, COLOR_BLACK);
+	init_pair(12, COLOR_WHITE, COLOR_BLUE);
+	init_pair(13, COLOR_WHITE, COLOR_RED);
+	init_pair(14, COLOR_WHITE, COLOR_CYAN);
+}
+
+void		fnkg_shit(WINDOW *win[2], int i)
+{
+		if (g_vm->map[1][i] == 1)
+		wattron(win[0], COLOR_PAIR(15));
+	else if (g_vm->map[1][i] == 2)
+		wattron(win[0], COLOR_PAIR(16));
+	else if (g_vm->map[1][i] == 3)
+		wattron(win[0], COLOR_PAIR(17));
+	else if (g_vm->map[1][i] == 4)
+		wattron(win[0], COLOR_PAIR(18));
+	else
+		wattron(win[0], COLOR_PAIR(5));
+	wrefresh(win[1]);
+
 }
 
 void		shit(WINDOW *win[2], int i)
@@ -200,6 +222,8 @@ int			ncurses(int sleep)
 			players_color(win, i);
 			if (g_vm->map[2][i] == 1)
 				shit(win, i);
+			if (g_vm->map[3][i] == 1)
+				fnkg_shit(win, i);
 			mvwprintw(win[0], y, x, "%.2x", g_vm->map[0][i]);
 			x += 3;
 			i++;
