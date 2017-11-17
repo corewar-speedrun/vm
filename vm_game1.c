@@ -14,14 +14,21 @@
 
 void	vm_make_game(t_car *car)
 {
+    t_vm *tmp = g_vm;
+
 	g_vm->sleep = 10000;
 	while (g_vm->game > 0)
 	{
 		car = g_vm->cars;
+<<<<<<< HEAD
+//		if (g_vm->flag_visualize == 1)
+//         g_vm->sleep = ncurses(g_vm->sleep);
+=======
 		if (g_vm->flag_visualize == 1)
          g_vm->sleep = ncurses(g_vm->sleep);
 		 if (g_vm->flag_visualize == 1)
 		 	g_vm->sleep = ncurses(g_vm->sleep);
+>>>>>>> e4ae8fd452a4976dec2cd94d74a80e5a9c06858f
 		while (car != NULL)
 		{
 			if (g_vm->map[2][car->car_pos] != 1)
