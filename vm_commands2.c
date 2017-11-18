@@ -26,7 +26,8 @@ void	vm_com_ifork(t_car *car)/////////////////////////////////////////////
 {
 	car->c_byte[0] = 2;
 	vm_get_reg_dir(car, 0, 1);
-	vm_init_car(car->car_pos, (short int)car->com_args[0], car->car_reg[1] * -1, car);
+	car->com_args[0] = ((short int)car->com_args[0]);
+	vm_init_car(car->car_pos, car->com_args[0], car->car_reg[1] * -1, car);
 	car->car_next_pos = vm_find_next_pos(car);
 	vm_car_clean(car);
 }
@@ -47,7 +48,7 @@ void	vm_com_st(t_car *car)///////////////////////////////////////////////
 			(car->com_args[1] > 0 && car->com_args[1] < 17))
 			car->car_reg[car->com_args[1]] = car->car_reg[car->com_args[0]];
 		else if (car->c_byte[1] == 3)
-			vm_map_write(tmp, car->car_pos + (car->com_args[1] % IDX_MOD) % MEM_SIZE, car);
+			vm_map_write(tmp, ((car->car_pos + car->com_args[1]) % IDX_MOD) % MEM_SIZE, car);
 	}
 	car->car_next_pos = vm_find_next_pos(car);
 	vm_car_clean(car);
@@ -88,7 +89,7 @@ void	vm_com_sti2(t_car *car)
 	tmp2 = 0;
 	tmp3 = 0;
 	if (car->com_args[0] > 0 && car->com_args[0] < 17)
-		tmp = car->car_reg[car->com_args[0]];
+		tmp = (short)car->car_reg[car->com_args[0]];
 	if (car->c_byte[1] == 1 && (car->com_args[1] > 0 && car->com_args[1] < 17))
 		tmp2 = car->car_reg[car->com_args[1]];
 	else if (car->c_byte[1] == 2 || car->c_byte[1] == 3)
