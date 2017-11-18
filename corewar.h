@@ -135,9 +135,10 @@ void				vm_init(void);
 t_champ				*vm_parsing(int fd);
 unsigned char		*vm_read_script(int i, int fd, int flag);
 int					vm_read_magic(int fd, int flag);
-void				vm_read_flag(char *str);
+int					vm_read_flag(char *str);
+int					vm_read_flag2(char *str);
 int					vm_read_size(int i, int fd);
-void				vm_read(int i, char **arg);
+void				vm_read1(int i, char **arg, int x, int flag);
 
 /*
 ** VM_init_game_&&_plase_champs
@@ -211,7 +212,6 @@ int					vm_usage(char *re);
 //char				*vm_strjoin(char *t, char *y);
 void				print_maps(void);
 int					vm_cycles_count(int tmp);
-
 int					ncurses(int sleep);
 
 #endif

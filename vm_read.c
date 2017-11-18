@@ -17,7 +17,7 @@
 ** vm_read_flag - работа с флагами. Закодить.////////////////////////////////////////////
 */
 
-void			vm_read_flag(char *str)
+int				vm_read_flag(char *str)
 {
 	if (g_vm->error == 2)
 		g_vm->error = -1;
@@ -25,32 +25,55 @@ void			vm_read_flag(char *str)
 		g_vm->flag_say_alive = 1;
 	else if (str[1] == 'v')
 		g_vm->flag_visualize = 1;
+	else if (str[1] == 'd')
+		return (1);
 	else
 		g_vm->error = 8;
-	return ;
+	return (0);
 }
 
-void			vm_read(int i, char **arg)
+int				vm_read_flag2(char *str)
+{
+	char *str2;
+
+	if (g_vm->error == 2)
+		g_vm->error = -1;
+	str2 = str;
+	while (*str2)
+	{
+		if (ft_isdigit(*str2))
+			str2++;
+		else
+		{
+			g_vm->error = 8;
+			return (0);
+		}
+	}
+	g_vm->damp = ft_atoi(str);
+	return (0);
+}
+
+void			vm_read1(int i, char **arg, int x, int flag)
 {
 	int			fd;
-	int			x;
 
-	x = 0;
 	while (++x < i)
 	{
 		if((fd = open(arg[x], O_RDONLY)) == -1 && g_vm->error == -1)
 			g_vm->error = 2;
 		if (arg[x][0] == '-' && (g_vm->error == -1 || g_vm->error == 2))
-			vm_read_flag(arg[x]);
+			flag = vm_read_flag(arg[x]);
+		else if (flag == 1 && (g_vm->error == -1 || g_vm->error == 2))
+			flag = vm_read_flag2(arg[x]);
 		else if (vm_read_magic(fd, 0) == 1 && g_vm->champs_nmbr == 4)
 			g_vm->error = 9;
 		else if (vm_read_magic(fd, 1) == 1 && g_vm->error == -1)
 			g_vm->champs[++g_vm->champs_nmbr] = vm_parsing(fd);
 		else if (g_vm->error == -1)
 			g_vm->error = 1;
+		close(fd);
 		if (g_vm->error != -1)
 			break ;
-		close(fd);
 	}
 	if (g_vm->champs_nmbr < 1 && g_vm->error != -1)
 		g_vm->error = 7;
