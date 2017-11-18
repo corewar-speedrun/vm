@@ -159,9 +159,9 @@ void	vm_map_write(int c, int p, t_car *car)
 //	{
 		if (p < 0)
 			p = (MEM_SIZE + p) % MEM_SIZE;
-		g_vm->map0[p % MEM_SIZE] = (c >> 16) & 255;
+		g_vm->map0[p % MEM_SIZE] = (c >> 24) & 255;
 		//printf("|%x| %d ", g_vm->map0[p % MEM_SIZE], p % MEM_SIZE);
-		g_vm->map0[(p + 1) % MEM_SIZE] = (c >> 12) & 255;
+		g_vm->map0[(p + 1) % MEM_SIZE] = (c >> 16) & 255;
 		//printf("|%x| %d ", g_vm->map0[(p + 1) % MEM_SIZE], (p + 1) % MEM_SIZE);
 		g_vm->map0[(p + 2) % MEM_SIZE] = (c >> 8) & 255;
 		//printf("|%x| %d ", g_vm->map0[(p + 2) % MEM_SIZE], (p + 2) % MEM_SIZE);
