@@ -17,7 +17,7 @@ void	vm_com_fork(t_car *car)
 	car->c_byte[0] = 2;
 	vm_get_reg_dir(car, 0, 1);
 	car->com_args[0] = ((short int)car->com_args[0]) % IDX_MOD;
-	vm_init_car(car->car_pos, car->com_args[0], car->car_reg[1] * -1, car);
+	vm_init_car(car->car_pos, car->com_args[0], car->car_reg[0] * -1, car);
 	car->car_next_pos = vm_find_next_pos(car);
 	vm_car_clean(car);
 }
@@ -27,7 +27,7 @@ void	vm_com_ifork(t_car *car)
 	car->c_byte[0] = 2;
 	vm_get_reg_dir(car, 0, 1);
 	car->com_args[0] = ((short int)car->com_args[0]);
-	vm_init_car(car->car_pos, car->com_args[0], car->car_reg[1] * -1, car);
+	vm_init_car(car->car_pos, car->com_args[0], car->car_reg[0] * -1, car);
 	car->car_next_pos = vm_find_next_pos(car);
 	vm_car_clean(car);
 }

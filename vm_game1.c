@@ -77,25 +77,23 @@ void	vm_car_to_die(void)
 	while (start != NULL && start->live < 1)
 	{
 		tmp = start->next_car;
+		if (g_vm->map2[start->car_pos] == 1)
+			g_vm->map2[start->car_pos] = 0;
 		free(start);
 		g_vm->cars_nmbr -= 1;
 		start = tmp;
 	}
 	g_vm->cars = start;
 	if (g_vm->cars != NULL)
-		vm_car_to_die2();
+		vm_car_to_die2(NULL, NULL, NULL);
 	else
 		vm_finish_game();
 	g_vm->to_die -= CYCLE_DELTA;
 	g_vm->die_cycle += g_vm->to_die;
 }
 
-void	vm_car_to_die2(void)
+void	vm_car_to_die2(t_car *tmp1, t_car *tmp2, t_car *tmp3)
 {
-	t_car *tmp1;
-	t_car *tmp2;
-	t_car *tmp3;
-
 	tmp1 = g_vm->cars;
 	tmp2 = tmp1->next_car;
 	while (tmp2 != NULL)
@@ -103,6 +101,8 @@ void	vm_car_to_die2(void)
 		tmp3 = tmp2->next_car;
 		if (tmp2->live < 1)
 		{
+			if (g_vm->map2[tmp2->car_pos] == 1)
+				g_vm->map2[tmp2->car_pos] = 0;
 			free(tmp2);
 			g_vm->cars_nmbr -= 1;
 			tmp1->next_car = tmp3;
