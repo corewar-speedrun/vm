@@ -157,32 +157,34 @@ void	vm_map_write(int c, int p, t_car *car)
 //	}
 //	else
 //	{
-		g_vm->map0[p % MEM_SIZE] = (c == 0) ? 0 : (c >> 16) & 255;
-		printf("|%x| ", g_vm->map0[p % MEM_SIZE]);
-		g_vm->map0[(p + 1) % MEM_SIZE] = (c == 0) ? 0 : (c >> 12) & 255;
-		printf("|%x| ", g_vm->map0[(p + 1) % MEM_SIZE]);
-		g_vm->map0[(p + 2) % MEM_SIZE] = (c == 0) ? 0 : (c >> 8) & 255;
-	printf("|%x| ", g_vm->map0[(p + 2) % MEM_SIZE]);
-		g_vm->map0[(p + 3) % MEM_SIZE] = (c == 0) ? 0 : c & 255;
-	printf("|%x| ", g_vm->map0[(p + 3) % MEM_SIZE]);
+		if (p < 0)
+			p = (MEM_SIZE + p) % MEM_SIZE;
+		g_vm->map0[p % MEM_SIZE] = (c >> 16) & 255;
+		//printf("|%x| %d ", g_vm->map0[p % MEM_SIZE], p % MEM_SIZE);
+		g_vm->map0[(p + 1) % MEM_SIZE] = (c >> 12) & 255;
+		//printf("|%x| %d ", g_vm->map0[(p + 1) % MEM_SIZE], (p + 1) % MEM_SIZE);
+		g_vm->map0[(p + 2) % MEM_SIZE] = (c >> 8) & 255;
+		//printf("|%x| %d ", g_vm->map0[(p + 2) % MEM_SIZE], (p + 2) % MEM_SIZE);
+		g_vm->map0[(p + 3) % MEM_SIZE] = c & 255;
+		//printf("|%x| %d \n", g_vm->map0[(p + 3) % MEM_SIZE], (p + 3) % MEM_SIZE);
 		g_vm->map1[p % MEM_SIZE] = car->car_reg[1] * -1;
-		printf("|%x| ", g_vm->map1[p % MEM_SIZE]);
+		//printf("|%x| ", g_vm->map1[p % MEM_SIZE]);
 		g_vm->map1[(p + 1) % MEM_SIZE] = car->car_reg[1] * -1;
-	printf("|%x| ", g_vm->map1[(p + 1) % MEM_SIZE]);
+		//printf("|%x| ", g_vm->map1[(p + 1) % MEM_SIZE]);
 		g_vm->map1[(p + 2) % MEM_SIZE] = car->car_reg[1] * -1;
-	printf("|%x| ", g_vm->map1[(p + 2) % MEM_SIZE]);
+		//printf("|%x| ", g_vm->map1[(p + 2) % MEM_SIZE]);
 		g_vm->map1[(p + 3) % MEM_SIZE] = car->car_reg[1] * -1;
-	printf("|%x| ", g_vm->map1[(p + 3) % MEM_SIZE]);
+		//printf("|%x|\n", g_vm->map1[(p + 3) % MEM_SIZE]);
 		g_vm->map3[p % MEM_SIZE] = 1;
-		printf("|%x| ", g_vm->map3[p % MEM_SIZE]);
+		//printf("|%x| ", g_vm->map3[p % MEM_SIZE]);
 		g_vm->map3[(p + 1) % MEM_SIZE] = 1;
-	printf("|%x| ", g_vm->map3[(p + 1) % MEM_SIZE]);
+		//printf("|%x| ", g_vm->map3[(p + 1) % MEM_SIZE]);
 		g_vm->map3[(p + 2) % MEM_SIZE] = 1;
-	printf("|%x| ", g_vm->map3[(p + 2) % MEM_SIZE]);
+		//printf("|%x| ", g_vm->map3[(p + 2) % MEM_SIZE]);
 		g_vm->map3[(p + 3) % MEM_SIZE] = 1;
-	printf("|%x| ", g_vm->map3[(p + 3) % MEM_SIZE]);
-	printf("\ncycle %d\ncomand %d\npos %d\narg1 %d\narg2 %d\narg3 %d\nreg1 %d\nreg2 %d\nreg3 %d\n", g_vm->cycle, car->comand, car->car_pos, car->com_args[0], car->com_args[1], car->com_args[2], car->car_reg[0], car->car_reg[1], car->car_reg[2]);
-		print_maps();
+		//printf("|%x| \n", g_vm->map3[(p + 3) % MEM_SIZE]);
+		//printf("\ncycle %d\ncomand %d\npos %d\narg1 %d\narg2 %d\narg3 %d\nreg1 %d\nreg2 %d\nreg3 %d\n", g_vm->cycle, car->comand, car->car_pos, car->com_args[0], car->com_args[1], car->com_args[2], car->car_reg[0], car->car_reg[1], car->car_reg[2]);
+		//print_maps();
 //	}
 }
 

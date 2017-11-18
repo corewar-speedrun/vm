@@ -57,7 +57,7 @@ void				vm_com_ldi(t_car *car)
 			i +=2;
 		vm_get_reg_dir(car, 2, i);
 		vm_com_ldi2(car);
-		car->carry = TRUE;
+		(car->car_reg[car->com_args[2]] == 0) ? (car->carry = TRUE) : 0;
 	}
 	car->car_next_pos = vm_find_next_pos(car);
 	vm_car_clean(car);

@@ -57,7 +57,7 @@ void		vm_com_add(t_car *car)
 			(tmp3 >= 0 && tmp3 < 16))
 		{
 			car->car_reg[tmp3] = car->car_reg[tmp1] + car->car_reg[tmp2];
-			car->carry = TRUE;
+			(car->car_reg[tmp3] == 0) ? (car->carry = TRUE) : 0;
 		}
 	}
 	car->car_next_pos = vm_find_next_pos(car);
@@ -80,7 +80,7 @@ void		vm_com_sub(t_car *car)
 			(tmp3 >= 0 && tmp3 < 16))
 		{
 			car->car_reg[tmp3] = car->car_reg[tmp1] - car->car_reg[tmp2];
-			car->carry = TRUE;
+			(car->car_reg[tmp3] == 0) ? (car->carry = TRUE) : 0;
 		}
 	}
 	car->car_next_pos = vm_find_next_pos(car);
@@ -91,11 +91,14 @@ void	vm_com_zjmp(t_car *car)
 {
 	car->car_next_pos = 3;
 	if (car->carry == FALSE)
+	{
+		vm_car_clean(car);
 		return ;
+	}
 	car->c_byte[0] = 2;
 	vm_get_reg_dir(car, 0, 1);
 	car->car_next_pos = (short int)car->com_args[0];
-	if ((car->car_next_pos + car->car_pos) == car->car_pos)
-		car->car_next_pos = 3;
+	// if ((car->car_next_pos + car->car_pos) == car->car_pos)
+	// 	car->car_next_pos = 3;
 	vm_car_clean(car);
 }
