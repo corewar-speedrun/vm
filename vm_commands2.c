@@ -48,7 +48,7 @@ void	vm_com_st(t_car *car)///////////////////////////////////////////////
 			(car->com_args[1] > 0 && car->com_args[1] < 17))
 			car->car_reg[car->com_args[1]] = car->car_reg[car->com_args[0]];
 		else if (car->c_byte[1] == 3)
-			vm_map_write(tmp, ((car->car_pos + car->com_args[1]) % IDX_MOD) % MEM_SIZE, car);
+			vm_map_write(tmp, car->car_pos + (car->com_args[1] % IDX_MOD) % MEM_SIZE, car);
 	}
 	car->car_next_pos = vm_find_next_pos(car);
 	vm_car_clean(car);
