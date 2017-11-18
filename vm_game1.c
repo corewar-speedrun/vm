@@ -83,7 +83,7 @@ void	vm_car_next_pos(t_car *car)
 		g_vm->map2[car->car_pos] = 1;
 	car->car_next_pos = 0;
 }
-
+/////////////////////////////Дима, декременть тут g_vm->cars_nmbr/////////////////
 void	vm_car_to_die(void)
 {
 	t_car *tmp;
