@@ -160,7 +160,6 @@ void				vm_car_next_pos(t_car *car);
 int					vm_cycles_count(int tmp);
 void				vm_finish_game(void);
 void				vm_map_write(int c, int p, t_car *car);
-void				vm_map_write2(int c, int p, t_car *car);
 
 /*
 ** VM_comandss

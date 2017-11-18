@@ -115,7 +115,7 @@ void	vm_get_ind(t_car *car, int index, int i)
 		ind = (ind << 8) | tmp;
 	}
 	z = -1;
-	if (car->comand == 2 || car->comand == 10)
+	if (car->comand == 2 || car->comand == 10 || car->comand == 11) /////////////car->comand == 11
 		ind = ind % IDX_MOD;
 	tmp = 0;
 	while (++z < 4)
