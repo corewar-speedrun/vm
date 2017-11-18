@@ -151,7 +151,7 @@ void				vm_init_car(int pos, int next, int champ_nmbr, t_car *car);
 */
 
 void				vm_make_game(t_car *car);
-void				vm_make_game2(t_car *car);
+void				vm_make_game2(t_car *car, int i);
 void				vm_car_to_die(void);
 void				vm_car_to_die2(t_car *tmp1, t_car *tmp2, t_car *tmp3);
 void				vm_read_comand(t_car *car);
