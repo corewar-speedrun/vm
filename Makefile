@@ -12,7 +12,7 @@
 
 NAME = corewar
 
-CFLAGS = -Wall -Wextra -Werror -g 
+CFLAGS = -Wall -Wextra -Werror -g -O3
 
 SRC = vm.c vm_init_memory.c vm_read.c vm_helps.c ncurses.c vm_commands1.c \
 vm_commands2.c vm_commands3.c vm_commands4.c vm_commands_help.c \
