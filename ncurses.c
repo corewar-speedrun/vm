@@ -225,10 +225,10 @@ int			ncurses(int sleep)
 		while (x < 194)
 		{
 			players_color(win, i);
-			if (g_vm->map2[i] == 1)
-				shit(win, i);
 			if (g_vm->map3[i] > 0)
 				fnkg_shit(win, i);
+			if (g_vm->map2[i] == 1)
+				shit(win, i);
 			mvwprintw(win[0], y, x, "%.2x", g_vm->map0[i]);
 			x += 3;
 			i++;
