@@ -89,7 +89,7 @@ void	vm_com_sti2(t_car *car)
 	tmp2 = 0;
 	tmp3 = 0;
 	if (car->com_args[0] > 0 && car->com_args[0] < 17)
-		tmp = (short)car->car_reg[car->com_args[0]];
+		tmp = car->car_reg[car->com_args[0]];
 	if (car->c_byte[1] == 1 && (car->com_args[1] > 0 && car->com_args[1] < 17))
 		tmp2 = car->car_reg[car->com_args[1]];
 	else if (car->c_byte[1] == 2 || car->c_byte[1] == 3)
