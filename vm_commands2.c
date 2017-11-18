@@ -43,6 +43,7 @@ void	vm_com_st(t_car *car)///////////////////////////////////////////////
 		vm_get_reg_dir(car, 1, 3);
 		if (car->com_args[0] > 0 && car->com_args[0] < 17)
 			tmp = car->car_reg[car->com_args[0]];
+			printf("dat shit |%d|%x|\n", tmp, tmp);
 		if (car->c_byte[1] == 1 &&
 			(car->com_args[0] > 0 && car->com_args[0] < 17) && 
 			(car->com_args[1] > 0 && car->com_args[1] < 17))
