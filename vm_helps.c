@@ -160,6 +160,7 @@ void	vm_map_write(int c, int p, t_car *car)
 		if (p < 0)
 			p = (MEM_SIZE + p) % MEM_SIZE;
 		g_vm->map0[p % MEM_SIZE] = (c >> 24) & 255;
+<<<<<<< HEAD
 		g_vm->map0[(p + 1) % MEM_SIZE] = (c >> 16) & 255;
 		g_vm->map0[(p + 2) % MEM_SIZE] = (c >> 8) & 255;
 		g_vm->map0[(p + 3) % MEM_SIZE] = c & 255;
@@ -172,6 +173,10 @@ void	vm_map_write(int c, int p, t_car *car)
 		g_vm->map3[(p + 2) % MEM_SIZE] = 1;
 		g_vm->map3[(p + 3) % MEM_SIZE] = 1;
 		//printf("|%x| %d ", g_vm->map0[p % MEM_SIZE], p % MEM_SIZE);
+=======
+		//printf("|%x| %d ", g_vm->map0[p % MEM_SIZE], p % MEM_SIZE);
+		g_vm->map0[(p + 1) % MEM_SIZE] = (c >> 16) & 255;
+>>>>>>> 664def2d0f07fbd611539f372d9546c0ad75868a
 		//printf("|%x| %d ", g_vm->map0[(p + 1) % MEM_SIZE], (p + 1) % MEM_SIZE);
 		//printf("|%x| %d ", g_vm->map0[(p + 2) % MEM_SIZE], (p + 2) % MEM_SIZE);
 		//printf("|%x| %d \n", g_vm->map0[(p + 3) % MEM_SIZE], (p + 3) % MEM_SIZE);
