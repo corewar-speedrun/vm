@@ -18,23 +18,25 @@
 int			paused(WINDOW *win[2], int sleep)
 {
 	int		ch;
-	int		i;
+//	int		i;
 
 	ch = wgetch(win[1]);
-	if (ch == ' ')
+	if (ch == ' ' || g_vm->move == 1)
 	{
 		mvwprintw(win[1], 2, 4, "%s   ", "** PAUSED **");
 		wrefresh(win[1]);
-		i = 1;
-		while (i == 1)
+		g_vm->move = 1;
+		while (g_vm->move == 1)
 		{
 			ch = wgetch(win[1]);
 			if (ch == ' ')
 			{
 				mvwprintw(win[1], 2, 4, "%s   ", "** RUNNING **");
 				wrefresh(win[1]);
-				i--;
+				g_vm->move--;
 			}
+			if (ch == KEY_RIGHT)
+				break;
 		}
 	}
 	(ch == KEY_UP && sleep != 0) ? sleep -= 1000 : 0;
@@ -61,23 +63,38 @@ void		players_color(WINDOW *win[2], int i)
 	wrefresh(win[1]);
 }
 
-void		print_cl_players(WINDOW *win[2])
+void		print_cl_players(WINDOW *win[2], int flag)
 {
 	wattron(win[1], COLOR_PAIR(7));
 	mvwprintw(win[1], 11, 16, "%s", g_vm->champs[1]->name);
 	if (g_vm->champs_nmbr > 1)
 	{
 		wattron(win[1], COLOR_PAIR(8));
+	if (flag > 0)
+	{
+		mvwprintw(win[1], 15 + 1, 16, "%s", g_vm->champs[2]->name);
+		flag--;
+	}
+	else
 		mvwprintw(win[1], 15, 16, "%s", g_vm->champs[2]->name);
 	}
 	if (g_vm->champs_nmbr > 2)
 	{
 		wattron(win[1], COLOR_PAIR(6));
+	if (flag > 0)
+	{
+		mvwprintw(win[1], 19 + 2, 16, "%s", g_vm->champs[3]->name);
+		flag--;
+	}
+	else
 		mvwprintw(win[1], 19, 16, "%s", g_vm->champs[3]->name);
 	}
 	if (g_vm->champs_nmbr > 3)
 	{
 		wattron(win[1], COLOR_PAIR(9));
+	if (flag > 0)
+		mvwprintw(win[1], 23 + 3, 16, "%s", g_vm->champs[4]->name);
+	else
 		mvwprintw(win[1], 23, 16, "%s", g_vm->champs[4]->name);
 	}
 	wattroff(win[1], COLOR_PAIR(9));
@@ -86,34 +103,57 @@ void		print_cl_players(WINDOW *win[2])
 
 void		print_players(WINDOW *win[2])
 {
+	int flag;
+
+	flag = 0;
 	mvwprintw(win[1], 11, 4, "%s", "Player -1 :");
 	mvwprintw(win[1], 12, 6, "%s %d",
 		"Last live :", g_vm->champs[1]->last_live);
 	mvwprintw(win[1], 13, 6, "%s %d",
 		"Lives in current period :", g_vm->champs[1]->live);
+	if (g_vm->champs[1]->comment != NULL)
+		{
+			mvwprintw(win[1], 11 + 3 + flag, 4, "%s %s", "Comment :", g_vm->champs[1]->comment);
+			flag++;
+		}	
 	if (g_vm->champs_nmbr > 1)
 	{
-		mvwprintw(win[1], 15, 4, "%s", "Player -2 :");
-		mvwprintw(win[1], 16, 6, "%s %d",
+		mvwprintw(win[1], 15 + flag, 4, "%s", "Player -2 :");
+		mvwprintw(win[1], 16 + flag, 6, "%s %d",
 			"Last live :", g_vm->champs[2]->last_live);
-		mvwprintw(win[1], 17, 6, "%s %d",
+		mvwprintw(win[1], 17 + flag, 6, "%s %d",
 			"Lives in current period :", g_vm->champs[2]->live);
+		if (g_vm->champs[2]->comment != NULL)
+			{
+				mvwprintw(win[1], 15 + 3 + flag, 4, "%s %s", "Comment :", g_vm->champs[2]->comment);
+				flag++;
+			}	
 	}
 	if (g_vm->champs_nmbr > 2)
 	{
-		mvwprintw(win[1], 19, 4, "%s", "Player -3 :");
-		mvwprintw(win[1], 20, 6, "%s %d",
+		mvwprintw(win[1], 19 + flag, 4, "%s", "Player -3 :");
+		mvwprintw(win[1], 20 + flag, 6, "%s %d",
 			"Last live :", g_vm->champs[3]->last_live);
-		mvwprintw(win[1], 21, 6, "%s %d",
+		mvwprintw(win[1], 21 + flag, 6, "%s %d",
 			"Lives in current period :", g_vm->champs[3]->live);
+		if (g_vm->champs[3]->comment != NULL)
+			{
+				mvwprintw(win[1], 19 + 3 + flag, 4, "%s %s", "Comment :", g_vm->champs[3]->comment);
+				flag++;
+			}	
 	}
 	if (g_vm->champs_nmbr > 3)
 	{
-		mvwprintw(win[1], 23, 4, "%s", "Player -4 :");
-		mvwprintw(win[1], 24, 6, "%s %d",
+		mvwprintw(win[1], 23 + flag, 4, "%s", "Player -4 :");
+		mvwprintw(win[1], 24 + flag, 6, "%s %d",
 			"Last live :", g_vm->champs[4]->last_live);
-		mvwprintw(win[1], 25, 6, "%s %d",
+		mvwprintw(win[1], 25 + flag, 6, "%s %d",
 			"Lives in current period :", g_vm->champs[4]->live);
+		if (g_vm->champs[4]->comment != NULL)
+			{
+				mvwprintw(win[1], 23 + 3 + flag, 4, "%s %s", "Comment :", g_vm->champs[4]->comment);
+				flag++;
+			}	
 	}
 	mvwprintw(win[1], 13 + (4 * (g_vm->champs_nmbr - 1)) +
 		8, 6, "%s %d", "CYCLE_TO_DIE :", g_vm->to_die);
@@ -123,7 +163,7 @@ void		print_players(WINDOW *win[2])
 		12, 6, "%s %d", "NBR_LIVE :", NBR_LIVE);
 	mvwprintw(win[1], 13 + (4 *
 		(g_vm->champs_nmbr - 1)) + 14, 6, "%s %d", "MAX_CHECKS :", MAX_CHECKS);
-	print_cl_players(win);
+	print_cl_players(win, flag);
 }
 
 void		print_window(WINDOW *win[2])

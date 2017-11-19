@@ -15,6 +15,7 @@
 void	vm_make_game(t_car *car)
 {
 	g_vm->sleep = 1;
+	g_vm->move = 0;
 	while (g_vm->game > 0)
 	{
 		car = g_vm->cars;

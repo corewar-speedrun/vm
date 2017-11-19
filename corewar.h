@@ -91,6 +91,7 @@ typedef struct		s_vm
 	int				flag_say_alive;
 	int				flag_visualize;
 	int             sleep;
+	int             move;
 }					t_vm;
 
 t_vm				*g_vm;
