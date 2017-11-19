@@ -37,9 +37,9 @@ int			paused(WINDOW *win[2], int sleep)
 			}
 		}
 	}
-	(ch == KEY_DOWN && sleep != 0) ? sleep -= 1000 : 0;
+	(ch == KEY_UP && sleep != 0) ? sleep -= 1000 : 0;
 	(sleep <= 0) ? sleep = 1 : 0;
-	(ch == KEY_UP && sleep != 0) ? sleep += 1000 : 0;
+	(ch == KEY_DOWN && sleep != 0) ? sleep += 1000 : 0;
 	(ch == 'q') ? exit(0) : 0;
 	return (sleep);
 }

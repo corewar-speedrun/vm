@@ -105,7 +105,6 @@ void				vm_com_lldi(t_car *car)
 			i +=2;
 		vm_get_reg_dir(car, 2, i);
 		vm_com_lldi2(car);
-		car->carry = TRUE;
 	}
 	car->car_next_pos = vm_find_next_pos(car);
 	vm_car_clean(car);
@@ -123,5 +122,8 @@ void				vm_com_lldi2(t_car *car)
 	while (++tmp3 < 4)
 		tmp2 = (tmp2 << 8) | g_vm->map0[(tmp + tmp3) % MEM_SIZE];
 	if (car->com_args[2] > 0 && car->com_args[2] < 17)
+	{
 		car->car_reg[car->com_args[2]] = tmp2;
+		(car->car_reg[car->com_args[2]] == 0) ? (car->carry = TRUE) : 0;
+	}
 }

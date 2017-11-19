@@ -18,8 +18,8 @@ void	vm_make_game(t_car *car)
 	while (g_vm->game > 0)
 	{
 		car = g_vm->cars;
-//		if (g_vm->flag_visualize == 1)
-//			g_vm->sleep = ncurses(g_vm->sleep);
+		if (g_vm->flag_visualize == 1)
+			g_vm->sleep = ncurses(g_vm->sleep);
 		while (car != NULL)
 		{
 			if (g_vm->map2[car->car_pos] != 1)
@@ -33,7 +33,7 @@ void	vm_make_game(t_car *car)
 			car = car->next_car;
 		}
 		vm_make_game2(car, -1);
-		if (g_vm->damp == g_vm->cycle)
+		if (g_vm->damp == g_vm->cycle && g_vm->flag_visualize != 1)
 		{
 			print_maps();
 			break ;
@@ -44,7 +44,7 @@ void	vm_make_game(t_car *car)
 void	vm_make_game2(t_car *car, int i)
 {
 	if (++g_vm->cycle == g_vm->die_cycle)
-		vm_car_to_die();
+		vm_car_to_die(NULL, NULL);
 	car = g_vm->cars;
 	while (car != NULL)
 	{
@@ -84,11 +84,8 @@ void	vm_car_next_pos(t_car *car)
 	car->car_next_pos = 0;
 }
 /////////////////////////////Дима, декременть тут g_vm->cars_nmbr/////////////////
-void	vm_car_to_die(void)
+void	vm_car_to_die(t_car *tmp, t_car *start)
 {
-	t_car *tmp;
-	t_car *start;
-
 	start = g_vm->cars;
 	while (start != NULL && start->live < 1)
 	{
@@ -96,12 +93,19 @@ void	vm_car_to_die(void)
 		if (g_vm->map2[start->car_pos] == 1)
 			g_vm->map2[start->car_pos] = 0;
 		free(start);
-		g_vm->cars_nmbr -= 1;
+		g_vm->cars_nmbr -= 1; ///////////////////////  Для ВНИМАТЕЛЬНЫХ, это тут было все время!///////////////
 		start = tmp;
 	}
 	g_vm->cars = start;
-	g_vm->to_die -= CYCLE_DELTA;
-	g_vm->die_cycle += g_vm->to_die;
+	if (g_vm->live_checks >= NBR_LIVE || g_vm->max_live_checks <= 0)
+	{
+		g_vm->to_die -= CYCLE_DELTA;
+		g_vm->die_cycle += g_vm->to_die;
+		g_vm->live_checks = 0;
+		g_vm->max_live_checks = MAX_CHECKS;
+	}
+	else
+		g_vm->max_live_checks--;
 	if (g_vm->cars != NULL && g_vm->to_die > 0)
 		vm_car_to_die2(NULL, NULL, NULL);
 	else
@@ -120,7 +124,7 @@ void	vm_car_to_die2(t_car *tmp1, t_car *tmp2, t_car *tmp3)
 			if (g_vm->map2[tmp2->car_pos] == 1)
 				g_vm->map2[tmp2->car_pos] = 0;
 			free(tmp2);
-			g_vm->cars_nmbr -= 1;
+			g_vm->cars_nmbr -= 1; ///////////////////////  Для ВНИМАТЕЛЬНЫХ, это тут было все время!///////////////
 			tmp1->next_car = tmp3;
 		}
 		else
