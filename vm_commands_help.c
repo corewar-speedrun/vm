@@ -82,15 +82,13 @@ void	vm_get_reg_dir(t_car *car, int index, int i)
 	else if (car->c_byte[index] == 2 && ((c_nmbr >= 9 && c_nmbr <= 12) ||
 		c_nmbr == 14 || c_nmbr == 15))
 		size = 2;
-	else if (car->c_byte[index] == 3)
-		size = 2;
 	z = -1;
 	while (++z < size)
 	{
 		tmp = g_vm->map0[(car->car_pos + z + i) % MEM_SIZE];
 		car->com_args[index] = (car->com_args[index] << 8) | tmp;
 	}
-	if (car->c_byte[index] == 3 || car->c_byte[index] == 2)
+	if (car->c_byte[index] == 2)
 		car->com_args[index] = (short int)car->com_args[index];
 }
 
@@ -115,14 +113,14 @@ void	vm_get_ind(t_car *car, int index, int i)
 		ind = (ind << 8) | tmp;
 	}
 	z = -1;
-	if (car->comand == 2 || car->comand == 10 || car->comand == 11) /////////////car->comand == 11
-		ind = ind % IDX_MOD;
+	ind = ind % IDX_MOD;
 	tmp = 0;
 	while (++z < 4)
 	{
 		tmp = g_vm->map0[(car->car_pos + ind + z) % MEM_SIZE];
 		car->com_args[index] = (car->com_args[index] << 8) | tmp;
 	}
+	car->com_args[index] = (short)car->com_args[index];
 }
 
 /*
