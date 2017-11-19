@@ -25,7 +25,7 @@ int				vm_read_flag(char *str)
 		g_vm->flag_say_alive = 1;
 	else if (str[1] == 'v')
 		g_vm->flag_visualize = 1;
-	else if (str[1] == 'd')
+	else if (ft_strequ(&str[1], "damp\0"))
 		return (1);
 	else
 		g_vm->error = 8;
@@ -50,6 +50,8 @@ int				vm_read_flag2(char *str)
 		}
 	}
 	g_vm->damp = ft_atoi(str);
+	if (g_vm->damp < 1)
+		g_vm->error = 10;
 	return (0);
 }
 
@@ -61,10 +63,10 @@ void			vm_read1(int i, char **arg, int x, int flag)
 	{
 		if((fd = open(arg[x], O_RDONLY)) == -1 && g_vm->error == -1)
 			g_vm->error = 2;
-		if (arg[x][0] == '-' && (g_vm->error == -1 || g_vm->error == 2))
-			flag = vm_read_flag(arg[x]);
-		else if (flag == 1 && (g_vm->error == -1 || g_vm->error == 2))
+		if (flag == 1 && (g_vm->error == -1 || g_vm->error == 2))
 			flag = vm_read_flag2(arg[x]);
+		else if (arg[x][0] == '-' && (g_vm->error == -1 || g_vm->error == 2))
+			flag = vm_read_flag(arg[x]);
 		else if (vm_read_magic(fd, 0) == 1 && g_vm->champs_nmbr == 4)
 			g_vm->error = 9;
 		else if (vm_read_magic(fd, 1) == 1 && g_vm->error == -1)

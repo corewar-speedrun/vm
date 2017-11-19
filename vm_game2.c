@@ -109,7 +109,6 @@ void	vm_finish_game(void)
 	int won;
 	int live;
 
-	print_maps();
 	i = 0;
 	won = 1;
 	live = 0;

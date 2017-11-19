@@ -74,7 +74,7 @@ int		vm_error(int error)
 	else if (error == 2)
 		ft_putstr_fd("Invalid or empty file.\n\0", 2);
 	else if (error == 3)
-		ft_putstr_fd("Wrong MAGIC.\n\0", 2);
+		ft_putstr_fd("Wrong Champion. Incorrect MAGIC.\n\0", 2);
 	else if (error == 4)
 		ft_putstr_fd("Champion size too big. > CHAMP_MAX_SIZE\n\0", 2);
 	else if (error == 5)
@@ -87,6 +87,8 @@ int		vm_error(int error)
 		vm_usage("Some unknown flag\n\0");
 	else if (error == 9)
 		vm_usage("Too many champions\n\0");
+	else if (error == 10)
+		vm_usage("Damp must be bigger than zero\n\0");
 	else
 		ft_putstr_fd("Some unknow error.\n\0", 2);
 	return (0);
@@ -104,6 +106,7 @@ int		vm_error(int error)
 ** error == 7 - Wee need a champion > 0! 
 ** error == 8 - Wrong flag 
 ** error == 9 - Too many champions
+** error == 10 - damp < 1;
 */
 
 int		vm_usage(char *re)
