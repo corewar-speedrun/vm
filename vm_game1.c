@@ -70,7 +70,6 @@ void	vm_make_game2(t_car *car, int i)
 ** vm_game/2 - главная ф-ция запуска игры.
 ** 
 ** размещает ботов на карте. потом будет передавать это все дальше.
-** еще пилю это.////////////////////////////////////////////////////////////////////
 */
 
 void	vm_car_next_pos(t_car *car)
@@ -84,7 +83,7 @@ void	vm_car_next_pos(t_car *car)
 		g_vm->map2[car->car_pos] = 1;
 	car->car_next_pos = 0;
 }
-/////////////////////////////Дима, декременть тут g_vm->cars_nmbr/////////////////
+
 void	vm_car_to_die(t_car *tmp, t_car *start)
 {
 	start = g_vm->cars;
@@ -94,7 +93,7 @@ void	vm_car_to_die(t_car *tmp, t_car *start)
 		if (g_vm->map2[start->car_pos] == 1)
 			g_vm->map2[start->car_pos] = 0;
 		free(start);
-		g_vm->cars_nmbr -= 1; ///////////////////////  Для ВНИМАТЕЛЬНЫХ, это тут было все время!///////////////
+		g_vm->cars_nmbr -= 1;
 		start = tmp;
 	}
 	g_vm->cars = start;
@@ -125,7 +124,7 @@ void	vm_car_to_die2(t_car *tmp1, t_car *tmp2, t_car *tmp3)
 			if (g_vm->map2[tmp2->car_pos] == 1)
 				g_vm->map2[tmp2->car_pos] = 0;
 			free(tmp2);
-			g_vm->cars_nmbr -= 1; ///////////////////////  Для ВНИМАТЕЛЬНЫХ, это тут было все время!///////////////
+			g_vm->cars_nmbr -= 1;
 			tmp1->next_car = tmp3;
 		}
 		else
