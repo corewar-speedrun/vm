@@ -97,6 +97,6 @@ void	vm_com_zjmp(t_car *car)
 	}
 	car->c_byte[0] = 2;
 	vm_get_reg_dir(car, 0, 1);
-	car->car_next_pos = (short int)car->com_args[0];
+	car->car_next_pos = (short)car->com_args[0];
 	vm_car_clean(car);
 }

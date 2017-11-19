@@ -6,17 +6,17 @@
 /*   By: dverbyts <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/24 14:20:18 by dverbyts          #+#    #+#             */
-/*   Updated: 2017/11/17 20:48:23 by dmaznyts         ###   ########.fr       */
+/*   Updated: 2017/11/19 18:36:29 by nsharova         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
-t_vm	g_vm;
+t_vm		*g_vm;
 
 int		main(int i, char **arg)
 {
 	if (i < 2)
-		return(vm_usage(NULL));
+		return (vm_usage(NULL));
 	if (!(g_vm = (t_vm *)malloc(sizeof(t_vm))))
 		return (0);
 	vm_init();
