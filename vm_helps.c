@@ -43,7 +43,7 @@ void		print_maps(void)
 	{
 		align(i, k);
 		j = -1;
-		while (++j < 32)
+		while (++j < 32 && i < MEM_SIZE)
 		{
 			buf2 = ft_itoa_base(g_vm->map0[i], 16);
 			if (ft_strlen(buf2) < 2)
