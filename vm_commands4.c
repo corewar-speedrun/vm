@@ -130,7 +130,7 @@ void		vm_com_lld(t_car *car)
 		{
 			car->car_reg[tmp] = car->com_args[0];
 			(car->car_reg[tmp] == 0) ? (car->carry = 1) : (car->carry = 0);
-			car->car_next_pos = i;
+			car->car_next_pos = i + 1;
 		}	
 	}
 	else 

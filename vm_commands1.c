@@ -39,7 +39,10 @@ void	vm_com_live2(int champ_namber)
 	write(1, " (", 2);
 	ft_putstr(g_vm->champs[champ_namber]->name);
 	write(1, ") ", 2);
-	ft_putstr("is said to be alive\n\0");	
+	ft_putstr("is said to be alive at \0");
+	ft_putnbr(g_vm->cycle);
+	ft_putstr("cycle\n\0");
+
 }
 
 void		vm_com_add(t_car *car)
