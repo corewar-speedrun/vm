@@ -24,7 +24,6 @@ void	vm_com_live(t_car *car)/////////////////////
 		g_vm->champs[champ_namber]->live += 1;
 		g_vm->champs[champ_namber]->last_live = g_vm->cycle;
 		g_vm->map3[car->car_pos] = 1;
-		g_vm->live_checks++;
 		if (g_vm->flag_say_alive == 1 && g_vm->flag_visualize != 1)
 			vm_com_live2(champ_namber);
 	}

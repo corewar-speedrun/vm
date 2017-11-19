@@ -22,7 +22,10 @@ void	vm_read_comand(t_car *car)
 		car->comand = (int)tmp;
 		car->count = vm_cycles_count((int)tmp);
 		if (car->comand == 1)
+		{
 			car->live = 1;
+			g_vm->live_checks++;
+		}
 	}
 	else
 	{
