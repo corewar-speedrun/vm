@@ -6,7 +6,7 @@
 /*   By: nsharova <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/13 15:07:20 by nsharova          #+#    #+#             */
-/*   Updated: 2017/11/19 18:53:06 by nsharova         ###   ########.fr       */
+/*   Updated: 2017/11/19 19:30:28 by nsharova         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ void		vm_com_xor(t_car *car)
 		if (tmp > 0 && tmp <= 16)
 		{
 			car->car_reg[tmp] = car->com_args[0] ^ car->com_args[1];
-			car->cary = (car->car_reg[tmp] == 0) ? 1 : 0;
+			car->carry = (car->car_reg[tmp] == 0) ? 1 : 0;
 			car->car_next_pos = i + 1;
 		}
 	}
