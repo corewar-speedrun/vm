@@ -95,7 +95,7 @@ typedef struct		s_vm
 	int             move;
 }					t_vm;
 
-t_vm				*g_vm;
+extern t_vm				*g_vm;
 
 /*
 ** t_vm - главная структура виртуальной машины.
