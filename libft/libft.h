@@ -239,5 +239,6 @@ char					ft_printf_itoa_hash(int base, t_arg *s);
 void					ft_printf_data_p(t_arg *s);
 int						ft_printf_chek_data(char f);
 int						ft_atoi_base(unsigned char *str, int str_base);
+char					*ft_itoa_base(int value, int base);
 
 #endif

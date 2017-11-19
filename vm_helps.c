@@ -12,60 +12,106 @@
 
 #include "corewar.h"
 
-void	print_maps(void) ////////////////////////////////\\\\\\\\\\\\\\\\\\\\\ Денис: прикрути сюда ф-цию вывода 
+void		align(int i, int k)
 {
+	char	*buf;
 
-	int i = -1;
-	int z = 1;
-	printf("code map\n");
-	while (++i < MEM_SIZE)
-	{
-		printf("|%x| ", g_vm->map0[i]);
-		if (z % 4 == 0)
-			printf("  ");
-		if (z % 32 == 0)
-			printf("\n");
-		z++;
-	}
-	printf("\n");
-	i = -1;
-	z = 1;
-	printf("champs\n");
-	while (++i < MEM_SIZE)
-	{
-		printf("|%x| ", g_vm->map1[i]);
-		if (z % 4 == 0)
-			printf("  ");
-		if (z % 32 == 0)
-			printf("\n");
-		z++;
-	}
-	printf("caretki\n");
-	i = -1;
-	z = 1;
-	while (++i < MEM_SIZE)
-	{
-		printf("|%x| ", g_vm->map2[i]);
-		if (z % 4 == 0)
-			printf("  ");
-		if (z % 32 == 0)
-			printf("\n");
-		z++;
-	}
-	printf("last modifay\n");
-	i = -1;
-	z = 1;
-	while (++i < MEM_SIZE)
-	{
-		printf("|%x| ", g_vm->map3[i]);
-		if (z % 4 == 0)
-			printf("  ");
-		if (z % 32 == 0)
-			printf("\n");
-		z++;
-	}
-	printf("\n");
+	buf = ft_itoa_base(i - k, 16);
+	ft_putstr("0x");
+	if (ft_strlen(buf) == 3)
+		ft_putstr("0");
+	else if (ft_strlen(buf) == 2)
+		ft_putstr("00");
+	else if (ft_strlen(buf) == 1)
+		ft_putstr("000");
+	ft_putstr(buf);
+	ft_putstr(" : ");
+	ft_strdel(&buf);
 }
+
+void		print_maps(void)
+{
+	int		i;
+	int		j;
+	int		k;
+	char	*buf2;
+
+	i = -1;
+	k = 0;
+	j = -1;
+	while (++i < MEM_SIZE)
+	{
+		align(i, k);
+		j = -1;
+		while (++j < 32)
+		{
+			buf2 = ft_itoa_base(g_vm->map0[i], 16);
+			if (ft_strlen(buf2) < 2)
+				ft_putchar('0');
+			ft_putstr(buf2);
+			ft_putchar(' ');
+			i++;
+			ft_strdel(&buf2);
+		}
+		ft_putchar('\n');
+		k++;
+	}
+}
+
+// void	print_maps(void) ////////////////////////////////\\\\\\\\\\\\\\\\\\\\\ Денис: прикрути сюда ф-цию вывода 
+// {
+
+// 	int i = -1;
+// 	int z = 1;
+// 	printf("code map\n");
+// 	while (++i < MEM_SIZE)
+// 	{
+// 		printf("|%x| ", g_vm->map0[i]);
+// 		if (z % 4 == 0)
+// 			printf("  ");
+// 		if (z % 32 == 0)
+// 			printf("\n");
+// 		z++;
+// 	}
+// 	printf("\n");
+// 	i = -1;
+// 	z = 1;
+// 	printf("champs\n");
+// 	while (++i < MEM_SIZE)
+// 	{
+// 		printf("|%x| ", g_vm->map1[i]);
+// 		if (z % 4 == 0)
+// 			printf("  ");
+// 		if (z % 32 == 0)
+// 			printf("\n");
+// 		z++;
+// 	}
+// 	printf("caretki\n");
+// 	i = -1;
+// 	z = 1;
+// 	while (++i < MEM_SIZE)
+// 	{
+// 		printf("|%x| ", g_vm->map2[i]);
+// 		if (z % 4 == 0)
+// 			printf("  ");
+// 		if (z % 32 == 0)
+// 			printf("\n");
+// 		z++;
+// 	}
+// 	printf("last modifay\n");
+// 	i = -1;
+// 	z = 1;
+// 	while (++i < MEM_SIZE)
+// 	{
+// 		printf("|%x| ", g_vm->map3[i]);
+// 		if (z % 4 == 0)
+// 			printf("  ");
+// 		if (z % 32 == 0)
+// 			printf("\n");
+// 		z++;
+// 	}
+// 	printf("\n");
+// }
 
 int		vm_error(int error)
 {

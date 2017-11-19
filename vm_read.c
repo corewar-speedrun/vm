@@ -49,6 +49,7 @@ int				vm_read_flag2(char *str)
 			return (0);
 		}
 	}
+	/////////////////////добавь проверку на больше-равно нуля///////////////////
 	g_vm->damp = ft_atoi(str);
 	if (g_vm->damp < 1)
 		g_vm->error = 10;
