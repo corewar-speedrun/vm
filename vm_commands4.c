@@ -6,7 +6,7 @@
 /*   By: nsharova <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/13 15:07:20 by nsharova          #+#    #+#             */
-/*   Updated: 2017/11/19 19:30:28 by nsharova         ###   ########.fr       */
+/*   Updated: 2017/11/19 20:16:01 by nsharova         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void		vm_com_and(t_car *car)
 		{
 			car->car_reg[tmp] = car->com_args[0] & car->com_args[1];
 			car->carry = (car->car_reg[tmp] == 0) ? 1 : 0;
-			car->car_next_pos = i + 1;
+			car->car_next_pos = i;
 		}
 	}
 	else
@@ -53,7 +53,7 @@ void		vm_com_or(t_car *car)
 		{
 			car->car_reg[tmp] = car->com_args[0] | car->com_args[1];
 			car->carry = (car->car_reg[tmp] == 0) ? 1 : 0;
-			car->car_next_pos = i + 1;
+			car->car_next_pos = i;
 		}
 	}
 	else
@@ -79,7 +79,7 @@ void		vm_com_xor(t_car *car)
 		{
 			car->car_reg[tmp] = car->com_args[0] ^ car->com_args[1];
 			car->carry = (car->car_reg[tmp] == 0) ? 1 : 0;
-			car->car_next_pos = i + 1;
+			car->car_next_pos = i;
 		}
 	}
 	else
@@ -122,7 +122,7 @@ void		vm_com_lld(t_car *car)
 
 	i = 2;
 	i += vm_get_arg(car, 0, i);
-	if (car->c_byte[1] == 1)
+	if ((car->c_byte[0] == 2 || car->c_byte[0] == 3) && car->c_byte[1] == 1)
 	{
 		tmp = g_vm->map0[(car->car_pos + i) % MEM_SIZE];
 		if (tmp > 0 && tmp <= 16)
