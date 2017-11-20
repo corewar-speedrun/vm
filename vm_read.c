@@ -12,25 +12,6 @@
 
 #include "corewar.h"
 
-/*
-** vm_read_flag - работа с флагами. Закодить.
-*/
-
-int				vm_read_flag(char *str)
-{
-	if (g_vm->error == 2)
-		g_vm->error = -1;
-	if (str[1] == 'l')
-		g_vm->flag_say_alive = 1;
-	else if (str[1] == 'v')
-		g_vm->flag_visualize = 1;
-	else if (ft_strequ(&str[1], "damp\0"))
-		return (1);
-	else
-		g_vm->error = 8;
-	return (0);
-}
-
 void			vm_read1(int i, char **arg, int x, int flag)
 {
 	int	fd;
@@ -39,8 +20,8 @@ void			vm_read1(int i, char **arg, int x, int flag)
 	{
 		if ((fd = open(arg[x], O_RDONLY)) == -1 && g_vm->error == -1)
 			g_vm->error = 2;
-		if (flag == 1 && (g_vm->error == -1 || g_vm->error == 2))
-			flag = vm_read_flag2(arg[x]);
+		if (flag > 0 && (g_vm->error == -1 || g_vm->error == 2))
+			flag = vm_read_flag2(i, arg, x, flag);
 		else if (arg[x][0] == '-' && (g_vm->error == -1 || g_vm->error == 2))
 			flag = vm_read_flag(arg[x]);
 		else if (vm_read_magic(fd, 0) == 1 && g_vm->champs_nmbr == 4)
@@ -68,6 +49,42 @@ void			vm_read1(int i, char **arg, int x, int flag)
 ** vm_read_magic - проверяет первые 4 байта на соответствие COREWAR_EXEC_MAGIC.
 ** Если vm_read_magic вернуло 1, это чемпион, начинаем его парсить. Если
 ** вернуло 0, нам засунули дичь, посылаем нафиг, выводим usage.
+*/
+
+t_champ			*vm_parsing(int fd)
+{
+	t_champ			*tmp;
+	unsigned char	buf[10];
+
+	if (!(tmp = (t_champ *)malloc(sizeof(t_champ) * 1)))
+		return (NULL);
+	ft_bzero(tmp, sizeof(t_champ));
+	if (g_vm->error == -1)
+		tmp->name = (char *)vm_read_script(PROG_NAME_LENGTH + 4, fd, 1);
+	if (g_vm->error == -1)
+		tmp->size = vm_read_size(4, fd);
+	if (g_vm->error == -1)
+		tmp->comment = (char *)vm_read_script(COMMENT_LENGTH + 4, fd, 1);
+	if (g_vm->error == -1 && tmp->size <= (MEM_SIZE / 6))
+		tmp->src = vm_read_script(tmp->size, fd, 0);
+	if (g_vm->error == -1)
+		tmp->nmbr = g_vm->champs_nmbr + 1;
+	else if (g_vm->error == -1)
+		g_vm->error = 4;
+	if (read(fd, &buf, 10) != 0)
+		g_vm->error = 6;
+	return (tmp);
+}
+
+/*
+** vm_parsing - малочим память под чемпиона и парсим в нее чемпиона
+**
+** tmp->name - имя чемпиона. кащу к char.
+** tmp->size - размер рабочего кода чемпиона. считываю согласно этого размера и
+** на поле размещать исходя из этого значения. перевожу в инт через атои_бейс.
+** tmp->comment - комент. в оригинальной ВМ без визуализатора выводится, с
+** визуализатором не используется. у нас должно выводится dвезде. кащу в char.
+** tmp->src - исходный код чемпиона. размещается на игровом поле.
 */
 
 int				vm_read_size(int i, int fd)

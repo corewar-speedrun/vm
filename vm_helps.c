@@ -75,7 +75,7 @@ int		vm_error(int error)
 	else if (error == 7)
 		vm_usage("We need a champion!\n\0");
 	else if (error == 8)
-		vm_usage("Some unknown flag\n\0");
+		vm_usage("Some unknown flag of incirect usage\n\0");
 	else if (error == 9)
 		vm_usage("Too many champions\n\0");
 	else if (error == 10)
