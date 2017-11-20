@@ -31,7 +31,7 @@ int		vm_find_next_pos(t_car *car)
 					c_nmbr == 13 || c_nmbr == 16))
 			r += 4;
 		else if (car->c_byte[i] == 2 && ((c_nmbr >= 9 && c_nmbr <= 12) ||
-					c_nmbr == 14))
+					c_nmbr == 14 || c_nmbr == 15))
 			r += 2;
 		else if (car->c_byte[i] == 3)
 			r += 2;
