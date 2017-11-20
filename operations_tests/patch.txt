@@ -1,0 +1,3 @@
+Introducing contestants...
+=== Player 1, weighing 27 bytes: ^[[1;31mldi_IDR    # ldi #
+^[[;0m0

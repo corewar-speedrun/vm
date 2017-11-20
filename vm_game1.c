@@ -23,12 +23,12 @@ void	vm_make_game(t_car *car)
 		{
 			if (g_vm->map2[car->car_pos] != 1)
 				g_vm->map2[car->car_pos] = 1;
-			if (car->count > 0)
-				car->count--;
 			if (car->comand == 0)
 				vm_read_comand(car);
-			else if (car->count == 0 && car->comand != 0)
+			else if (car->count == 1 && car->comand != 0)
 				vm_make_move(car);
+			if (car->count > 0)
+				car->count--;
 			car = car->next_car;
 		}
 		vm_make_game2(car, -1);
