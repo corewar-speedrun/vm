@@ -17,6 +17,7 @@
 # include <fcntl.h>
 # include <stdio.h>
 # include "libft/libft.h"
+# include <ncurses.h>
 
 # define MAX_PLAYERS		4
 # define MEM_SIZE			(4*1024)
@@ -110,6 +111,7 @@ typedef struct		s_vm
 	int				flag_visualize;
 	int				sleep;
 	int				move;
+	int				flag;
 }					t_vm;
 
 extern t_vm			*g_vm;
@@ -236,5 +238,19 @@ int					vm_usage(char *re);
 void				print_maps(void);
 int					vm_cycles_count(int tmp);
 int					ncurses(int sleep);
+void				with_comment(WINDOW *win[2]);
+void				shit(WINDOW *win[2], int i);
+void				fnkg_shit(WINDOW *win[2], int i);
+int					paused(WINDOW *win[2], int sleep);
+void				init(void);
+void				print_f_player(WINDOW *win[2]);
+void				print_s_player(WINDOW *win[2]);
+void				print_th_player(WINDOW *win[2]);
+void				print_fo_player(WINDOW *win[2]);
+void				players_color(WINDOW *win[2], int i);
+int					key_managment(int ch, int speed);
+
+
+
 
 #endif
