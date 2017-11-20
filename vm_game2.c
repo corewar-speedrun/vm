@@ -116,6 +116,7 @@ void	vm_finish_game(void)
 	int won;
 	int live;
 
+	system("say JOBS DONE");
 	i = 0;
 	won = 1;
 	live = 0;

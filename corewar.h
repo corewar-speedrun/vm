@@ -38,7 +38,6 @@
 
 # define TRUE		1
 # define FALSE		0
-# define LEAK system("leaks corewar");
 
 typedef struct		s_champ
 {

@@ -82,7 +82,7 @@ void		print_window(WINDOW *win[2], int sleep)
 	mvwprintw(win[1], 7, 4, "%s %d", "Cycle :", g_vm->cycle);
 	mvwprintw(win[1], 9, 4, "%s %d", "Processes :", g_vm->cars_nmbr);
 	print_players(win);
-	mvwprintw(win[1], 5, 27, "speed %d         ", sleep);
+	mvwprintw(win[1], 5, 27, "delay %d         ", sleep);
 }
 
 void		print_mem(WINDOW *win[2], int sleep)

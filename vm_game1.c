@@ -14,6 +14,7 @@
 
 void	vm_make_game(t_car *car)
 {
+	system("say LETS START WAR");
 	while (g_vm->game > 0)
 	{
 		car = g_vm->cars;
@@ -90,6 +91,7 @@ void	vm_car_to_die(t_car *tmp, t_car *start)
 		if (g_vm->map2[start->car_pos] == 1)
 			g_vm->map2[start->car_pos] = 0;
 		free(start);
+		system("say CAR IS DEAD");
 		g_vm->cars_nmbr -= 1;
 		start = tmp;
 	}
@@ -120,6 +122,7 @@ void	vm_car_to_die2(t_car *tmp1, t_car *tmp2, t_car *tmp3)
 			if (g_vm->map2[tmp2->car_pos] == 1)
 				g_vm->map2[tmp2->car_pos] = 0;
 			free(tmp2);
+			system("say CAR IS DEAD");
 			g_vm->cars_nmbr -= 1;
 			tmp1->next_car = tmp3;
 		}
