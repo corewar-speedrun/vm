@@ -48,24 +48,24 @@ int		check_numbers(int i, int j)
 
 void	kakatofn(void)
 {
-	int		f;
-	int		i;
-	t_champ	*tmp;
+// 	int		f;
+// 	int		i;
+// 	t_champ	*tmp;
 
-	i = 0;
-	f = 1;
-	!check_numbers(0, 0) ? (f = 0) : 0;
-	if (f)
-	{
-		while (++i < 5)
-		{
-			if (g_vm->nambering[i] != i)
-			{
-				tmp = g_vm->champ[g_vm->nambering[i]];
-				g_vm->champ[i] = g_vm->champ[g_vm->nambering[i]];
-				g_vm->champ[g_vm->nambering[i]] = tmp;
-				free(tmp);
-			}
-		}
-	}
+// 	i = 0;
+// 	f = 1;
+// 	!check_numbers(0, 0) ? (f = 0) : 0;
+// 	if (f)
+// 	{
+// 		while (++i < 5)
+// 		{
+// 			if (g_vm->nambering[i] != i)
+// 			{
+// 				tmp = g_vm->champ[g_vm->nambering[i]];
+// 				g_vm->champ[i] = g_vm->champ[g_vm->nambering[i]];
+// 				g_vm->champ[g_vm->nambering[i]] = tmp;
+// 				free(tmp);
+// 			}
+// 		}
+// 	}
 }
