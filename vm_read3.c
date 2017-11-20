@@ -47,7 +47,8 @@ void	vm_split_champs(void)
 	{
 		while (++i < 5)
 		{
-			if (g_vm->nambering[i] != i && g_vm->nambering[i] != 0)
+			if (g_vm->nambering[i] != i && g_vm->nambering[i] != 0
+				&& i < g_vm->nambering[i])
 			{
 				tmp = g_vm->champs[i];
 				g_vm->champs[i] = g_vm->champs[g_vm->nambering[i]];
