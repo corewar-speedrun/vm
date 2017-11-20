@@ -144,7 +144,13 @@ int					vm_read_size(int i, int fd)
 		while (++x < i)
 			z = (z << 8) | buf[x];
 	}
-	return (z);
+	if (z < CHAMP_MAX_SIZE)
+		return (z);
+	else
+	{
+		g_vm->error = 11;
+		return (0);
+	}
 }
 
 /*

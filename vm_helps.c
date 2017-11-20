@@ -135,6 +135,8 @@ int		vm_error(int error)
 		vm_usage("Too many champions\n\0");
 	else if (error == 10)
 		vm_usage("Damp must be bigger than zero\n\0");
+	else if (error == 11)
+		vm_usage("Champ must be smaller than CHAMP_MAX_SIZE\n\0");
 	else
 		ft_putstr_fd("Some unknow error.\n\0", 2);
 	return (0);

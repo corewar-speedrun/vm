@@ -17,10 +17,26 @@
 # include <fcntl.h>
 # include <stdio.h>
 # include "libft/libft.h"
-# include "op.h"
 
-# define TRUE 1
-# define FALSE 0
+# define MAX_PLAYERS		4
+# define MEM_SIZE			(4*1024)
+# define IDX_MOD			(MEM_SIZE / 8)
+# define CHAMP_MAX_SIZE		(MEM_SIZE / 6)
+
+# define REG_NUMBER			16
+# define REG_SIZE			4
+
+# define CYCLE_TO_DIE		1536
+# define CYCLE_DELTA		50
+# define NBR_LIVE			21
+# define MAX_CHECKS			10
+
+# define PROG_NAME_LENGTH	(128)
+# define COMMENT_LENGTH		(2048)
+# define COREWAR_EXEC_MAGIC	0xea83f3
+
+# define TRUE		1
+# define FALSE		0
 
 typedef struct		s_champ
 {
@@ -91,11 +107,11 @@ typedef struct		s_vm
 	int				to_die;
 	int				flag_say_alive;
 	int				flag_visualize;
-	int             sleep;
-	int             move;
+	int				sleep;
+	int				move;
 }					t_vm;
 
-extern t_vm				*g_vm;
+extern t_vm			*g_vm;
 
 /*
 ** t_vm - главная структура виртуальной машины.
