@@ -51,6 +51,11 @@ void	vm_split_champs(void)
 				&& i < g_vm->nambering[i])
 			{
 				tmp = g_vm->champs[i];
+				if (!tmp)
+				{
+					g_vm->error = 8;
+					return ;
+				}
 				g_vm->champs[i] = g_vm->champs[g_vm->nambering[i]];
 				g_vm->champs[g_vm->nambering[i]] = tmp;
 			}
