@@ -11,11 +11,7 @@
 /* ************************************************************************** */
 
 #include "corewar.h"
-<<<<<<< HEAD
 t_vm		*g_vm;
-=======
-t_vm	*g_vm;
->>>>>>> fd1da773baea34fc34d8d665bd753ad8a7f0d985
 
 int		main(int i, char **arg)
 {
