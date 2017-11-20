@@ -75,8 +75,6 @@ int		vm_get_t_ind(t_car *car, int index, int i)
 		tmp2 = g_vm->map0[b % MEM_SIZE];
 		b = (car->car_pos + ind + z);
 		tmp2 = g_vm->map0[b % MEM_SIZE];
-		// printf("tmp vm_get_t_ind: %d\n", (car->car_pos + ind + z) % MEM_SIZE );
-		// printf("tmp vm_get_t_ind: %d\n", b % MEM_SIZE );
 		car->com_args[index] = (car->com_args[index] << 8) | tmp2;
 	}
 	return (2);
