@@ -6,7 +6,7 @@
 /*   By: dverbyts <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/13 15:07:20 by nsharova          #+#    #+#             */
-/*   Updated: 2017/11/13 15:07:24 by nsharova         ###   ########.fr       */
+/*   Updated: 2017/11/20 09:34:25 by dmaznyts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,12 +39,12 @@ int		vm_get_t_reg(t_car *car, int index, int i)
 int		vm_get_t_dir(t_car *car, int index, int i)
 {
 	unsigned char	tmp1;
-	int 			z;
+	int				z;
 	int				size;
 
 	z = -1;
 	size = ((car->comand >= 1 && car->comand <= 8) ||
-		car->comand == 13 || car->comand == 16) ? 4 : 2;
+			car->comand == 13 || car->comand == 16) ? 4 : 2;
 	while (++z < size)
 	{
 		tmp1 = g_vm->map0[(car->car_pos + z + i) % MEM_SIZE];
@@ -57,7 +57,7 @@ int		vm_get_t_ind(t_car *car, int index, int i)
 {
 	unsigned char	tmp1;
 	unsigned char	tmp2;
-	int 			z;
+	int				z;
 	short int		ind;
 
 	z = -1;

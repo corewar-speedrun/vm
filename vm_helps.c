@@ -6,13 +6,13 @@
 /*   By: dverbyts <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/06 16:22:02 by dverbyts          #+#    #+#             */
-/*   Updated: 2017/11/06 16:22:04 by dverbyts         ###   ########.fr       */
+/*   Updated: 2017/11/20 09:39:36 by dmaznyts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
 
-void		align(int i, int k)
+void	align(int i, int k)
 {
 	char	*buf;
 
@@ -29,7 +29,7 @@ void		align(int i, int k)
 	ft_strdel(&buf);
 }
 
-void		print_maps(void)
+void	print_maps(void)
 {
 	int		i;
 	int		j;
@@ -58,65 +58,10 @@ void		print_maps(void)
 	}
 }
 
-// void	print_maps(void) ////////////////////////////////\\\\\\\\\\\\\\\\\\\\\ Денис: прикрути сюда ф-цию вывода 
-// {
-
-// 	int i = -1;
-// 	int z = 1;
-// 	printf("code map\n");
-// 	while (++i < MEM_SIZE)
-// 	{
-// 		printf("|%x| ", g_vm->map0[i]);
-// 		if (z % 4 == 0)
-// 			printf("  ");
-// 		if (z % 32 == 0)
-// 			printf("\n");
-// 		z++;
-// 	}
-// 	printf("\n");
-// 	i = -1;
-// 	z = 1;
-// 	printf("champs\n");
-// 	while (++i < MEM_SIZE)
-// 	{
-// 		printf("|%x| ", g_vm->map1[i]);
-// 		if (z % 4 == 0)
-// 			printf("  ");
-// 		if (z % 32 == 0)
-// 			printf("\n");
-// 		z++;
-// 	}
-// 	printf("caretki\n");
-// 	i = -1;
-// 	z = 1;
-// 	while (++i < MEM_SIZE)
-// 	{
-// 		printf("|%x| ", g_vm->map2[i]);
-// 		if (z % 4 == 0)
-// 			printf("  ");
-// 		if (z % 32 == 0)
-// 			printf("\n");
-// 		z++;
-// 	}
-// 	printf("last modifay\n");
-// 	i = -1;
-// 	z = 1;
-// 	while (++i < MEM_SIZE)
-// 	{
-// 		printf("|%x| ", g_vm->map3[i]);
-// 		if (z % 4 == 0)
-// 			printf("  ");
-// 		if (z % 32 == 0)
-// 			printf("\n");
-// 		z++;
-// 	}
-// 	printf("\n");
-// }
-
 int		vm_error(int error)
 {
 	if (error == 1)
-		return(vm_usage("Invalid argument.\n\0"));
+		return (vm_usage("Invalid argument.\n\0"));
 	else if (error == 2)
 		ft_putstr_fd("Invalid or empty file.\n\0", 2);
 	else if (error == 3)
@@ -124,9 +69,9 @@ int		vm_error(int error)
 	else if (error == 4)
 		ft_putstr_fd("Champion size too big. > CHAMP_MAX_SIZE\n\0", 2);
 	else if (error == 5)
-		ft_putstr_fd("We need \\0 at the end of champion name or comment\n\0", 2);
+		ft_putstr_fd("We need \\0 at the end of champ name or comment\n\0", 2);
 	else if (error == 6)
-		ft_putstr_fd("Champion size error. Size != encoded size by Assembler\n\0", 2);
+		ft_putstr_fd("Champion size != encoded size by Assembler\n\0", 2);
 	else if (error == 7)
 		vm_usage("We need a champion!\n\0");
 	else if (error == 8)
@@ -135,6 +80,8 @@ int		vm_error(int error)
 		vm_usage("Too many champions\n\0");
 	else if (error == 10)
 		vm_usage("Damp must be bigger than zero\n\0");
+	else if (error == 11)
+		vm_usage("Champ must be smaller than CHAMP_MAX_SIZE\n\0");
 	else
 		ft_putstr_fd("Some unknow error.\n\0", 2);
 	return (0);
@@ -149,8 +96,8 @@ int		vm_error(int error)
 ** error == 4 - champion size > CHAMP_MAX_SIZE
 ** error == 5 - no \0 at the end of champion name or comment
 ** error == 6 - Champion size != encoded size by Assembler
-** error == 7 - Wee need a champion > 0! 
-** error == 8 - Wrong flag 
+** error == 7 - Wee need a champion > 0!
+** error == 8 - Wrong flag
 ** error == 9 - Too many champions
 ** error == 10 - damp < 1;
 */
@@ -181,28 +128,4 @@ void	vm_map_write(int c, int p, t_car *car)
 	g_vm->map3[(p + 1) % MEM_SIZE] = 1;
 	g_vm->map3[(p + 2) % MEM_SIZE] = 1;
 	g_vm->map3[(p + 3) % MEM_SIZE] = 1;
-	// printf("|%x| %d ", g_vm->map0[p % MEM_SIZE], p % MEM_SIZE);
-	// printf("|%x| %d ", g_vm->map0[(p + 1) % MEM_SIZE], (p + 1) % MEM_SIZE);
-	// printf("|%x| %d ", g_vm->map0[(p + 2) % MEM_SIZE], (p + 2) % MEM_SIZE);
-	// printf("|%x| %d \n", g_vm->map0[(p + 3) % MEM_SIZE], (p + 3) % MEM_SIZE);
-	// printf("|%x| ", g_vm->map1[p % MEM_SIZE]);
-	// printf("|%x| ", g_vm->map1[(p + 1) % MEM_SIZE]);
-	// printf("|%x| ", g_vm->map1[(p + 2) % MEM_SIZE]);
-	// printf("|%x|\n", g_vm->map1[(p + 3) % MEM_SIZE]);
-	// printf("|%x| ", g_vm->map3[p % MEM_SIZE]);
-	// printf("|%x| ", g_vm->map3[(p + 1) % MEM_SIZE]);
-	// printf("|%x| ", g_vm->map3[(p + 2) % MEM_SIZE]);
-	// printf("|%x| \n", g_vm->map3[(p + 3) % MEM_SIZE]);
-	// printf("\ncycle %d\ncomand %d\npos %d\narg1 %d\narg2 %d\narg3 %d\nreg1 %d\nreg2 %d\nreg3 %d\n", g_vm->cycle, car->comand, car->car_pos, car->com_args[0], car->com_args[1], car->com_args[2], car->car_reg[0], car->car_reg[1], car->car_reg[2]);
-	// print_maps();
 }
-
-
-
-
-
-
-
-
-
-

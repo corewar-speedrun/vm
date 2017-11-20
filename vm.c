@@ -6,12 +6,17 @@
 /*   By: dverbyts <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/24 14:20:18 by dverbyts          #+#    #+#             */
-/*   Updated: 2017/11/19 18:36:29 by nsharova         ###   ########.fr       */
+/*   Updated: 2017/11/20 09:22:22 by dmaznyts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
+<<<<<<< HEAD
 t_vm		*g_vm;
+=======
+
+t_vm	*g_vm;
+>>>>>>> 4257091313e5b031b4149ad563ef38ae0c810ae8
 
 int		main(int i, char **arg)
 {
