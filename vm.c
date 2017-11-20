@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "corewar.h"
+
 t_vm		*g_vm;
   
 int		main(int i, char **arg)
@@ -21,6 +22,9 @@ int		main(int i, char **arg)
 		return (0);
 	vm_init();
 	vm_read1(i, arg, 0, 0);
+	if (g_vm->error != -1)
+		return (vm_error(g_vm->error));
+	vm_split_champs();
 	if (g_vm->error != -1)
 		return (vm_error(g_vm->error));
 	vm_init_champs();

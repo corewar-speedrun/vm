@@ -29,7 +29,7 @@ int	ft_atoi_base(unsigned char *str, int str_base)
 	int temp;
 	int value;
 	int sign;
-	
+
 	value = 0;
 	sign = 1;
 	if (str_base < 2 || str_base > 16 || (!str))
