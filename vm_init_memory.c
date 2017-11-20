@@ -35,6 +35,8 @@ void	vm_init(void)
 	g_vm->to_die = CYCLE_TO_DIE;
 	g_vm->die_cycle = g_vm->to_die;
 	g_vm->max_live_checks = MAX_CHECKS;
+	g_vm->sleep = 1;
+	g_vm->move = 0;
 	return ;
 }
 

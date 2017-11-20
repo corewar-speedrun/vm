@@ -69,9 +69,9 @@ int		vm_error(int error)
 	else if (error == 4)
 		ft_putstr_fd("Champion size too big. > CHAMP_MAX_SIZE\n\0", 2);
 	else if (error == 5)
-		ft_putstr_fd("We need \\0 at the end of champion name or comment\n\0", 2);
+		ft_putstr_fd("We need \\0 at the end of champ name or comment\n\0", 2);
 	else if (error == 6)
-		ft_putstr_fd("Champion size error. Size != encoded size by Assembler\n\0", 2);
+		ft_putstr_fd("Champion size != encoded size by Assembler\n\0", 2);
 	else if (error == 7)
 		vm_usage("We need a champion!\n\0");
 	else if (error == 8)
