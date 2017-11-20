@@ -18,7 +18,8 @@ int		vm_check_numbers(int i, int j)
 	{
 		j = 0;
 		while (++j < 5)
-			if (g_vm->nambering[i] == g_vm->nambering[j])
+			if (g_vm->nambering[i] == g_vm->nambering[j] &&
+				g_vm->nambering[i] != 0)
 			{
 				g_vm->error = 8;
 				return (0);
@@ -35,7 +36,7 @@ void	vm_split_champs(void)
 
 	i = 0;
 	f = 1;
-	!check_numbers(0, 0) ? (f = 0) : 0;
+	!vm_check_numbers(0, 0) ? (f = 0) : 0;
 	if (f)
 	{
 		while (++i < 5)

@@ -167,7 +167,7 @@ int					vm_read_flag3(int i, char **arg, int x, int flag);
 int					vm_read_flag4(char **arg, int x);
 int					vm_read_size(int i, int fd);
 void				vm_read1(int i, char **arg, int x, int flag);
-void				vm_split_champs(void)
+void				vm_split_champs(void);
 
 /*
 ** VM_init_game_&&_plase_champs

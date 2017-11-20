@@ -24,7 +24,7 @@ int		main(int i, char **arg)
 	vm_read1(i, arg, 0, 0);
 	if (g_vm->error != -1)
 		return (vm_error(g_vm->error));
-	kakatofn();
+	vm_split_champs();
 	if (g_vm->error != -1)
 		return (vm_error(g_vm->error));
 	vm_init_champs();
