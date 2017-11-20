@@ -6,7 +6,7 @@
 /*   By: dverbyts <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/15 17:22:52 by dverbyts          #+#    #+#             */
-/*   Updated: 2017/11/15 17:22:55 by dverbyts         ###   ########.fr       */
+/*   Updated: 2017/11/20 09:33:02 by dmaznyts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 void				vm_com_aff(t_car *car)
 {
-	int tmp;
-	char a;
+	int		tmp;
+	char	a;
 
 	vm_get_reg_dir(car, 0, 2);
 	if (car->c_byte[1] == 1 && car->com_args[0] > 0 && car->com_args[0] < 17)
@@ -24,7 +24,7 @@ void				vm_com_aff(t_car *car)
 		while (tmp > 0)
 		{
 			a = tmp % 256;
-			write (1, &a, 1);
+			write(1, &a, 1);
 			tmp = tmp / 256;
 		}
 	}
@@ -44,14 +44,14 @@ void				vm_com_ldi(t_car *car)
 		else
 			vm_get_reg_dir(car, 0, i);
 		if (car->c_byte[0] == 1)
-			i +=1;
+			i += 1;
 		else
-			i +=2;
+			i += 2;
 		vm_get_reg_dir(car, 1, i);
 		if (car->c_byte[1] == 1)
-			i +=1;
+			i += 1;
 		else
-			i +=2;
+			i += 2;
 		vm_get_reg_dir(car, 2, i);
 		vm_com_ldi2(car);
 	}
@@ -91,14 +91,14 @@ void				vm_com_lldi(t_car *car)
 		else
 			vm_get_reg_dir(car, 0, i);
 		if (car->c_byte[0] == 1)
-			i +=1;
+			i += 1;
 		else
-			i +=2;
+			i += 2;
 		vm_get_reg_dir(car, 1, i);
 		if (car->c_byte[1] == 1)
-			i +=1;
+			i += 1;
 		else
-			i +=2;
+			i += 2;
 		vm_get_reg_dir(car, 2, i);
 		vm_com_lldi2(car);
 	}

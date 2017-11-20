@@ -6,7 +6,7 @@
 #    By: dverbyts <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/02 13:10:10 by dverbyts          #+#    #+#              #
-#    Updated: 2017/11/16 21:35:36 by dverbyts         ###   ########.fr        #
+#    Updated: 2017/11/20 09:59:40 by dmaznyts         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ CFLAGS = -Wall -Wextra -Werror -g -O3
 
 SRC = vm.c vm_init_memory.c vm_read.c vm_helps.c ncurses.c vm_commands1.c \
 vm_commands2.c vm_commands3.c vm_commands4.c vm_commands_help.c \
-vm_commands_help2.c vm_game1.c vm_game2.c
+vm_commands_help2.c vm_game1.c vm_game2.c vm_read2.c
 
 OBJ = $(SRC:.c=.o)
 

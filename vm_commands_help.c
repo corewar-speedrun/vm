@@ -6,7 +6,7 @@
 /*   By: dverbyts <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/13 16:24:08 by dverbyts          #+#    #+#             */
-/*   Updated: 2017/11/13 16:24:11 by dverbyts         ###   ########.fr       */
+/*   Updated: 2017/11/20 09:49:11 by dmaznyts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,10 @@ int		vm_find_next_pos(t_car *car)
 		if (car->c_byte[i] == 1)
 			r += 1;
 		else if (car->c_byte[i] == 2 && ((c_nmbr >= 1 && c_nmbr <= 8) ||
-			c_nmbr == 13 || c_nmbr == 16))
+					c_nmbr == 13 || c_nmbr == 16))
 			r += 4;
 		else if (car->c_byte[i] == 2 && ((c_nmbr >= 9 && c_nmbr <= 12) ||
-			c_nmbr == 14))
+					c_nmbr == 14))
 			r += 2;
 		else if (car->c_byte[i] == 3)
 			r += 2;
@@ -55,7 +55,7 @@ void	vm_car_clean(t_car *car)
 		g_vm->map2[car->car_pos] = 0;
 }
 
-void		vm_parse_code_byte(t_car *car)
+void	vm_parse_code_byte(t_car *car)
 {
 	unsigned char code_byte;
 
@@ -77,10 +77,10 @@ void	vm_get_reg_dir(t_car *car, int index, int i)
 	if (car->c_byte[index] == 1)
 		size = 1;
 	else if (car->c_byte[index] == 2 && ((c_nmbr >= 1 && c_nmbr <= 8) ||
-		c_nmbr == 13 || c_nmbr == 16))
+				c_nmbr == 13 || c_nmbr == 16))
 		size = 4;
 	else if (car->c_byte[index] == 2 && ((c_nmbr >= 9 && c_nmbr <= 12) ||
-		c_nmbr == 14 || c_nmbr == 15))
+				c_nmbr == 14 || c_nmbr == 15))
 		size = 2;
 	z = -1;
 	while (++z < size)
@@ -102,7 +102,7 @@ void	vm_get_reg_dir(t_car *car, int index, int i)
 void	vm_get_ind(t_car *car, int index, int i)
 {
 	unsigned char	tmp;
-	int 			z;
+	int				z;
 	short int		ind;
 
 	z = -1;
@@ -117,7 +117,7 @@ void	vm_get_ind(t_car *car, int index, int i)
 	if (car->comand == 3)
 	{
 		car->com_args[index] = (short int)ind;
-		return;
+		return ;
 	}
 	while (++z < 4)
 	{

@@ -6,15 +6,19 @@
 /*   By: dverbyts <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/13 15:07:20 by dverbyts          #+#    #+#             */
-/*   Updated: 2017/11/13 15:07:24 by dverbyts         ###   ########.fr       */
+/*   Updated: 2017/11/20 09:44:07 by dmaznyts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
 
-void	vm_com_live(t_car *car)/////////////////////
+/*
+** после vm_com_live стояло куча слешей
+*/
+
+void	vm_com_live(t_car *car)
 {
-	int 			champ_namber;
+	int	champ_namber;
 
 	car->c_byte[0] = 2;
 	vm_get_reg_dir(car, 0, 1);
@@ -42,10 +46,9 @@ void	vm_com_live2(int champ_namber)
 	ft_putstr("is said to be alive at \0");
 	ft_putnbr(g_vm->cycle);
 	ft_putstr("cycle\n\0");
-
 }
 
-void		vm_com_add(t_car *car)
+void	vm_com_add(t_car *car)
 {
 	car->carry = FALSE;
 	if (car->c_byte[0] == 1 && car->c_byte[1] == 1 && car->c_byte[2] == 1)
@@ -54,11 +57,11 @@ void		vm_com_add(t_car *car)
 		vm_get_reg_dir(car, 1, 3);
 		vm_get_reg_dir(car, 2, 4);
 		if ((car->com_args[0] >= 0 && car->com_args[0] < 16) &&
-			(car->com_args[1] >= 0 && car->com_args[1] < 16) && 
-			(car->com_args[2] >= 0 && car->com_args[2] < 16))
+				(car->com_args[1] >= 0 && car->com_args[1] < 16) &&
+				(car->com_args[2] >= 0 && car->com_args[2] < 16))
 		{
-			car->car_reg[car->com_args[2]] = car->car_reg[car->com_args[0]] + 
-			car->car_reg[car->com_args[1]];
+			car->car_reg[car->com_args[2]] = car->car_reg[car->com_args[0]] +
+				car->car_reg[car->com_args[1]];
 			(car->car_reg[car->com_args[2]] == 0) ? (car->carry = TRUE) : 0;
 		}
 	}
@@ -66,7 +69,7 @@ void		vm_com_add(t_car *car)
 	vm_car_clean(car);
 }
 
-void		vm_com_sub(t_car *car)
+void	vm_com_sub(t_car *car)
 {
 	car->carry = FALSE;
 	if (car->c_byte[0] == 1 && car->c_byte[1] == 1 && car->c_byte[2] == 1)
@@ -75,11 +78,11 @@ void		vm_com_sub(t_car *car)
 		vm_get_reg_dir(car, 1, 3);
 		vm_get_reg_dir(car, 2, 4);
 		if ((car->com_args[0] >= 0 && car->com_args[0] < 16) &&
-			(car->com_args[1] >= 0 && car->com_args[1] < 16) && 
-			(car->com_args[2] >= 0 && car->com_args[2] < 16))
+				(car->com_args[1] >= 0 && car->com_args[1] < 16) &&
+				(car->com_args[2] >= 0 && car->com_args[2] < 16))
 		{
-			car->car_reg[car->com_args[2]] = car->car_reg[car->com_args[0]] - 
-			car->car_reg[car->com_args[1]];
+			car->car_reg[car->com_args[2]] = car->car_reg[car->com_args[0]] -
+				car->car_reg[car->com_args[1]];
 			(car->car_reg[car->com_args[2]] == 0) ? (car->carry = TRUE) : 0;
 		}
 	}

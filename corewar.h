@@ -6,7 +6,7 @@
 /*   By: dverbyts <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/24 14:46:15 by dverbyts          #+#    #+#             */
-/*   Updated: 2017/11/19 19:28:19 by nsharova         ###   ########.fr       */
+/*   Updated: 2017/11/20 09:50:58 by dmaznyts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@
 
 # define TRUE		1
 # define FALSE		0
+# define LEAK system("leaks corewar");
 
 typedef struct		s_champ
 {

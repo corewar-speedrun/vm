@@ -6,7 +6,7 @@
 /*   By: dverbyts <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/10 08:46:17 by dverbyts          #+#    #+#             */
-/*   Updated: 2017/11/10 08:46:20 by dverbyts         ###   ########.fr       */
+/*   Updated: 2017/11/20 09:41:58 by dmaznyts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	vm_read_comand(t_car *car)
 		car->comand = 0;
 	}
 	if ((car->comand > 1 && car->comand < 17) && car->comand != 9 &&
-		car->comand != 12 && car->comand != 15)
+			car->comand != 12 && car->comand != 15)
 		vm_parse_code_byte(car);
 }
 
@@ -80,9 +80,13 @@ void	vm_make_move(t_car *car)
 		vm_com_xor(car);
 	else
 		vm_make_move2(car);
-	if (car->car_next_pos == 0) ///////////////////////////////////////////////////////////
+	if (car->car_next_pos == 0)
 		car->car_next_pos += 1;
 }
+
+/*
+**if (car->car_next_pos == 0) был тут коммент
+*/
 
 void	vm_make_move2(t_car *car)
 {
@@ -130,5 +134,3 @@ void	vm_finish_game(void)
 	ft_putstr("\", has won !\n\0");
 	g_vm->game = 0;
 }
-
-
