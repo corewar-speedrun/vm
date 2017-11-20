@@ -96,7 +96,7 @@ void	vm_car_to_die(t_car *tmp, t_car *start)
 	g_vm->cars = start;
 	if (g_vm->live_checks >= NBR_LIVE || g_vm->max_live_checks <= 0)
 	{
-		g_vm->to_die -= CYCLE_DELTA;	
+		g_vm->to_die -= CYCLE_DELTA;
 		g_vm->live_checks = 0;
 		g_vm->max_live_checks = MAX_CHECKS;
 	}

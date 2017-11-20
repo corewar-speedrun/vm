@@ -13,7 +13,7 @@
 #include "corewar.h"
 
 t_vm		*g_vm;
-  
+
 int		main(int i, char **arg)
 {
 	if (i < 2)
