@@ -6,13 +6,13 @@
 /*   By: dverbyts <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/01 19:43:58 by dverbyts          #+#    #+#             */
-/*   Updated: 2017/11/01 19:43:59 by dverbyts         ###   ########.fr       */
+/*   Updated: 2017/11/20 09:50:08 by dmaznyts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
 
-void			vm_init(void)
+void	vm_init(void)
 {
 	int i;
 
@@ -42,7 +42,7 @@ void			vm_init(void)
 ** vm_init - выделяем память под основную структуру виртуальной машины - t_vm.
 */
 
-void		vm_init_champs(void)
+void	vm_init_champs(void)
 {
 	int				i;
 	int				q;
@@ -65,11 +65,10 @@ void		vm_init_champs(void)
 
 /*
 ** vm_init_champs - копирует исходный код ботов и размещает на карте.
-**
-** еще пилю это.//////////////////////////////////////////////////////////////////////
+** еще пилю это./////////////////////////////////////////////////
 */
 
-void		vm_init_car(int pos, int next, int champ_nmbr, t_car *car)
+void	vm_init_car(int pos, int next, int champ_nmbr, t_car *car)
 {
 	t_car *mem;
 
@@ -81,13 +80,13 @@ void		vm_init_car(int pos, int next, int champ_nmbr, t_car *car)
 	mem->car_pos = pos;
 	mem->car_next_pos = next;
 	if (mem->car_next_pos != 0)
-			vm_car_next_pos(mem);
+		vm_car_next_pos(mem);
 	if (car != NULL)
 	{
 		next = -1;
 		while (++next <= (REG_NUMBER + 1))
 			mem->car_reg[next] = car->car_reg[next];
-	} 
+	}
 	mem->next_car = (g_vm->cars == NULL) ? NULL : g_vm->cars;
 	mem->carry = (car == NULL) ? FALSE : car->carry;
 	mem->live = (car == NULL) ? FALSE : car->live;

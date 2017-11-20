@@ -6,7 +6,7 @@
 /*   By: dverbyts <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/24 14:46:15 by dverbyts          #+#    #+#             */
-/*   Updated: 2017/11/19 19:28:19 by nsharova         ###   ########.fr       */
+/*   Updated: 2017/11/20 09:50:58 by dmaznyts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@
 # include <stdio.h>
 # include "libft/libft.h"
 # include "op.h"
+
+#define LEAK system("leaks corewar");
 
 # define TRUE 1
 # define FALSE 0
@@ -91,8 +93,8 @@ typedef struct		s_vm
 	int				to_die;
 	int				flag_say_alive;
 	int				flag_visualize;
-	int             sleep;
-	int             move;
+	int				sleep;
+	int				move;
 }					t_vm;
 
 extern t_vm				*g_vm;
