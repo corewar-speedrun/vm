@@ -76,3 +76,19 @@ int		vm_get_t_ind(t_car *car, int index, int i)
 	}
 	return (2);
 }
+
+void	vm_car_clean(t_car *car)
+{
+	int i;
+
+	i = -1;
+	while (++i < 3)
+	{
+		car->c_byte[i] = 0;
+		car->com_args[i] = 0;
+	}
+	car->count = 0;
+	car->comand = 0;
+	if (g_vm->map2[car->car_pos] == 1)
+		g_vm->map2[car->car_pos] = 0;
+}

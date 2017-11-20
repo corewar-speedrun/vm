@@ -18,15 +18,14 @@ void				vm_com_aff(t_car *car)
 	char	a;
 
 	vm_get_reg_dir(car, 0, 2);
-	if (car->c_byte[1] == 1 && car->com_args[0] > 0 && car->com_args[0] < 17)
+	if (car->c_byte[0] == 1 && car->com_args[0] > 0 && car->com_args[0] < 17 &&
+			g_vm->flag_visualize == 0)
 	{
 		tmp = car->car_reg[car->com_args[0]];
-		while (tmp > 0)
-		{
-			a = tmp % 256;
-			write(1, &a, 1);
-			tmp = tmp / 256;
-		}
+		a = tmp % 256;
+		write(1, "AFF: ", 5);
+		write(1, &a, 1);
+		write(1, "\n", 1);
 	}
 	car->car_next_pos = vm_find_next_pos(car);
 	vm_car_clean(car);
