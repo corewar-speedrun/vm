@@ -1,6 +1,6 @@
 #!/bin/sh
 
-EXE_PATH = "../vm/"
+EXE_PATH = "../"
 
 mkdir test_dir
 

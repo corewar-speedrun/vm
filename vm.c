@@ -23,7 +23,49 @@ int		main(int i, char **arg)
 	vm_read1(i, arg, 0, 0);
 	if (g_vm->error != -1)
 		return (vm_error(g_vm->error));
+	kakatofn();
+	if (g_vm->error != -1)
+		return (vm_error(g_vm->error));
 	vm_init_champs();
 	vm_make_game(NULL);
 	return (0);
+}
+
+int		check_numbers(int i, int j)
+{
+	while (++i < 5)
+	{
+		j = 0;
+		while (++j < 5)
+			if (g_vm->nambering[i] == g_vm->nambering[j])
+			{
+				g_vm->error = 8;
+				return (0);
+			}
+	}
+	return (1);
+}
+
+void	kakatofn(void)
+{
+	int		f;
+	int		i;
+	t_champ	*tmp;
+
+	i = 0;
+	f = 1;
+	!check_numbers(0, 0) ? (f = 0) : 0;
+	if (f)
+	{
+		while (++i < 5)
+		{
+			if (g_vm->nambering[i] != i)
+			{
+				tmp = g_vm->champ[g_vm->nambering[i]];
+				g_vm->champ[i] = g_vm->champ[g_vm->nambering[i]];
+				g_vm->champ[g_vm->nambering[i]] = tmp;
+				free(tmp);
+			}
+		}
+	}
 }
