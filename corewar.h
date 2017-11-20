@@ -110,10 +110,7 @@ typedef struct		s_vm
 	int				flag_visualize;
 	int				sleep;
 	int				move;
-<<<<<<< HEAD
-=======
 	int				flag;
->>>>>>> dd1e8cd7e9f77bb1a19b79c45f92c9646ecc5cb3
 	int				nambering[5];
 	int				namber;
 }					t_vm;
