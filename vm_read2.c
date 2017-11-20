@@ -20,13 +20,13 @@ int				vm_read_flag(char *str)
 {
 	if (g_vm->error == 2)
 		g_vm->error = -1;
-	if (str[1] == 'l')
+	if (ft_strequ(str, "-l\0"))
 		g_vm->flag_say_alive = 1;
-	else if (str[1] == 'v')
+	else if (ft_strequ(str, "-v\0"))
 		g_vm->flag_visualize = 1;
-	else if (str[1] == 'n')
+	else if (ft_strequ(str, "-n\0"))
 		return (2);
-	else if (ft_strequ(&str[1], "damp\0"))
+	else if (ft_strequ(str, "-damp\0"))
 		return (1);
 	else
 		g_vm->error = 8;
