@@ -19,40 +19,41 @@ int		vm_find_next_pos(t_car *car)
 	int c_nmbr;
 
 	c_nmbr = car->comand;
-	i = -1;
 	r = 2;
 	if (c_nmbr == 1 || c_nmbr == 9 || c_nmbr == 12 || c_nmbr == 15)
 		r -= 1;
-	while (++i < 3)
-	{
-		if (car->c_byte[i] == 1)
-			r += 1;
-		else if (car->c_byte[i] == 2 && ((c_nmbr >= 1 && c_nmbr <= 8) ||
-					c_nmbr == 13 || c_nmbr == 16))
-			r += 4;
-		else if (car->c_byte[i] == 2 && ((c_nmbr >= 9 && c_nmbr <= 12) ||
-					c_nmbr == 14 || c_nmbr == 15))
-			r += 2;
-		else if (car->c_byte[i] == 3)
-			r += 2;
-	}
+	i = 0;
+	if (car->c_byte[i] == 1 )
+		r += 1;
+	else if (car->c_byte[i] == 2 && ((c_nmbr >= 1 && c_nmbr <= 8) ||
+		c_nmbr == 13 || c_nmbr == 16))
+		r += 4;
+	else if (car->c_byte[i] == 3 || (car->c_byte[i] == 2 && ((c_nmbr >= 9 &&
+		c_nmbr <= 12) || c_nmbr == 14 || c_nmbr == 15)))
+		r += 2;
+	r = vm_find_next_pos2(car, r, c_nmbr, i);
 	return (r);
 }
 
-void	vm_car_clean(t_car *car)
+int		vm_find_next_pos2(t_car *car, int r, int c_nmbr, int i)
 {
-	int i;
-
-	i = -1;
+	if (c_nmbr == 1 || c_nmbr == 9 || c_nmbr == 12 || c_nmbr > 14)
+		return (r);
 	while (++i < 3)
 	{
-		car->c_byte[i] = 0;
-		car->com_args[i] = 0;
+		if (car->c_byte[i] == 1 )
+			r += 1;
+		else if (car->c_byte[i] == 2 && ((c_nmbr >= 1 && c_nmbr <= 8) ||
+			c_nmbr == 13 || c_nmbr == 16))
+			r += 4;
+		else if (car->c_byte[i] == 3 || (car->c_byte[i] == 2 && ((c_nmbr >= 9 &&
+			c_nmbr <= 12) || c_nmbr == 14 || c_nmbr == 15)))
+			r += 2;
+		if (c_nmbr >= 1 && (c_nmbr <= 3 || c_nmbr == 9 || c_nmbr == 12 ||
+			c_nmbr == 13 || c_nmbr > 14))
+			return (r);
 	}
-	car->count = 0;
-	car->comand = 0;
-	if (g_vm->map2[car->car_pos] == 1)
-		g_vm->map2[car->car_pos] = 0;
+	return (r);
 }
 
 void	vm_parse_code_byte(t_car *car)

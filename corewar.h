@@ -190,6 +190,7 @@ void				vm_read_comand(t_car *car);
 void				vm_make_move(t_car *car);
 void				vm_make_move2(t_car *car);
 void				vm_car_next_pos(t_car *car);
+int					vm_find_next_pos2(t_car *car, int r, int c_nmbr, int i);
 int					vm_cycles_count(int tmp);
 void				vm_finish_game(void);
 void				vm_map_write(int c, int p, t_car *car);
