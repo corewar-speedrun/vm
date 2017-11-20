@@ -27,7 +27,10 @@ void			vm_read1(int i, char **arg, int x, int flag)
 		else if (vm_read_magic(fd, 0) == 1 && g_vm->champs_nmbr == 4)
 			g_vm->error = 9;
 		else if (vm_read_magic(fd, 1) == 1 && g_vm->error == -1)
+		{
 			g_vm->champs[++g_vm->champs_nmbr] = vm_parsing(fd);
+			++g_vm->namber;
+		}
 		else if (g_vm->error == -1)
 			g_vm->error = 1;
 		close(fd);
