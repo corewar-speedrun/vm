@@ -6,7 +6,7 @@
 /*   By: dverbyts <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/24 14:46:15 by dverbyts          #+#    #+#             */
-/*   Updated: 2017/11/20 09:50:58 by dmaznyts         ###   ########.fr       */
+/*   Updated: 2017/11/20 18:34:42 by dmaznyts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,6 +110,10 @@ typedef struct		s_vm
 	int				flag_visualize;
 	int				sleep;
 	int				move;
+<<<<<<< HEAD
+=======
+	int				flag;
+>>>>>>> dd1e8cd7e9f77bb1a19b79c45f92c9646ecc5cb3
 	int				nambering[5];
 	int				namber;
 }					t_vm;
