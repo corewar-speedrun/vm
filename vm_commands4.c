@@ -131,6 +131,7 @@ void		vm_com_lld(t_car *car)
 			car->carry = (car->car_reg[tmp] == 0) ? 1 : 0;
 			car->car_next_pos = i + 1;
 		}
+
 	}
 	else
 	{
