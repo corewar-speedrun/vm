@@ -62,7 +62,7 @@ int				vm_read_flag3(int i, char **arg, int x, int fd)
 {
 	t_champ	*tmp;
 	char	*str;
-	
+
 	tmp = NULL;
 	if (((x + 1) >= i || (fd = open(arg[x + 1], O_RDONLY)) == -1 ||
 		vm_read_magic(fd, 0) != 1 || (tmp = vm_parsing(fd)) == NULL ||

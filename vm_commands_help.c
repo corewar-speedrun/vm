@@ -23,7 +23,7 @@ int		vm_find_next_pos(t_car *car)
 	if (c_nmbr == 1 || c_nmbr == 9 || c_nmbr == 12 || c_nmbr == 15)
 		r -= 1;
 	i = 0;
-	if (car->c_byte[i] == 1 )
+	if (car->c_byte[i] == 1)
 		r += 1;
 	else if (car->c_byte[i] == 2 && ((c_nmbr >= 1 && c_nmbr <= 8) ||
 		c_nmbr == 13 || c_nmbr == 16))
@@ -41,7 +41,7 @@ int		vm_find_next_pos2(t_car *car, int r, int c_nmbr, int i)
 		return (r);
 	while (++i < 3)
 	{
-		if (car->c_byte[i] == 1 )
+		if (car->c_byte[i] == 1)
 			r += 1;
 		else if (car->c_byte[i] == 2 && ((c_nmbr >= 1 && c_nmbr <= 8) ||
 			c_nmbr == 13 || c_nmbr == 16))
@@ -104,7 +104,7 @@ void	vm_get_ind(t_car *car, int index, int i)
 {
 	unsigned char	tmp;
 	int				z;
-	short int		ind;
+	int				ind;
 
 	z = -1;
 	ind = 0;
@@ -120,9 +120,10 @@ void	vm_get_ind(t_car *car, int index, int i)
 		car->com_args[index] = (short int)ind;
 		return ;
 	}
+	ind = (unsigned int)(car->car_pos + ind);
 	while (++z < 4)
 	{
-		tmp = g_vm->map0[(car->car_pos + ind + z) % MEM_SIZE];
+		tmp = g_vm->map0[(ind + z) % MEM_SIZE];
 		car->com_args[index] = (car->com_args[index] << 8) | tmp;
 	}
 	car->com_args[index] = (short int)car->com_args[index];
