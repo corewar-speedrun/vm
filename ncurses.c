@@ -121,7 +121,7 @@ int			ncurses(int sleep)
 	init();
 	noecho();
 	print_window(win, sleep);
-	sleep = paused(win, sleep);
 	print_mem(win, sleep);
+	sleep = paused(win, sleep);
 	return (sleep);
 }
