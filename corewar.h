@@ -158,7 +158,7 @@ union				u_read
 */
 
 int					main(int argv, char **argc);
-void				vm_init(void);
+void				vm_init(int i);
 t_champ				*vm_parsing(int fd);
 unsigned char		*vm_read_script(int i, int fd, int flag);
 int					vm_read_magic(int fd, int flag);
@@ -182,7 +182,7 @@ void				vm_init_car(int pos, int next, int champ_nmbr, t_car *car);
 */
 
 void				vm_make_game(t_car *car);
-void				vm_make_game2(t_car *car, int i);
+void				vm_make_game2(int i);
 void				vm_car_to_die(t_car *tmp, t_car *start);
 void				vm_car_to_die2(t_car *tmp1, t_car *tmp2, t_car *tmp3);
 void				vm_read_comand(t_car *car);
@@ -211,7 +211,7 @@ void				vm_com_zjmp(t_car *car);
 void				vm_com_ldi(t_car *car);
 void				vm_com_ldi2(t_car *car);
 void				vm_com_sti(t_car *car);
-void				vm_com_sti2(t_car *car);
+void				vm_com_sti2(t_car *car, int tmp, int tmp2, int tmp3);
 void				vm_com_fork(t_car *car);
 void				vm_com_lld(t_car *car);
 void				vm_com_lldi(t_car *car);

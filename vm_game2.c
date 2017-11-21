@@ -20,7 +20,7 @@ void	vm_read_comand(t_car *car)
 	if (tmp > 0 && tmp < 17)
 	{
 		car->comand = (int)tmp;
-		car->count = vm_cycles_count((int)tmp) - 1;
+		car->count = vm_cycles_count((int)tmp);
 		if (car->comand == 1)
 		{
 			car->live = 1;
@@ -30,6 +30,7 @@ void	vm_read_comand(t_car *car)
 	else
 	{
 		car->car_next_pos = 1;
+		vm_car_next_pos(car);
 		car->comand = 0;
 	}
 	if ((car->comand > 1 && car->comand < 17) && car->comand != 9 &&
@@ -81,7 +82,8 @@ void	vm_make_move(t_car *car)
 	else
 		vm_make_move2(car);
 	if (car->car_next_pos == 0)
-		car->car_next_pos += 1;
+		car->car_next_pos = 1;
+	vm_car_next_pos(car);
 }
 
 /*

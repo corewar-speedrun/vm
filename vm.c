@@ -20,7 +20,7 @@ int		main(int i, char **arg)
 		return (vm_usage(NULL));
 	if (!(g_vm = (t_vm *)malloc(sizeof(t_vm))))
 		return (0);
-	vm_init();
+	vm_init(0);
 	vm_read1(i, arg, 0, 0);
 	if (g_vm->error != -1)
 		return (vm_error(g_vm->error));
