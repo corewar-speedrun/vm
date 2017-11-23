@@ -20,24 +20,22 @@ void	vm_make_game(t_car *car)
 		car = g_vm->cars;
 		while (car != NULL)
 		{
+			car->f_move = 0;
+			if (g_vm->map2[car->car_pos] != 1)
+				g_vm->map2[car->car_pos] = 1;
 			if (car->count == 0 && car->comand != 0)
 				vm_make_move(car);
 			if (car->comand == 0)
 				vm_read_comand(car);
 			if (car->count > 0)
 				car->count--;
-			if (g_vm->map2[car->car_pos] != 1)
-				g_vm->map2[car->car_pos] = 1;
+			if (car->f_move == 0)
+				vm_car_next_pos(car);
 			car = car->next_car;
 		}
 		if (g_vm->flag_visualize == 1)
 			g_vm->sleep = ncurses(g_vm->sleep);
 		vm_make_game2(-1);
-		if (g_vm->damp == g_vm->cycle && g_vm->flag_visualize != 1)
-		{
-			print_maps();
-			break ;
-		}
 	}
 }
 
@@ -55,6 +53,11 @@ void	vm_make_game2(int i)
 				g_vm->map3[i]++;
 		}
 	}
+	if (g_vm->damp == g_vm->cycle && g_vm->flag_visualize != 1)
+	{
+		print_maps();
+		g_vm->game = 0 ;
+	}
 }
 
 /*
@@ -64,6 +67,9 @@ void	vm_make_game2(int i)
 
 void	vm_car_next_pos(t_car *car)
 {
+	car->f_move = 1;
+	if (car->car_next_pos == 0)
+		return ;
 	if (car->car_next_pos < 0)
 		car->car_next_pos = (MEM_SIZE + car->car_next_pos) % MEM_SIZE;
 	if (g_vm->map2[car->car_pos] == 1)

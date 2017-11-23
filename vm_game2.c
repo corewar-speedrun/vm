@@ -29,12 +29,12 @@ void	vm_read_comand(t_car *car)
 	}
 	else
 	{
-		car->car_next_pos = 1;
-		vm_car_next_pos(car);
 		car->comand = 0;
+		car->car_next_pos = 1;
+		if (car->f_move == 0)
+			vm_car_next_pos(car);
 	}
-	if ((car->comand > 1 && car->comand < 17) && car->comand != 9 &&
-			car->comand != 12 && car->comand != 15)
+	if (car->comand != 9 &&	car->comand != 12 && car->comand != 15)
 		vm_parse_code_byte(car);
 }
 
@@ -81,14 +81,9 @@ void	vm_make_move(t_car *car)
 		vm_com_xor(car);
 	else
 		vm_make_move2(car);
-	if (car->car_next_pos == 0)
-		car->car_next_pos = 1;
-	vm_car_next_pos(car);
+	if (car->f_move == 0)
+		vm_car_next_pos(car);
 }
-
-/*
-**if (car->car_next_pos == 0) был тут коммент
-*/
 
 void	vm_make_move2(t_car *car)
 {

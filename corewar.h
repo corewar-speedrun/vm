@@ -71,6 +71,7 @@ typedef struct		s_car
 	int				car_reg[REG_NUMBER + 1];
 	int				carry;
 	int				live;
+	int				f_move;
 	struct s_car	*next_car;
 	struct s_champ	*champ;
 }					t_car;

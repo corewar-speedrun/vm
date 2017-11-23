@@ -38,7 +38,6 @@ void	print_maps(void)
 
 	i = -1;
 	k = 0;
-	j = -1;
 	while (++i < MEM_SIZE)
 	{
 		align(i, k);

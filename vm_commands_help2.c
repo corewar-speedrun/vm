@@ -72,7 +72,6 @@ int		vm_get_t_ind(t_car *car, int index, int i)
 	ind = (car->comand == 13) ? ind : ind % IDX_MOD;
 	while (++z < 4)
 	{
-		tmp2 = g_vm->map0[b % MEM_SIZE];
 		b = (car->car_pos + ind + z);
 		tmp2 = g_vm->map0[b % MEM_SIZE];
 		car->com_args[index] = (car->com_args[index] << 8) | tmp2;
