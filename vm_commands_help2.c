@@ -65,7 +65,7 @@ int		vm_get_t_ind(t_car *car, int index, int i)
 	ind = 0;
 	while (++z < 2)
 	{
-		tmp1 = g_vm->map0[car->car_pos + z + i];
+		tmp1 = g_vm->map0[(car->car_pos + z + i) % MEM_SIZE];
 		ind = (ind << 8) | tmp1;
 	}
 	z = -1;
