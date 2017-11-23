@@ -37,7 +37,7 @@ void			vm_read1(int i, char **arg, int x, int flag)
 		if (g_vm->error != -1)
 			break ;
 	}
-	if (g_vm->champs_nmbr < 1 && g_vm->error != -1)
+	if (g_vm->champs_nmbr < 1 && g_vm->error == -1)
 		g_vm->error = 7;
 }
 

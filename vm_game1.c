@@ -18,8 +18,6 @@ void	vm_make_game(t_car *car)
 	while (g_vm->game > 0)
 	{
 		car = g_vm->cars;
-//		if (g_vm->flag_visualize == 1)
-//			g_vm->sleep = ncurses(g_vm->sleep);
 		while (car != NULL)
 		{
 			if (car->count == 0 && car->comand != 0)
@@ -32,6 +30,8 @@ void	vm_make_game(t_car *car)
 				g_vm->map2[car->car_pos] = 1;
 			car = car->next_car;
 		}
+		if (g_vm->flag_visualize == 1)
+			g_vm->sleep = ncurses(g_vm->sleep);
 		vm_make_game2(-1);
 		if (g_vm->damp == g_vm->cycle && g_vm->flag_visualize != 1)
 		{

@@ -15,7 +15,7 @@
 
 # include <unistd.h>
 # include <fcntl.h>
-# include <stdio.h>
+# include <stdio.h>//////////////////////////НЕ УДАЛЯТЬ СЛЕШИ// УДАЛИТЬ ВСЮ СТРОКУ/////////////////
 # include "libft/libft.h"
 # include "ncurses.h"
 
