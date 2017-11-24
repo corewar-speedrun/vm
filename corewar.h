@@ -114,6 +114,7 @@ typedef struct		s_vm
 	int				flag;
 	int				nambering[5];
 	int				namber;
+	unsigned char	r[4];
 }					t_vm;
 
 extern t_vm			*g_vm;
