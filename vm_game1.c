@@ -14,7 +14,7 @@
 
 void	vm_make_game(t_car *car)
 {
-//	system("say READY? FIGHT!");
+	system("say READY? FIGHT!");
 	while (g_vm->game > 0)
 	{
 		car = g_vm->cars;
