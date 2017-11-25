@@ -20,7 +20,7 @@ int		main(int i, char **arg)
 		return (vm_usage(NULL));
 	if (!(g_vm = (t_vm *)malloc(sizeof(t_vm))))
 		return (0);
-	vm_init();
+	vm_init(0);
 	vm_read1(i, arg, 0, 0);
 	if (g_vm->error != -1)
 		return (vm_error(g_vm->error));
@@ -28,6 +28,8 @@ int		main(int i, char **arg)
 	if (g_vm->error != -1)
 		return (vm_error(g_vm->error));
 	vm_init_champs();
+	if (g_vm->flag_visualize == 1)
+		g_vm->sleep = ncurses(g_vm->sleep);
 	vm_make_game(NULL);
 	return (0);
 }

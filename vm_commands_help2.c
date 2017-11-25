@@ -55,8 +55,8 @@ int		vm_get_t_dir(t_car *car, int index, int i)
 
 int		vm_get_t_ind(t_car *car, int index, int i)
 {
-	unsigned char	tmp1;
-	unsigned char	tmp2;
+	unsigned char	tmp;
+	int				kostyl;
 	int				z;
 	short int		ind;
 	unsigned int	b;
@@ -65,18 +65,17 @@ int		vm_get_t_ind(t_car *car, int index, int i)
 	ind = 0;
 	while (++z < 2)
 	{
-		tmp1 = g_vm->map0[car->car_pos + z + i];
-		ind = (ind << 8) | tmp1;
+		tmp = g_vm->map0[(car->car_pos + z + i) % MEM_SIZE];
+		ind = (ind << 8) | tmp;
 	}
 	z = -1;
 	ind = (car->comand == 13) ? ind : ind % IDX_MOD;
-	while (++z < 4)
+	kostyl = (car->comand == 13) ? 2 : 4;
+	while (++z < kostyl)
 	{
 		b = (car->car_pos + ind + z);
-		tmp2 = g_vm->map0[b % MEM_SIZE];
-		// printf("tmp vm_get_t_ind: %d\n", (car->car_pos + ind + z) % MEM_SIZE );
-		// printf("tmp vm_get_t_ind: %d\n", b % MEM_SIZE );
-		car->com_args[index] = (car->com_args[index] << 8) | tmp2;
+		tmp = g_vm->map0[b % MEM_SIZE];
+		car->com_args[index] = (car->com_args[index] << 8) | tmp;
 	}
 	return (2);
 }

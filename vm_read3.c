@@ -24,7 +24,7 @@ int		vm_check_numbers(int i, int j)
 		{
 			if (g_vm->nambering[j] == i)
 				flag += 1;
-			if (flag > 1)
+			if (flag > 1 || g_vm->nambering[j] > g_vm->champs_nmbr)
 			{
 				g_vm->error = 8;
 				return (0);
@@ -51,6 +51,11 @@ void	vm_split_champs(void)
 				&& i < g_vm->nambering[i])
 			{
 				tmp = g_vm->champs[i];
+				if (tmp == NULL)
+				{
+					g_vm->error = 8;
+					return ;
+				}
 				g_vm->champs[i] = g_vm->champs[g_vm->nambering[i]];
 				g_vm->champs[g_vm->nambering[i]] = tmp;
 			}

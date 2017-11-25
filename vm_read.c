@@ -37,7 +37,7 @@ void			vm_read1(int i, char **arg, int x, int flag)
 		if (g_vm->error != -1)
 			break ;
 	}
-	if (g_vm->champs_nmbr < 1 && g_vm->error != -1)
+	if (g_vm->champs_nmbr < 1 && g_vm->error == -1)
 		g_vm->error = 7;
 }
 
@@ -159,18 +159,17 @@ unsigned char	*vm_read_script(int i, int fd, int flag)
 int				vm_read_magic(int fd, int flag)
 {
 	union u_read	smpl;
-	unsigned char	r[4];
 
 	smpl.mg = COREWAR_EXEC_MAGIC;
 	if (flag == 0)
 	{
-		if (read(fd, &r, 4) != 4)
+		ft_bzero(g_vm->r, sizeof(unsigned char) * 4);
+		if (read(fd, &g_vm->r, 4) != 4)
 			g_vm->error = 2;
 	}
-	if (g_vm->error == -1 && (r[0] == smpl.bit[3] || r[0] == smpl.bit[0]) &&
-		(r[1] == smpl.bit[2] || r[1] == smpl.bit[1]) &&
-		(r[2] == smpl.bit[1] || r[2] == smpl.bit[2]) &&
-		(r[3] == smpl.bit[0] || r[3] == smpl.bit[3]))
+	if (g_vm->error == -1 && g_vm->r[0] == smpl.bit[3] &&
+		g_vm->r[1] == smpl.bit[2] && g_vm->r[2] == smpl.bit[1] &&
+		g_vm->r[3] == smpl.bit[0])
 		return (1);
 	else if (g_vm->error == -1)
 		g_vm->error = 3;

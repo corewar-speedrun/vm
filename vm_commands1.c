@@ -92,10 +92,10 @@ void	vm_com_sub(t_car *car)
 
 void	vm_com_zjmp(t_car *car)
 {
-	car->car_next_pos = 3;
 	if (car->carry == FALSE)
 	{
-		vm_car_clean(car);
+        car->car_next_pos = 3;
+        vm_car_clean(car);
 		return ;
 	}
 	car->c_byte[0] = 2;

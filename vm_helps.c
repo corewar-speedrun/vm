@@ -38,7 +38,6 @@ void	print_maps(void)
 
 	i = -1;
 	k = 0;
-	j = -1;
 	while (++i < MEM_SIZE)
 	{
 		align(i, k);
@@ -75,15 +74,14 @@ int		vm_error(int error)
 	else if (error == 7)
 		vm_usage("We need a champion!\n\0");
 	else if (error == 8)
-		vm_usage("Some unknown flag of incirect usage\n\0");
+		vm_usage("Some unknown flag of incorrect usage\n\0");
 	else if (error == 9)
 		vm_usage("Too many champions\n\0");
 	else if (error == 10)
 		vm_usage("Damp must be bigger than zero\n\0");
 	else if (error == 11)
 		vm_usage("Champ must be smaller than CHAMP_MAX_SIZE\n\0");
-	else
-		ft_putstr_fd("Some unknow error.\n\0", 2);
+	system("say YOU SHALL NOT PASS");
 	return (0);
 }
 

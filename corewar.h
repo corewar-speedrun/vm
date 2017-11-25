@@ -15,7 +15,7 @@
 
 # include <unistd.h>
 # include <fcntl.h>
-# include <stdio.h>
+# include <stdio.h>//////////////////////////НЕ УДАЛЯТЬ СЛЕШИ// УДАЛИТЬ ВСЮ СТРОКУ/////////////////
 # include "libft/libft.h"
 # include "ncurses.h"
 
@@ -38,7 +38,6 @@
 
 # define TRUE		1
 # define FALSE		0
-# define LEAK system("leaks corewar");
 
 typedef struct		s_champ
 {
@@ -72,6 +71,7 @@ typedef struct		s_car
 	int				car_reg[REG_NUMBER + 1];
 	int				carry;
 	int				live;
+	int				f_move;
 	struct s_car	*next_car;
 	struct s_champ	*champ;
 }					t_car;
@@ -114,6 +114,7 @@ typedef struct		s_vm
 	int				flag;
 	int				nambering[5];
 	int				namber;
+	unsigned char	r[4];
 }					t_vm;
 
 extern t_vm			*g_vm;
@@ -159,7 +160,7 @@ union				u_read
 */
 
 int					main(int argv, char **argc);
-void				vm_init(void);
+void				vm_init(int i);
 t_champ				*vm_parsing(int fd);
 unsigned char		*vm_read_script(int i, int fd, int flag);
 int					vm_read_magic(int fd, int flag);
@@ -183,7 +184,7 @@ void				vm_init_car(int pos, int next, int champ_nmbr, t_car *car);
 */
 
 void				vm_make_game(t_car *car);
-void				vm_make_game2(t_car *car, int i);
+void				vm_make_game2(int i);
 void				vm_car_to_die(t_car *tmp, t_car *start);
 void				vm_car_to_die2(t_car *tmp1, t_car *tmp2, t_car *tmp3);
 void				vm_read_comand(t_car *car);
@@ -212,7 +213,7 @@ void				vm_com_zjmp(t_car *car);
 void				vm_com_ldi(t_car *car);
 void				vm_com_ldi2(t_car *car);
 void				vm_com_sti(t_car *car);
-void				vm_com_sti2(t_car *car);
+void				vm_com_sti2(t_car *car, int tmp, int tmp2, int tmp3);
 void				vm_com_fork(t_car *car);
 void				vm_com_lld(t_car *car);
 void				vm_com_lldi(t_car *car);

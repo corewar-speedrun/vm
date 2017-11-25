@@ -12,11 +12,8 @@
 
 #include "corewar.h"
 
-void	vm_init(void)
+void	vm_init(int i)
 {
-	int i;
-
-	i = 0;
 	ft_bzero(g_vm, sizeof(*g_vm));
 	g_vm->champs = (t_champ **)malloc(sizeof(t_champ *) * (MAX_PLAYERS + 1));
 	while (++i < MAX_PLAYERS + 1)
@@ -32,11 +29,11 @@ void	vm_init(void)
 	ft_bzero(g_vm->map3, (sizeof(unsigned char) * MEM_SIZE));
 	g_vm->damp = -1;
 	g_vm->game = 1;
+	g_vm->move = 1;
 	g_vm->to_die = CYCLE_TO_DIE;
 	g_vm->die_cycle = g_vm->to_die;
 	g_vm->max_live_checks = MAX_CHECKS;
 	g_vm->sleep = 1;
-	return ;
 }
 
 /*
