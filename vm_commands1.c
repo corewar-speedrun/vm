@@ -12,10 +12,6 @@
 
 #include "corewar.h"
 
-/*
-** после vm_com_live стояло куча слешей
-*/
-
 void	vm_com_live(t_car *car)
 {
 	int	champ_namber;
