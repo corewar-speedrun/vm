@@ -50,6 +50,7 @@ int		vm_get_t_dir(t_car *car, int index, int i)
 		tmp1 = g_vm->map0[(car->car_pos + z + i) % MEM_SIZE];
 		car->com_args[index] = (car->com_args[index] << 8) | tmp1;
 	}
+	car->com_args[index] = (unsigned int)car->com_args[index];
 	return (size);
 }
 
@@ -69,7 +70,11 @@ int		vm_get_t_ind(t_car *car, int index, int i)
 		ind = (ind << 8) | tmp;
 	}
 	z = -1;
-	ind = (car->comand == 13) ? ind : ind % IDX_MOD;
+	ind = (car->comand != 12) ? ind % IDX_MOD : ind;
+	if (car->comand == 2)
+		car->com_args[index] = (unsigned int)ind;
+	else
+	{
 	kostyl = (car->comand == 13) ? 2 : 4;
 	while (++z < kostyl)
 	{
@@ -79,6 +84,7 @@ int		vm_get_t_ind(t_car *car, int index, int i)
 	}
 	(car->comand == 13) ? 
 	(car->com_args[index] = (unsigned int)((short)car->com_args[index])) : 0;
+	}
 	return (2);
 }
 
