@@ -49,7 +49,7 @@ void	vm_com_st(t_car *car)
 		if (car->c_byte[1] == 1 &&
 				(car->com_args[0] > 0 && car->com_args[0] < 17) &&
 				(car->com_args[1] > 0 && car->com_args[1] < 17))
-			car->car_reg[car->com_args[1]] = car->car_reg[car->com_args[0]];
+			car->car_reg[car->com_args[1]] = tmp;
 		else if (car->c_byte[1] == 3 && (car->com_args[0] > 0 &&
 			car->com_args[0] < 17))
 			vm_map_write(tmp, (car->car_pos +
@@ -86,7 +86,7 @@ void	vm_com_sti(t_car *car)
 
 void	vm_com_sti2(t_car *car, int tmp, int tmp2, int tmp3)
 {
-	int ttt;
+	int cords;
 
 	if (car->com_args[0] > 0 && car->com_args[0] < 17)
 		tmp = car->car_reg[car->com_args[0]];
@@ -98,13 +98,13 @@ void	vm_com_sti2(t_car *car, int tmp, int tmp2, int tmp3)
 		tmp3 = car->car_reg[car->com_args[2]];
 	else if (car->c_byte[2] == 2)
 		tmp3 = car->com_args[2];
-	ttt = tmp2 + tmp3;
+	cords = ((car->car_pos + (tmp2 + tmp3) % IDX_MOD) % MEM_SIZE);
 	if ((car->com_args[0] > 0 && car->com_args[0] < 17) && ((car->c_byte[1] == 2
 		|| car->c_byte[1] == 3) || (car->c_byte[1] == 1 &&
 		(car->com_args[1] > 0 && car->com_args[1] < 17))) &&
 		((car->c_byte[2] == 2) || (car->c_byte[2] == 1 &&
 		(car->com_args[2] > 0 && car->com_args[2] < 17))))
-		vm_map_write(tmp, (car->car_pos + ttt % IDX_MOD) % MEM_SIZE, car);
+		vm_map_write(tmp, cords, car);
 }
 
 
