@@ -124,8 +124,7 @@ void	vm_get_ind(t_car *car, int index, int i)
 		tmp = g_vm->map0[b % MEM_SIZE];
 		car->com_args[index] = (car->com_args[index] << 8) | tmp;
 	}
-	car->com_args[index] = (unsigned int)((short)car->com_args[index]);
-//	car->com_args[index] = (unsigned int)car->com_args[index];
+	//car->com_args[index] = (unsigned int)((short)car->com_args[index]);
 }
 
 /*

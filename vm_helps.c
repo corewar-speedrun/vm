@@ -12,11 +12,11 @@
 
 #include "corewar.h"
 
-void	align(int i, int k)
+void	align(int i)
 {
 	char	*buf;
 
-	buf = ft_itoa_base(i - k, 16);
+	buf = ft_itoa_base(i, 16);
 	ft_putstr("0x");
 	if (ft_strlen(buf) == 3)
 		ft_putstr("0");
@@ -29,32 +29,29 @@ void	align(int i, int k)
 	ft_strdel(&buf);
 }
 
-void	print_maps(void)
+void    print_maps(void)
 {
-	int		i;
-	int		j;
-	int		k;
-	char	*buf2;
+    int        i;
+    int        j;
+    char    *buf2;
 
-	i = -1;
-	k = 0;
-	while (++i < MEM_SIZE)
-	{
-		align(i, k);
-		j = -1;
-		while (++j < 32 && i < MEM_SIZE)
-		{
-			buf2 = ft_itoa_base(g_vm->map0[i], 16);
-			if (ft_strlen(buf2) < 2)
-				ft_putchar('0');
-			ft_putstr(buf2);
-			ft_putchar(' ');
-			i++;
-			ft_strdel(&buf2);
-		}
-		ft_putchar('\n');
-		k++;
-	}
+    i = 0;
+    while (i < MEM_SIZE)
+    {
+        align(i);
+        j = -1;
+        while (++j < 64)
+        {
+            buf2 = ft_itoa_base(g_vm->map0[i], 16);
+            if (ft_strlen(buf2) < 2)
+                ft_putchar('0');
+            ft_putstr(buf2);
+            ft_putchar(' ');
+            i++;
+            ft_strdel(&buf2);
+        }
+        ft_putchar('\n');
+    }
 }
 
 int		vm_error(int error)
