@@ -28,8 +28,8 @@ int		main(int i, char **arg)
 	if (g_vm->error != -1)
 		return (vm_error(g_vm->error));
 	vm_init_champs();
-	if (g_vm->flag_visualize == 1)
-		g_vm->sleep = ncurses(g_vm->sleep);
+//	if (g_vm->flag_visualize == 1)
+//		g_vm->sleep = ncurses(g_vm->sleep);
 	vm_make_game(NULL);
 	return (0);
 }
