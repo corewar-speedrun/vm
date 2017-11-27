@@ -44,7 +44,8 @@ int		vm_get_t_dir(t_car *car, int index, int i)
 
 	z = -1;
 	size = ((car->comand >= 1 && car->comand <= 8) ||
-			car->comand == 13 || car->comand == 16) ? 4 : 2;
+			//car->comand == 13 || 
+			car->comand == 16) ? 4 : 2;
 	while (++z < size)
 	{
 		tmp1 = g_vm->map0[(car->car_pos + z + i) % MEM_SIZE];
@@ -72,7 +73,7 @@ int		vm_get_t_ind(t_car *car, int index, int i)
 	z = -1;
 	ind = (car->comand != 12) ? ind % IDX_MOD : ind;
 	if (car->comand == 2)
-		car->com_args[index] = (unsigned int)ind;
+		car->com_args[index] = ind;
 	else
 	{
 	kostyl = (car->comand == 13) ? 2 : 4;
