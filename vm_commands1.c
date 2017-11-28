@@ -46,7 +46,6 @@ void	vm_com_live2(int champ_namber)
 
 void	vm_com_add(t_car *car)
 {
-	car->carry = FALSE;
 	if (car->c_byte[0] == 1 && car->c_byte[1] == 1 && car->c_byte[2] == 1)
 	{
 		vm_get_reg_dir(car, 0, 2);
@@ -58,7 +57,8 @@ void	vm_com_add(t_car *car)
 		{
 			car->car_reg[car->com_args[2]] = car->car_reg[car->com_args[0]] +
 				car->car_reg[car->com_args[1]];
-			(car->car_reg[car->com_args[2]] == 0) ? (car->carry = TRUE) : 0;
+			(car->car_reg[car->com_args[2]] == 0) ? (car->carry = TRUE) :
+			(car->carry = TRUE);
 		}
 	}
 	car->car_next_pos = vm_find_next_pos(car);
@@ -67,7 +67,6 @@ void	vm_com_add(t_car *car)
 
 void	vm_com_sub(t_car *car)
 {
-	car->carry = FALSE;
 	if (car->c_byte[0] == 1 && car->c_byte[1] == 1 && car->c_byte[2] == 1)
 	{
 		vm_get_reg_dir(car, 0, 2);
@@ -79,7 +78,8 @@ void	vm_com_sub(t_car *car)
 		{
 			car->car_reg[car->com_args[2]] = car->car_reg[car->com_args[0]] -
 				car->car_reg[car->com_args[1]];
-			(car->car_reg[car->com_args[2]] == 0) ? (car->carry = TRUE) : 0;
+			(car->car_reg[car->com_args[2]] == 0) ? (car->carry = TRUE) :
+			(car->carry = TRUE);
 		}
 	}
 	car->car_next_pos = vm_find_next_pos(car);

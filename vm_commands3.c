@@ -82,7 +82,6 @@ void				vm_com_lldi(t_car *car)
 	int i;
 
 	i = 2;
-	car->carry = FALSE;
 	if ((car->c_byte[1] == 1 || car->c_byte[1] == 2) && car->c_byte[2] == 1)
 	{
 		if (car->c_byte[0] == 3)
@@ -123,6 +122,7 @@ void				vm_com_lldi2(t_car *car)
 	if (car->com_args[2] > 0 && car->com_args[2] < 17)
 	{
 		car->car_reg[car->com_args[2]] = tmp2;
-		(car->car_reg[car->com_args[2]] == 0) ? (car->carry = TRUE) : 0;
+		(car->car_reg[car->com_args[2]] == 0) ? (car->carry = TRUE) :
+		(car->carry = TRUE);
 	}
 }

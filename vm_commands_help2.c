@@ -71,7 +71,7 @@ int		vm_get_t_ind(t_car *car, int index, int i)
 		ind = (ind << 8) | tmp;
 	}
 	z = -1;
-	ind = (car->comand != 12) ? ind % IDX_MOD : ind;
+	ind = (car->comand != 13) ? ind % IDX_MOD : ind;
 	if (car->comand == 2)
 		car->com_args[index] = ind;
 	else
