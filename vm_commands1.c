@@ -58,7 +58,7 @@ void	vm_com_add(t_car *car)
 			car->car_reg[car->com_args[2]] = car->car_reg[car->com_args[0]] +
 				car->car_reg[car->com_args[1]];
 			(car->car_reg[car->com_args[2]] == 0) ? (car->carry = TRUE) :
-			(car->carry = TRUE);
+			(car->carry = FALSE);
 		}
 	}
 	car->car_next_pos = vm_find_next_pos(car);
@@ -79,7 +79,7 @@ void	vm_com_sub(t_car *car)
 			car->car_reg[car->com_args[2]] = car->car_reg[car->com_args[0]] -
 				car->car_reg[car->com_args[1]];
 			(car->car_reg[car->com_args[2]] == 0) ? (car->carry = TRUE) :
-			(car->carry = TRUE);
+			(car->carry = FALSE);
 		}
 	}
 	car->car_next_pos = vm_find_next_pos(car);

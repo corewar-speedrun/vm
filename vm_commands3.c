@@ -123,6 +123,6 @@ void				vm_com_lldi2(t_car *car)
 	{
 		car->car_reg[car->com_args[2]] = tmp2;
 		(car->car_reg[car->com_args[2]] == 0) ? (car->carry = TRUE) :
-		(car->carry = TRUE);
+		(car->carry = FALSE);
 	}
 }

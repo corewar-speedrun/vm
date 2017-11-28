@@ -29,8 +29,6 @@ void		vm_com_and(t_car *car)
 			car->carry = (car->car_reg[tmp] == 0) ? 1 : 0;
 		}
 	}
-	else
-		car->carry = 0;
 	car->car_next_pos = vm_find_next_pos(car);
 	vm_car_clean(car);
 }
@@ -52,8 +50,6 @@ void		vm_com_or(t_car *car)
 			car->carry = (car->car_reg[tmp] == 0) ? 1 : 0;
 		}
 	}
-	else
-		car->carry = 0;
 	car->car_next_pos = vm_find_next_pos(car);
 	vm_car_clean(car);
 }
@@ -75,8 +71,6 @@ void		vm_com_xor(t_car *car)
 			car->carry = (car->car_reg[tmp] == 0) ? 1 : 0;
 		}
 	}
-	else
-		car->carry = 0;
 	car->car_next_pos = vm_find_next_pos(car);
 	vm_car_clean(car);
 }
@@ -97,8 +91,6 @@ void		vm_com_ld(t_car *car)
 			car->carry = (car->car_reg[tmp] == 0) ? 1 : 0;
 		}
 	}
-	else
-		car->carry = 0;
 	car->car_next_pos = vm_find_next_pos(car);
 	vm_car_clean(car);
 }
@@ -119,8 +111,6 @@ void		vm_com_lld(t_car *car)
 			car->carry = (car->car_reg[tmp] == 0) ? 1 : 0;
 		}
 	}
-	else
-		car->carry = 0;
 	car->car_next_pos = vm_find_next_pos(car);
 	vm_car_clean(car);
 }
