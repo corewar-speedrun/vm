@@ -63,6 +63,7 @@ typedef struct		s_champ
 
 typedef struct		s_car
 {
+	int				nabr;
 	int				car_pos;
 	int				car_next_pos;
 	int				count;

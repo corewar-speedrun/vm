@@ -73,6 +73,7 @@ void	vm_init_car(int pos, int next, int champ_nmbr, t_car *car)
 	if (!(mem = (t_car *)malloc(sizeof(t_car))))
 		return ;
 	ft_bzero(mem, sizeof(t_car));
+	g_vm->cars_nmbr += 1;
 	mem->car_reg[1] = champ_nmbr * -1;
 	mem->car_reg[0] = champ_nmbr * -1;
 	mem->car_pos = pos;
@@ -88,8 +89,8 @@ void	vm_init_car(int pos, int next, int champ_nmbr, t_car *car)
 	mem->next_car = (g_vm->cars == NULL) ? NULL : g_vm->cars;
 	mem->carry = (car == NULL) ? FALSE : car->carry;
 	mem->live = (car == NULL) ? FALSE : car->live;
+	mem->nabr = g_vm->cars_nmbr;
+    (car != NULL) ? vm_read_comand(mem) : 0;
+    (car != NULL) ?mem->count-- : 0;
 	g_vm->cars = mem;
-	g_vm->cars_nmbr += 1;
-	car != NULL ? vm_read_comand(mem) : 0;
-	car != NULL ? mem->count-- : 0;
 }
