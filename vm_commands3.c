@@ -71,6 +71,8 @@ void				vm_com_ldi2(t_car *car)
 	if (car->c_byte[1] == 1)
 		car->com_args[1] = (short)car->car_reg[car->com_args[1]];
 	tmp = (car->car_pos + (car->com_args[0] + car->com_args[1]) % IDX_MOD);
+	if (tmp < 0)
+		tmp = (MEM_SIZE + tmp) % MEM_SIZE;
 	while (++tmp3 < 4)
 		tmp2 = (tmp2 << 8) | g_vm->map0[(tmp + tmp3) % MEM_SIZE];
 	if (car->com_args[2] > 0 && car->com_args[2] < 17)
@@ -117,6 +119,8 @@ void				vm_com_lldi2(t_car *car)
 	if (car->c_byte[1] == 1)
 		car->com_args[1] = car->car_reg[car->com_args[1]];
 	tmp = car->com_args[0] + car->com_args[1] + car->car_pos;
+	while (tmp < 0)
+		tmp = (MEM_SIZE + tmp) % MEM_SIZE;
 	while (++tmp3 < 4)
 		tmp2 = (tmp2 << 8) | g_vm->map0[(tmp + tmp3) % MEM_SIZE];
 	if (car->com_args[2] > 0 && car->com_args[2] < 17)

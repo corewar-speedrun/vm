@@ -34,8 +34,8 @@ void	vm_read_comand(t_car *car)
 		if (car->f_move == 0)
 			vm_car_next_pos(car);
 	}
-	if (car->comand != 9 &&	car->comand != 12 && car->comand != 15)
-		vm_parse_code_byte(car);
+	// if (car->comand != 9 &&	car->comand != 12 && car->comand != 15)
+	// 	vm_parse_code_byte(car);
 }
 
 int		vm_cycles_count(int tmp)
@@ -63,6 +63,8 @@ int		vm_cycles_count(int tmp)
 
 void	vm_make_move(t_car *car)
 {
+	if (car->comand != 9 &&	car->comand != 12 && car->comand != 15)
+		vm_parse_code_byte(car);
 	if (car->comand == 1)
 		vm_com_live(car);
 	else if (car->comand == 2)

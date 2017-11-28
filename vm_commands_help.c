@@ -58,6 +58,8 @@ void	vm_parse_code_byte(t_car *car)
 	unsigned char code_byte;
 
 	code_byte = g_vm->map0[(car->car_pos + 1) % MEM_SIZE];
+	// if (code_byte < 64)
+	// 	return ;
 	car->c_byte[0] = code_byte >> 6;
 	car->c_byte[1] = (code_byte >> 4) & 3;
 	car->c_byte[2] = (code_byte >> 2) & 3;

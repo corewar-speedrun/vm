@@ -72,10 +72,6 @@ int		vm_get_t_ind(t_car *car, int index, int i)
 	}
 	z = -1;
 	ind = (car->comand != 13) ? ind % IDX_MOD : ind;
-	if (car->comand == 2)
-		car->com_args[index] = ind;
-	else
-	{
 	kostyl = (car->comand == 13) ? 2 : 4;
 	while (++z < kostyl)
 	{
@@ -85,7 +81,6 @@ int		vm_get_t_ind(t_car *car, int index, int i)
 	}
 	(car->comand == 13) ? 
 	(car->com_args[index] = (unsigned int)((short)car->com_args[index])) : 0;
-	}
 	return (2);
 }
 
