@@ -21,6 +21,8 @@ void	vm_make_game(t_car *car)
 		while (car != NULL)
 		{
 			car->f_move = 0;
+			if (car->comand == 0 && car->car_next_pos != 0)
+				vm_car_next_pos(car);
 			if (g_vm->map2[car->car_pos] != 1)
 				g_vm->map2[car->car_pos] = 1;
 			if (car->count == 0 && car->comand != 0)
@@ -35,14 +37,18 @@ void	vm_make_game(t_car *car)
 		}
 //		if (g_vm->flag_visualize == 1)
 //			g_vm->sleep = ncurses(g_vm->sleep);
-		vm_make_game2(-1);
+		vm_make_game2(-1, 0);
 	}
 }
 
-void	vm_make_game2(int i)
+void	vm_make_game2(int i, int l)
 {
 	if (++g_vm->cycle == g_vm->die_cycle)
+	{
 		vm_car_to_die(NULL, NULL);
+		while (++l <= g_vm->champs_nmbr)
+			g_vm->champs[l]->live = 0;
+	}
 	while (++i < MEM_SIZE)
 	{
 		if (g_vm->map3[i] > 0)
@@ -87,10 +93,8 @@ void	vm_car_to_die(t_car *tmp, t_car *start)
 	while (start != NULL && start->live < 1)
 	{
 		tmp = start->next_car;
-		if (g_vm->map2[start->car_pos] == 1)
-			g_vm->map2[start->car_pos] = 0;
+		g_vm->map2[start->car_pos] = 0;
 		free(start);
-	//	system("say CAR IS DEAD");
 		g_vm->cars_nmbr -= 1;
 		start = tmp;
 	}
@@ -118,8 +122,7 @@ void	vm_car_to_die2(t_car *tmp1, t_car *tmp2, t_car *tmp3)
 		tmp3 = tmp2->next_car;
 		if (tmp2->live < 1)
 		{
-			if (g_vm->map2[tmp2->car_pos] == 1)
-				g_vm->map2[tmp2->car_pos] = 0;
+			g_vm->map2[tmp2->car_pos] = 0;
 			free(tmp2);
 			g_vm->cars_nmbr -= 1;
 			tmp1->next_car = tmp3;
