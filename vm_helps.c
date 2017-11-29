@@ -17,15 +17,15 @@ void	align(int i)
 	char	*buf;
 
 	buf = ft_itoa_base(i, 16);
-	ft_putstr("0x");
+	ft_putstr("\e[0;33m0x");
 	if (ft_strlen(buf) == 3)
-		ft_putstr("0");
+		ft_putstr("\e[0;33m0");
 	else if (ft_strlen(buf) == 2)
-		ft_putstr("00");
+		ft_putstr("\e[0;33m00");
 	else if (ft_strlen(buf) == 1)
-		ft_putstr("000");
+		ft_putstr("\e[0;33m000");
 	ft_putstr(buf);
-	ft_putstr(" : ");
+	ft_putstr("\e[1;31m : \e[0m");
 	ft_strdel(&buf);
 }
 
@@ -57,27 +57,28 @@ void	print_maps(void)
 int		vm_error(int error)
 {
 	if (error == 1)
-		return (vm_usage("Invalid argument.\n\0"));
+		(ft_putstr_fd("\e[1;31mInvalid argument\e[0m", 2));
 	else if (error == 2)
-		ft_putstr_fd("Invalid or empty file.\n\0", 2);
+		ft_putstr_fd("\e[1;31mInvalid/empty file\e[0m", 2);
 	else if (error == 3)
-		ft_putstr_fd("Wrong Champion. Incorrect MAGIC.\n\0", 2);
+		ft_putstr_fd("\e[1;31mIncorrect champion\e[0m", 2);
 	else if (error == 4)
-		ft_putstr_fd("Champion size too big. > CHAMP_MAX_SIZE\n\0", 2);
+		ft_putstr_fd("\e[1;31mChampion size too big. > CHAMP_MAX_SIZE\e[0m", 2);
 	else if (error == 5)
-		ft_putstr_fd("We need \\0 at the end of champ name or comment\n\0", 2);
+		ft_putstr_fd("\e[1;32mNeed \\0 at end of champ name/comment\e[0m", 2);
 	else if (error == 6)
-		ft_putstr_fd("Champion size != encoded size by Assembler\n\0", 2);
+		ft_putstr_fd("\e[1;33mChampion size != encoded size\e[0m", 2);
 	else if (error == 7)
-		vm_usage("We need a champion!\n\0");
+		ft_putstr_fd("\e[0;31mWe need a champion!\e[0m", 2);
 	else if (error == 8)
-		vm_usage("Some unknown flag of incorrect usage\n\0");
+		ft_putstr_fd("\e[1;34mUnknown flag of incorrect usage\e[0m", 2);
 	else if (error == 9)
-		vm_usage("Too many champions\n\0");
+		ft_putstr_fd("\e[0;33mToo many champions\e[0m", 2);
 	else if (error == 10)
-		vm_usage("Damp must be bigger than zero\n\0");
+		ft_putstr_fd("\e[1;37mDamp must be bigger than zero\e[0m", 2);
 	else if (error == 11)
-		vm_usage("Champ must be smaller than CHAMP_MAX_SIZE\n\0");
+		ft_putstr_fd("\e[1;35mChamp must be < CHAMP_MAX_SIZE\e[0m", 2);
+	ft_putstr_fd("\n", 2);
 	system("say YOU SHALL NOT PASS");
 	return (0);
 }
@@ -101,9 +102,10 @@ int		vm_usage(char *re)
 {
 	if (re != NULL)
 		ft_putstr_fd(re, 2);
-	ft_putstr("Usage:\n./corewar [-flags] <champion1.cor> <...>\n\0");
-	ft_putstr("flags:\n-v - Visual mode\n-l - Show lives\n\0");
-	ft_putstr("-damp NAMBER - print game memory on NAMBER cycle\n\0");
+	ft_putstr("\e[1;36mUsage:\n./corewar [-flags] <champion1.cor> <...>\n");
+	ft_putstr("\e[1;36mflags:\n-v - Visual mode\n-l - Show lives\n\e[0m");
+	ft_putstr("\e[1;36mflags:\n-n XXX - champ namber\n\e[0m");
+	ft_putstr("\e[1;36mflags:\n-damp XXX - print memory on XXX cycle\n\e[0m");
 	return (0);
 }
 

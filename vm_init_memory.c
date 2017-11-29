@@ -63,7 +63,6 @@ void	vm_init_champs(void)
 
 /*
 ** vm_init_champs - копирует исходный код ботов и размещает на карте.
-** еще пилю это./////////////////////////////////////////////////
 */
 
 void	vm_init_car(int pos, int next, int champ_nmbr, t_car *car)
