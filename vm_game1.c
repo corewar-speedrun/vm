@@ -35,8 +35,8 @@ void	vm_make_game(t_car *car)
 				vm_car_next_pos(car);
 			car = car->next_car;
 		}
-		if (g_vm->flag_visualize == 1)
-			g_vm->sleep = ncurses(g_vm->sleep);
+//		if (g_vm->flag_visualize == 1 && g_vm->cycle > 16000)
+//			g_vm->sleep = ncurses(g_vm->sleep);
 		vm_make_game2(-1, 0);
 	}
 }
@@ -88,7 +88,6 @@ void	vm_car_next_pos(t_car *car)
 
 void	vm_car_to_die(t_car *tmp, t_car *start)
 {
-	g_vm->die_cycle += g_vm->to_die;
 	start = g_vm->cars;
 	while (start != NULL && start->live < 1)
 	{
@@ -107,6 +106,7 @@ void	vm_car_to_die(t_car *tmp, t_car *start)
 	}
 	else
 		g_vm->max_live_checks--;
+	g_vm->die_cycle += g_vm->to_die;
 	if (g_vm->cars != NULL && g_vm->to_die > 0)
 		vm_car_to_die2(NULL, NULL, NULL);
 	else
