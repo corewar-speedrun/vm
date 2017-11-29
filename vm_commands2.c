@@ -106,35 +106,3 @@ void	vm_com_sti2(t_car *car, int tmp, int tmp2, int tmp3)
 		(car->com_args[2] > 0 && car->com_args[2] < 17))))
 		vm_map_write(tmp, cords, car);
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

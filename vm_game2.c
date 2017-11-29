@@ -61,7 +61,7 @@ int		vm_cycles_count(int tmp)
 
 void	vm_make_move(t_car *car)
 {
-	if (car->comand != 9 &&	car->comand != 12 && car->comand != 15)
+	if (car->comand != 9 && car->comand != 12 && car->comand != 15)
 		vm_parse_code_byte(car);
 	if (car->comand == 1)
 		vm_com_live(car);

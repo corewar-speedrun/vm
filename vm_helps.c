@@ -29,29 +29,29 @@ void	align(int i)
 	ft_strdel(&buf);
 }
 
-void    print_maps(void)
+void	print_maps(void)
 {
-    int        i;
-    int        j;
-    char    *buf2;
+	int		i;
+	int		j;
+	char	*buf2;
 
-    i = 0;
-    while (i < MEM_SIZE)
-    {
-        align(i);
-        j = -1;
-        while (++j < 64)
-        {
-            buf2 = ft_itoa_base(g_vm->map0[i], 16);
-            if (ft_strlen(buf2) < 2)
-                ft_putchar('0');
-            ft_putstr(buf2);
-            ft_putchar(' ');
-            i++;
-            ft_strdel(&buf2);
-        }
-        ft_putchar('\n');
-    }
+	i = 0;
+	while (i < MEM_SIZE)
+	{
+		align(i);
+		j = -1;
+		while (++j < 64)
+		{
+			buf2 = ft_itoa_base(g_vm->map0[i], 16);
+			if (ft_strlen(buf2) < 2)
+				ft_putchar('0');
+			ft_putstr(buf2);
+			ft_putchar(' ');
+			i++;
+			ft_strdel(&buf2);
+		}
+		ft_putchar('\n');
+	}
 }
 
 int		vm_error(int error)
@@ -107,20 +107,17 @@ int		vm_usage(char *re)
 	return (0);
 }
 
-void	vm_map_write(int c, int p, t_car *car)
+void	vm_car_next_pos(t_car *car)
 {
-	if (p < 0)
-		p = (MEM_SIZE + p) % MEM_SIZE;
-	g_vm->map0[p % MEM_SIZE] = (c >> 24) & 255;
-	g_vm->map0[(p + 1) % MEM_SIZE] = (c >> 16) & 255;
-	g_vm->map0[(p + 2) % MEM_SIZE] = (c >> 8) & 255;
-	g_vm->map0[(p + 3) % MEM_SIZE] = c & 255;
-	g_vm->map1[p % MEM_SIZE] = car->car_reg[0] * -1;
-	g_vm->map1[(p + 1) % MEM_SIZE] = car->car_reg[0] * -1;
-	g_vm->map1[(p + 2) % MEM_SIZE] = car->car_reg[0] * -1;
-	g_vm->map1[(p + 3) % MEM_SIZE] = car->car_reg[0] * -1;
-	g_vm->map3[p % MEM_SIZE] = 1;
-	g_vm->map3[(p + 1) % MEM_SIZE] = 1;
-	g_vm->map3[(p + 2) % MEM_SIZE] = 1;
-	g_vm->map3[(p + 3) % MEM_SIZE] = 1;
+	car->f_move = 1;
+	if (car->car_next_pos == 0)
+		return ;
+	if (car->car_next_pos < 0)
+		car->car_next_pos = (MEM_SIZE + car->car_next_pos) % MEM_SIZE;
+	if (g_vm->map2[car->car_pos] == 1)
+		g_vm->map2[car->car_pos] = 0;
+	car->car_pos = ((car->car_pos + car->car_next_pos) % MEM_SIZE);
+	if (g_vm->map2[car->car_pos] != 1)
+		g_vm->map2[car->car_pos] = 1;
+	car->car_next_pos = 0;
 }

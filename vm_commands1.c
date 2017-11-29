@@ -90,8 +90,8 @@ void	vm_com_zjmp(t_car *car)
 {
 	if (car->carry == FALSE)
 	{
-        car->car_next_pos = 3;
-        vm_car_clean(car);
+		car->car_next_pos = 3;
+		vm_car_clean(car);
 		return ;
 	}
 	car->c_byte[0] = 2;

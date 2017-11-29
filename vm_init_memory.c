@@ -90,7 +90,25 @@ void	vm_init_car(int pos, int next, int champ_nmbr, t_car *car)
 	mem->carry = (car == NULL) ? FALSE : car->carry;
 	mem->live = (car == NULL) ? FALSE : car->live;
 	mem->nabr = g_vm->cars_nmbr;
-    (car != NULL) ? vm_read_comand(mem) : 0;
-    (car != NULL) ?mem->count-- : 0;
+	(car != NULL) ? vm_read_comand(mem) : 0;
+	(car != NULL) ? mem->count-- : 0;
 	g_vm->cars = mem;
+}
+
+void	vm_map_write(int c, int p, t_car *car)
+{
+	if (p < 0)
+		p = (MEM_SIZE + p) % MEM_SIZE;
+	g_vm->map0[p % MEM_SIZE] = (c >> 24) & 255;
+	g_vm->map0[(p + 1) % MEM_SIZE] = (c >> 16) & 255;
+	g_vm->map0[(p + 2) % MEM_SIZE] = (c >> 8) & 255;
+	g_vm->map0[(p + 3) % MEM_SIZE] = c & 255;
+	g_vm->map1[p % MEM_SIZE] = car->car_reg[0] * -1;
+	g_vm->map1[(p + 1) % MEM_SIZE] = car->car_reg[0] * -1;
+	g_vm->map1[(p + 2) % MEM_SIZE] = car->car_reg[0] * -1;
+	g_vm->map1[(p + 3) % MEM_SIZE] = car->car_reg[0] * -1;
+	g_vm->map3[p % MEM_SIZE] = 1;
+	g_vm->map3[(p + 1) % MEM_SIZE] = 1;
+	g_vm->map3[(p + 2) % MEM_SIZE] = 1;
+	g_vm->map3[(p + 3) % MEM_SIZE] = 1;
 }
