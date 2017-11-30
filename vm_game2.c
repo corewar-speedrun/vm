@@ -129,6 +129,6 @@ void	vm_finish_game(void)
 	ft_putnbr(won);
 	ft_putstr(", \"\0");
 	ft_putstr(g_vm->champs[won]->name);
-	ft_putstr("\", has won !\n\0");
+	ft_putstr("\", has won!\n\0");
 	g_vm->game = 0;
 }

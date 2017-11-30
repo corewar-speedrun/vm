@@ -6,13 +6,13 @@
 #    By: dverbyts <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/02 13:10:10 by dverbyts          #+#    #+#              #
-#    Updated: 2017/11/20 18:34:21 by dmaznyts         ###   ########.fr        #
+#    Updated: 2017/11/29 17:19:58 by dverbyts         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = corewar
 
-CFLAGS = -Wall -Wextra -Werror -g -O3
+CFLAGS = -Wall -Wextra -Werror
 
 SRC = vm.c vm_init_memory.c vm_read.c vm_helps.c ncurses.c vm_commands1.c \
 vm_commands2.c vm_commands3.c vm_commands4.c vm_commands_help.c \
@@ -27,7 +27,9 @@ all: $(NAME)
 
 $(NAME): $(OBJ)
 	@make -C libft
-	gcc $(FLAGS) -o $(NAME) $(OBJ) $(LIB) -lncurses
+	@echo "\033[32;1m<corewar libft>		| done\033[0m"
+	@gcc $(FLAGS) -o $(NAME) $(OBJ) $(LIB) -lncurses
+	@echo "\033[32;1m<corewar>		| done\033[0m"
 
 %.o: %.c
 	@gcc $(CFLAGS) -c -o $@ $<
@@ -35,9 +37,12 @@ $(NAME): $(OBJ)
 clean:
 	@rm -f $(OBJ)
 	@make clean -C libft
+	@echo "\033[1;33m<corewar libft *.o>	| removed\033[0m"
+	@echo "\033[1;33m<corewar *.o>		| removed\033[0m"
 
 fclean: clean
 	@rm -f $(NAME)
 	@make fclean -C libft
+	@echo "\033[1;33m<corewar>		| removed\033[0m"
 
 re: fclean all

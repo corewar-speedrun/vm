@@ -27,7 +27,7 @@ void	vm_make_game(t_car *car)
 				car->count--;
 			car = car->next_car;
 		}
-		if (g_vm->flag_visualize == 1 && g_vm->cycle > 16000)
+		if (g_vm->flag_visualize == 1)
 			g_vm->sleep = ncurses(g_vm->sleep);
 		vm_make_game2(-1, 0);
 	}

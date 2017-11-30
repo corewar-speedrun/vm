@@ -104,8 +104,8 @@ int		vm_usage(char *re)
 		ft_putstr_fd(re, 2);
 	ft_putstr("\e[1;36mUsage:\n./corewar [-flags] <champion1.cor> <...>\n");
 	ft_putstr("\e[1;36mflags:\n-v - Visual mode\n-l - Show lives\n\e[0m");
-	ft_putstr("\e[1;36mflags:\n-n XXX - champ namber\n\e[0m");
-	ft_putstr("\e[1;36mflags:\n-damp XXX - print memory on XXX cycle\n\e[0m");
+	ft_putstr("\e[1;36m-n XXX - champ namber\n\e[0m");
+	ft_putstr("\e[1;36m-damp XXX - print memory on XXX cycle\n\e[0m");
 	return (0);
 }
 
