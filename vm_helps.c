@@ -6,7 +6,7 @@
 /*   By: dverbyts <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/06 16:22:02 by dverbyts          #+#    #+#             */
-/*   Updated: 2017/11/20 09:39:36 by dmaznyts         ###   ########.fr       */
+/*   Updated: 2017/11/20 19:39:36 by dverbyts         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,11 @@ void	print_maps(void)
 	}
 }
 
+/*
+** print_maps и вспомогательная ф-ция align используются для вывода
+** состояния памяти на кран. нужно для работы флага -damp.
+*/
+
 int		vm_error(int error)
 {
 	if (error == 1)
@@ -96,6 +101,7 @@ int		vm_error(int error)
 ** error == 8 - Wrong flag
 ** error == 9 - Too many champions
 ** error == 10 - damp < 1;
+** error == 11 - same error == 4;
 */
 
 int		vm_usage(char *re)
@@ -123,3 +129,8 @@ void	vm_car_next_pos(t_car *car)
 		g_vm->map2[car->car_pos] = 1;
 	car->car_next_pos = 0;
 }
+
+/*
+** vm_car_next_pos - двигает каретку на следующую точку, указанную в
+** переменной car->car_next_pos. после чего обнуляет ее значение.
+*/

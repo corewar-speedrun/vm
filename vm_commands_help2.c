@@ -12,6 +12,11 @@
 
 #include "corewar.h"
 
+/*
+** vm_commands_help2 - аналогично работает vm_commands_help, только написана по
+** стилю и навыку второго разработчика ВМ.
+*/
+
 int		vm_get_arg(t_car *car, int arg, int i)
 {
 	if (car->c_byte[arg] == 1)
@@ -98,3 +103,8 @@ void	vm_car_clean(t_car *car)
 	if (g_vm->map2[car->car_pos] == 1)
 		g_vm->map2[car->car_pos] = 0;
 }
+
+/*
+** vm_car_clean - очищает процесс(каретку) от служебной информации, записанной в
+** процессе выполнения команды.
+*/

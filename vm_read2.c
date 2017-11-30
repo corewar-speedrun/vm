@@ -13,7 +13,7 @@
 #include "corewar.h"
 
 /*
-** vm_read_flag - работа с флагами. Закодить.
+** vm_read_flag/1/2/3/4 - работа с флагами.
 */
 
 int				vm_read_flag(char *str)
@@ -96,3 +96,8 @@ int				vm_read_flag4(char **arg, int x)
 	}
 	return (0);
 }
+
+/*
+** vm_read_flag1 - vm_read_flag4 используются для работы флага -n,
+** позволяющей менять номер бота.
+*/

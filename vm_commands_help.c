@@ -53,6 +53,12 @@ int		vm_find_next_pos2(t_car *car, int r, int c, int i)
 	return (r);
 }
 
+/*
+** vm_find_next_pos - ищет на сколько нужно подвинуть каретку. В зависимости 
+** от кодирующего байта и того, какие аргументы может принимать комнда, дает
+** соответствующий результат.
+*/
+
 void	vm_parse_code_byte(t_car *car)
 {
 	unsigned char code_byte;
@@ -62,6 +68,11 @@ void	vm_parse_code_byte(t_car *car)
 	car->c_byte[1] = (code_byte >> 4) & 3;
 	car->c_byte[2] = (code_byte >> 2) & 3;
 }
+
+/*
+** vm_parse_code_byte - считывает и парсит кодирующий байт, который идет после
+** команды, если он есть у команды.
+*/
 
 void	vm_get_reg_dir(t_car *car, int index, int i)
 {
